@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""微盘 400 名单：**按需现场计算，不落盘**（数据源是 Archive/Security + Data 的行情）。
+"""微盘 400 名单：**按需现场计算，不落盘**。
+
+数据源：``Archive/Security``（历史年）+ ``Data/<年>``（当年）+ ``Latest``（最近 5 个交易日，
+同日与 Data 重复时以 Latest 为准，避免重复行）。
 
 名单 = 每日横截面上「主板 + 非 ST + 有成交 + 上市满 60 交易日」按总市值升序取前 400，
 所以不需要再存一份：直接算即得。
@@ -62,10 +65,17 @@ def _newest(root, paths):
 
 
 def ensurePanel(root, force=False, log=print):
-    """构建/刷新按年面板缓存（``Index/Cache/Panel/<年>.mvsv`` + ``first.json``）。"""
+    """构建/刷新按年面板缓存（``Index/Cache/Panel/<年>.mvsv`` + ``first.json``/``days.json``）。
+
+    源 = ``Archive/Security`` + ``Data/<年>`` + ``Latest``（最近 5 日）；同一 ``Code+Date``
+    在 Latest 与 Data 都出现时以 Latest 为准（先收集 Latest 的键，写盘时跳过）。
+    """
     folder = panelDir(root)
+    latestPath = os.path.join(root, "Latest", "Latest.mvsv")
     sources = glob.glob(os.path.join(root, "Archive", "Security", "*.mvsv")) + \
         glob.glob(os.path.join(root, "Data", "*", "*.mvsv"))
+    if os.path.exists(latestPath):
+        sources.append(latestPath)
     stampPath = os.path.join(folder, "stamp.json")
     stamp = _newest(root, sources)
     if not force and os.path.exists(stampPath):
@@ -77,7 +87,13 @@ def ensurePanel(root, force=False, log=print):
         if cached >= stamp and os.path.exists(os.path.join(folder, FIRST_FILE)) \
                 and os.path.exists(os.path.join(folder, DAYS_FILE)):
             return folder
-    log(f"重建面板缓存（{len(sources)} 个文件）…")
+    latestRows, latestKeys = [], set()
+    if os.path.exists(latestPath):
+        for row in Market.readRows(latestPath):
+            field = row.split("|")
+            latestRows.append(row)
+            latestKeys.add(f"{field[0]}|{field[2]}")
+    log(f"重建面板缓存（{len(sources)} 个文件，Latest {len(latestRows)} 行）…")
     os.makedirs(folder, exist_ok=True)
     handles = {}
     first = {}
@@ -89,6 +105,8 @@ def ensurePanel(root, force=False, log=print):
                 field = row.split("|")
                 if len(field) < 14 - 1:      # 13 列
                     continue
+                if latestKeys and f"{field[0]}|{field[2]}" in latestKeys:
+                    continue                 # 该日已由 Latest 提供，避免重复行
                 year = field[2][:4]
                 handle = handles.get(year)
                 if handle is None:
@@ -100,6 +118,18 @@ def ensurePanel(root, force=False, log=print):
                 code = field[0]
                 if code not in first or field[2] < first[code]:
                     first[code] = field[2]
+        for row in latestRows:               # Latest 的行（多数已跳过，这里兜底补缺）
+            field = row.split("|")
+            year = field[2][:4]
+            handle = handles.get(year)
+            if handle is None:
+                handle = open(os.path.join(folder, f"{year}.mvsv"), "w", encoding="utf-8")
+                handles[year] = handle
+            handle.write(row + "\n")
+            rows += 1
+            days.add(field[2])
+            if field[0] not in first or field[2] < first[field[0]]:
+                first[field[0]] = field[2]
     finally:
         for handle in handles.values():
             handle.close()

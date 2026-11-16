@@ -295,6 +295,8 @@ Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 
 - 字段：`Code|Name|Date|Rank|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal|MvFloat`
 - 选样（与 §7.2 行情同源）：沪深主板、非 ST、当日 `Volume>0`、上市满 60 个交易日，总市值升序取 400；候选 = 名单中 `Close < 10`
+- 数据源：`Archive/Security`（历史年）+ `Data/<年>`（当年）+ `Latest`（最近 5 日），
+  `Code+Date` 去重（同日以 `Latest` 为准）
 - **不默认入库**：名单由 `Tool/Micro400.py` 从行情现场计算（`--date`/`--code`/`--csv`），
   避免与 `Archive/Security` 重复存储；仅在 `Index/Cache/Panel/` 建查询缓存（不入库）
 - 确需落盘时由父仓库 `python tools/BuildMicro.py` 按需生成

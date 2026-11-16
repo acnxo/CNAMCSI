@@ -103,7 +103,7 @@ python Tool/FetchHistory.py --rebuild 2026 # .pending 落盘到 Data + 由 Data 
 
 ## 查看每日微盘 400 成分（现场计算，不落盘）
 
-名单直接由 `Archive/Security`（历史）+ `Data/<年>`（当年）的行情算出，
+名单直接由 `Archive/Security`（历史年）+ `Data/<年>`（当年）+ `Latest`（最近 5 个交易日）的行情算出，
 **不再另存一份**（选样规则见 `AGENTS.md` §3：主板 + 非 ST + 当日有成交 + 上市满 60 交易日，
 按总市值升序取前 400；候选池 = 其中收盘价 < 10 元）。
 
@@ -127,6 +127,7 @@ python Tool/Micro400.py --date 2004-12-31                # 历史任意交易日
    3  603709  中源家居         10.52       13.74    2123
 ```
 
+同日 `Latest` 与 `Data` 都有时以 `Latest` 为准（`Code+Date` 去重，不会出现重复行）。
 首次查询会在 `Index/Cache/Panel/`（`.gitignore`）建行情查询缓存（约 50 秒），
 之后每次 3~5 秒；行情更新后用 `--rebuild-cache` 重建。工具**只读**，不改 `Archive/`、`Data/`、`Latest/`。
 
