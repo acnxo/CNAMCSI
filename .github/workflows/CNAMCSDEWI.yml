@@ -68,7 +68,7 @@ jobs:
           set -euo pipefail
           git config user.name "cnamci-bot"
           git config user.email "cnamci-bot@users.noreply.github.com"
-          git add Index/CNAMCSDEWI
+          git add Index/CNAMCSDEWI Latest Data Archive
           if git diff --cached --quiet; then
             echo "没有变化，跳过提交"
             exit 0

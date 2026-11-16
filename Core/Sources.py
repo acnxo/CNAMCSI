@@ -111,7 +111,7 @@ EM_HOSTS = [
 ]
 # f2 最新价 / f5 成交量(手) / f6 成交额 / f12 代码 / f13 市场(0深1沪) / f14 名称
 # f20 总市值 / f21 流通市值 / f26 上市日期 / f124 行情时间戳
-EM_FIELDS = "f2,f5,f6,f12,f13,f14,f17,f20,f21,f26,f124"
+EM_FIELDS = "f2,f5,f6,f12,f13,f14,f15,f16,f17,f20,f21,f26,f124"
 # 沪深主板：沪 m:1+t:2，深 m:0+t:6（不含创业板 t:80、科创板 t:23、北交所）
 EM_FS_MAIN = "m:0+t:6,m:1+t:2"
 EM_FS_ALL_A = "m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23"
@@ -161,6 +161,8 @@ def parseEmRow(r):
         "name": str(r.get("f14") or "").strip(),
         "price": price,
         "open": _num(r.get("f17")) or 0.0,   # 今开（T+1 成交价）
+        "high": _num(r.get("f15")) or 0.0,   # 最高
+        "low": _num(r.get("f16")) or 0.0,    # 最低
         "volume": _num(r.get("f5")) or 0.0,  # 手
         "amount": _num(r.get("f6")) or 0.0,
         "total_mv": mcap,
@@ -283,6 +285,8 @@ def parseTencentText(txt):
             "name": f[1].strip(),
             "price": price,
             "open": _num(f[5]) or 0.0,    # 今开（T+1 成交价）
+            "high": _num(f[33]) or 0.0,   # 最高
+            "low": _num(f[34]) or 0.0,    # 最低
             "volume": _num(f[6]) or 0.0,  # 手
             "amount": (_num(f[37]) or 0.0) * 1e4,
             "total_mv": mcap * 1e8,   # 腾讯返回「亿元」

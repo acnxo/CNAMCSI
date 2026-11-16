@@ -36,6 +36,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, "Core"))
 import Archive  # noqa: E402  按年归档（每天只改 4 个文件）
 import Cnamci  # noqa: E402  指数点位与报告（纯函数）
 import Logger  # noqa: E402  统一日志（北京时间 + 主题前缀 + 步骤耗时）
+import Market  # noqa: E402  行情三层（Archive / Data / Latest）落盘
 import Mvsv  # noqa: E402  .mvsv 读写（头部元数据 + 竖线分隔）
 import Portfolio  # noqa: E402  目标股数/调仓计划/成交回填/费用
 import Sources as sources  # noqa: E402  行情抓取与请求计数
@@ -549,6 +550,17 @@ def run(args):
             report = Cnamci.renderReport(indexRecord, plan, execution, snapshot)
             saveFile(root, "Latest/Report.md", report)
             fileCount += 1
+            if not getattr(args, "no_market", False):      # 行情三层：Latest / Data / Archive
+                try:
+                    info = Market.update(BASE_DIR, quotes, tradeDate, log=Logger.info)
+                    if info.get("ok"):
+                        fileCount += 2
+                        step.note(f"行情三层：Latest {info['latest_rows']} 行 · "
+                                  f"{info['data']} {info['data_rows']} 行")
+                    else:
+                        step.note(f"行情三层跳过：{info.get('reason')}")
+                except Exception as exc:  # noqa: BLE001  行情层失败不影响指数产物
+                    Logger.warn(f"行情三层更新失败：{exc}")
             step.result(f"{fileCount} 个文件 · Nav.mvsv {navCount} 行 · Daily/{tradeDate[:4]}/")
             if os.environ.get("GITHUB_STEP_SUMMARY"):
                 with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as file:
@@ -586,6 +598,8 @@ def main():
     parser.add_argument("--source", default=None, choices=("tencent", "eastmoney"))
     parser.add_argument("--max-wait-min", type=float, default=None)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--no-market", dest="no_market", action="store_true",
+                        help="不更新行情三层（Latest / Data / Archive）")
     parser.add_argument("--replay-start", default=None,
                         help="历史回放起始日（如 2004-12-31），覆盖 Data/<代码>/")
     return run(parser.parse_args())

@@ -48,7 +48,7 @@ jobs:
           INPUT_NO_WAIT: ${{ inputs.no_wait }}
         run: |
           set -euo pipefail
-          ARGS="--index CNAMCSWEWI"
+          ARGS="--index CNAMCSWEWI --no-market"   # 行情三层只由日频工作流维护
           if [ -n "${INPUT_MODE}" ]; then ARGS="$ARGS --mode ${INPUT_MODE}"; fi
           if [ "${INPUT_NO_WAIT}" = "true" ]; then ARGS="$ARGS --no-wait"; fi
           echo "执行：python Index.py $ARGS"

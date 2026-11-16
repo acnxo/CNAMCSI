@@ -230,6 +230,9 @@ w_i,t = w_i,t-1 × (1 + r_i,t) / (1 + ret_t)
 | L3 当前 | `Latest/Latest.mvsv` | 最近 5 个交易日横截面 | 每天覆盖 | 未确认完整，便于快速调整 |
 
 - 明文、竖线分隔（`|`）、扩展名 `.mvsv`，不压缩
+- 自动采集：日频工作流每天调用 `Core/Market.update()` 写三层（周频/月频传 `--no-market`）；
+  同一天重复执行只覆盖当日横截面，不会产生重复行；跨年后自动把 `Data/<旧年>/` 合并进
+  `Archive/Security/<Code>.mvsv`（幂等，已归年份记在 `Archive/.ArchivedYears.json`）
 - 字段列顺序统一为
   `Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal|MvFloat`
   （`Archive/Security/` 按证券；`Data/` 为横截面）；

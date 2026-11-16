@@ -40,6 +40,7 @@ def args(data_dir, **kw):
     base = {"data_dir": data_dir, "config": "", "wait_close": False, "date": None,
             "n": 3, "capital": 300_000.0, "mode": "changes", "source": "tencent",
             "max_wait_min": 1, "dry_run": False, "replay_start": None,
+            "no_market": True,          # 测试不得写仓库根的行情三层
             "index": "CNAMCSDEWI"}
     base.update(kw)
     return SimpleNamespace(**base)

@@ -71,7 +71,12 @@ Date|Code|Name|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 | Current | 2 MB（5 个交易日） |
 | 补采 | 单只只改 `Archive/Security/<Code>.mvsv` 1 个文件 |
 
-`Amount` 当前为临时近似，`SharesFloat`/`MvFloat` 由流通市值反推，均待增量采集校正。
+三层由日频工作流（`CNAMCSDEWI`）每天自动更新：拉完快照后由 `Core/Market.py` 落盘——
+L3 保留最近 5 个交易日、L2 追加当月横截面、跨年后自动把往年 `Data/` 合并进 `Archive/Security/`（幂等）。
+周频/月频工作流用 `--no-market` 跳过，避免三个工作流同时改写同一批文件。
+单独补采：`python Tool/UpdateMarket.py [--date YYYY-MM-DD]`。
+
+`Amount` 取自腾讯快照（万元精度，约万级近似），`SharesTotal`/`SharesFloat` 由市值 ÷ 收盘反推。
 
 ## 目录
 
