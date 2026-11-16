@@ -1,0 +1,6 @@
+# 标题 : Summary.mvsv
+# Field : "date|point|ret|cum_return|holdings_count|total_asset|cash|rebalance"
+# 字段名称 : "日期|点位|收益率|累计收益|持仓只数|总资产|现金|是否调仓"
+# Count : 1
+
+2004-12-31|1000.0|0.0|0.0|0|4000000.0|4000000.0|True
