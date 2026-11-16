@@ -450,7 +450,8 @@ def fillMissingListDates(rows, quiet=False):
     if not quiet and filled:
         print(f"[info] 上市日期补齐 {filled} 只（来源 SeedStockList.yaml）", flush=True)
     if not quiet and left:
-        print(f"[warn] 上市日期仍缺失 {left} 只，按不可选处理（多为快照之后的新股）", flush=True)
+        print(f"[info] 上市日期仍缺 {left} 只（交易所清单含已退市/更名老代码，部署包快照不含），按不可选处理",
+              flush=True)
     return filled, left
 
 
@@ -591,9 +592,15 @@ def quotesFromTencent(cfg, calendar, boards, store):
         quote["name"] = quote.get("name") or meta.get("name", "")
         quote["list_date"] = meta.get("list_date", "") or quote.get("list_date", "")
         quote["listed_days"] = listedTradingDays(quote["list_date"], calendar)
-    missing = sum(1 for q in quotes if not normalizeDate(q.get("list_date")))
+    missing = [q for q in quotes if not normalizeDate(q.get("list_date"))]
     if missing:
-        print(f"[warn] 快照中 {missing}/{len(quotes)} 只上市日缺失，按不可选处理", flush=True)
+        # 正常在市股票不会缺上市日；缺失项几乎都是已退市/已更名老代码（无成交量）
+        tradable = [q for q in missing if (q.get("volume") or 0) > 0]
+        if tradable:
+            codes = ",".join(q["code"] for q in tradable[:10])
+            print(f"[warn] {len(tradable)} 只有成交量却缺上市日，按不可选处理：{codes}", flush=True)
+        else:
+            print(f"[info] {len(missing)} 只缺上市日且无成交量（退市/长期停牌老代码），自然排除", flush=True)
     return quotes, {"pages": 0, "stock_list": how, "codes": len(codes),
                     "scanned": len(quotes)}
 
