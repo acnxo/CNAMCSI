@@ -66,8 +66,8 @@ Date|Code|Name|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 
 | 项 | 值 |
 | --- | --- |
-| Archive | 3,171 个证券文件，1.41 GB |
-| Data 2026 | 11 个月度文件，88 MB |
+| Archive | 3,194 个证券文件，1.3 GB（1,138 万行，5,333 个交易日） |
+| Data 2026 | 11 个月度文件，75 MB（664,414 行） |
 | Current | 2 MB（5 个交易日） |
 | 补采 | 单只只改 `Archive/Security/<Code>.mvsv` 1 个文件 |
 
@@ -76,7 +76,7 @@ L3 保留最近 5 个交易日、L2 追加当月横截面、跨年后自动把�
 周频/月频工作流用 `--no-market` 跳过，避免三个工作流同时改写同一批文件。
 单独补采：`python Tool/UpdateMarket.py [--date YYYY-MM-DD]`。
 
-`Amount` 取自腾讯快照（万元精度，约万级近似），`SharesTotal`/`SharesFloat` 由市值 ÷ 收盘反推。
+历史 `Amount` 已用雪球日线重采为**真实成交额**（2026-11 全量重采，详见下节）；每日增量的 `Amount` 仍取自腾讯快照（万元精度近似），`SharesTotal`/`SharesFloat` 由市值 ÷ 收盘反推。
 
 ### 历史全量补采（断点续采）
 
@@ -93,7 +93,7 @@ python Tool/FetchHistory.py --rebuild 2026 # 由 Archive 切出 Data/Latest
 | 项 | 说明 |
 | --- | --- |
 | 数据源 | 雪球 `chart/kline.json`（`type=normal` 不复权，一次返回全历史）；失败自动退避，`--source eastmoney` 换备源 |
-| 起点 | `2004-12-01`（2004 年 12 月有 **22 个交易日**，用于评估初始选样与建仓形态） |
+| 起点 | `2004-12-01`（2004 年 12 月有 **23 个交易日**，用于评估初始选样与建仓形态） |
 | 落盘 | `Archive/Security/<Code>.mvsv`，头部 16 行元数据与既有文件逐字一致（仅 `Count`/`Title` 变），数据行 13 列 |
 | 单位 | 成交量=**股**、成交额=**元**；股本沿用既有序列（最近邻填充，送转/增发日不跳变），市值 = 收盘 × 股本 |
 | 断点续采 | 状态写 `Archive/.FetchState.json`（不入库）：中断后**重跑同一条命令**即续采；`--force` 全量重采 |

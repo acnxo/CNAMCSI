@@ -67,7 +67,7 @@ GET https://index_api.wind.com.cn/indexofficialwebsite/Kline?indexId=<ID>&lan=cn
 | 调样频率 | 调仓日：日频=每天，周频=每周最后一个交易日，月频=每月最后一个交易日 |
 | 基点 / 基日 | **1000 点 / 2004-12-31**（`Config.yaml` 的 `BasePoint` / `BaseDate`） |
 | 计算公式 | 等权价格指数（逐条规则见 [`Methodology.md`](Methodology.md) §5） |
-| 数据区间 | 2004-12-31 ~ 最新交易日（5,310 个交易日） |
+| 数据区间 | 2004-12-01 ~ 最新交易日（5,333 个交易日） |
 
 ## 2. 成分与权重（实现：`Core/Universe.py`）
 
@@ -256,15 +256,16 @@ Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 | 字段 | 含义 | 单位 | 口径 |
 | --- | --- | --- | --- |
 | `Volume` | 成交量 | 股 | 新浪日线 |
-| `Amount` | 成交额 | 元 | **临时近似** `Volume×(Open+Close+High+Low)/4`，待增量采集替换 |
+| `Amount` | 成交额 | 元 | 历史为雪球**真实成交额**（2026-11 重采）；每日增量仍为腾讯快照近似 |
 | `SharesTotal` | 总股本 | 股 | 快照总市值/价 反推 + 除权回溯 |
 | `SharesFloat` | 流通股本 | 股 | 快照流通市值/价 反推 + 除权回溯（限售解禁无法还原） |
 | `MvTotal` | 总市值 | 元 | `Close × SharesTotal` |
 | `MvFloat` | 流通市值 | 元 | `Close × SharesFloat` |
 
-- 规模：`Archive/Security` 3,171 个文件 / 约 1.2 GB；`Data/2026` 11 个月度文件 / 约 80 MB；`Latest/Latest.mvsv` 约 2 MB
+- 规模：`Archive/Security` 3,194 个文件 / 约 1.3 GB / 1,138 万行；`Data/2026` 11 个月度文件 / 75 MB（664,414 行）；`Latest/Latest.mvsv` 约 1.8 MB
 - 补采单只证券：只改 `Archive/Security/<Code>.mvsv` 1 个文件
 - 年末分发：`Data/<yyyy>/` 的月份文件追加进各 `Archive/Security/<Code>.mvsv`（一年一次）
+- 重采工具（本仓库）：`python Tool/FetchHistory.py`（断点续采，见 7.2.1）
 - 生成工具（父仓库 `WindMicroCapIdx/tools/BuildCnamcsi.py`）：`python tools/BuildCnamcsi.py --force`
 
 #### 7.2.1 历史全量采集（`Tool/FetchHistory.py`，断点续采）
@@ -346,3 +347,4 @@ cat Index/CNAMCSDEWI/Latest/Report.md
 | 2026-11-15 | v3.0 | 基日改为 2004-12-31（中证全指基日），回放 2009-06 起全量数据（4242 个交易日） |
 | 2026-11-16 | v3.1 | 数据扩至 2004-12-31 起（5,310 个交易日）；全部导出改为 `.mvsv`（头部元数据 + 竖线分隔）；三层存储（Current/Pending/Archive）；新增行情数据层（`Archive/Security`、`Data/<yyyy>/`、`Latest/Latest.mvsv`）与微盘选样数据（`Archive/Micro400`、`Archive/Candidates`）；万得两指数接入（60 条增量）；文档改名大驼峰（`Spec.md`/`Readme.md`/`Methodology.md`/`License`）；新增 `Methodology.md` |
 | 2026-11-16 | v3.2 | 行情三层改为自动采集（`Core/Market.py`，日频工作流维护，`--no-market` 跳过）；工作流触发时间 15:05 → **15:35**，`Compare.yml` 顺延到 15:55；JSONL 输出改为紧凑格式 |
+| 2026-11-16 | v3.3 | 历史行情全量重采（雪球不复权日线，2004-12-01 起）：`Amount` 由估算公式改为真实成交额，补入 2004-12 起 23 个交易日；`Tool/FetchHistory.py` 断点续采（状态 `Archive/.FetchState.json`）；`--rebuild` 由 Archive 切出当年 Data/Latest；数据规模 3,194 文件 / 1,138 万行 / 5,333 个交易日 |
