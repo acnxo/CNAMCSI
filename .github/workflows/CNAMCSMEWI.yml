@@ -44,13 +44,13 @@ jobs:
       - name: 运行 CNAMCSMEWI 计算（默认零参数）
         env:
           TZ: Asia/Shanghai
-          INPUT_MODE: ${{{{ inputs.mode }}}}
-          INPUT_NO_WAIT: ${{{{ inputs.no_wait }}}}
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_NO_WAIT: ${{ inputs.no_wait }}
         run: |
           set -euo pipefail
           ARGS="--index CNAMCSMEWI"
-          [ -n "${{INPUT_MODE}}" ] && ARGS="$ARGS --mode ${{INPUT_MODE}}"
-          [ "${{INPUT_NO_WAIT}}" = "true" ] && ARGS="$ARGS --no-wait"
+          if [ -n "${INPUT_MODE}" ]; then ARGS="$ARGS --mode ${INPUT_MODE}"; fi
+          if [ "${INPUT_NO_WAIT}" = "true" ]; then ARGS="$ARGS --no-wait"; fi
           echo "执行：python Index.py $ARGS"
           python Index.py $ARGS
 
@@ -74,5 +74,5 @@ jobs:
             exit 0
           fi
           git commit -m "data(CNAMCSMEWI): $(date -u +%F) 每日快照"
-          git pull --rebase --autostash origin "${{GITHUB_REF_NAME}}" || true
-          git push origin "HEAD:${{GITHUB_REF_NAME}}"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"
