@@ -1,0 +1,19 @@
+# 标题 : 中证微盘股行情 001396 誉帆科技 日线
+# 字段名称 : "代码|名称|日期|开盘价|收盘价|最高价|最低价|成交量|成交额|总股本|流通股本|总市值|流通市值"
+# DataProvider : Sina/Tencent
+# Field : "Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal|MvFloat"
+# FieldName : "Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal|MvFloat"
+# FieldType : "String|String|Int|Decimal|Decimal|Decimal|Decimal|Decimal|Decimal|Decimal|Decimal|Decimal|Decimal"
+# TypeKLine : Day
+# Count : 2
+# Symbol : CN.001396
+# SecuCode : 001396
+# USC : 001396
+# Name : "誉帆科技"
+# Region : CN
+# Market : SZSE
+# TimeZone : Asia/Shanghai
+# Currency : CNY
+
+001396|誉帆科技|20251230|60.0|50.01|64.5|49.99|16661928|935150709.0|92250792|19586627|4613462107.92|979527216.27
+001396|誉帆科技|20251231|44.5|43.15|47.47|42.89|11720703|521600585.257|106916851|22700515|4613462120.65|979527222.25
