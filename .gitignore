@@ -222,3 +222,7 @@ ReplayCache
 
 # 本地/CI 运行时缓存（代码清单、交易日历）
 Index/Cache/
+
+# 历史行情采集：断点续采状态与日志（过程数据，不入库）
+Archive/.FetchState.json
+Archive/.fetch.log

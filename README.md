@@ -78,6 +78,27 @@ L3 保留最近 5 个交易日、L2 追加当月横截面、跨年后自动把�
 
 `Amount` 取自腾讯快照（万元精度，约万级近似），`SharesTotal`/`SharesFloat` 由市值 ÷ 收盘反推。
 
+### 历史全量补采（断点续采）
+
+早期历史数据部分来自转换/缺省值占位。需要时用 `Tool/FetchHistory.py` 重采**真实**日线（不复权）：
+
+```bash
+python Tool/FetchHistory.py --status       # 看进度：已完成 / 待采 / 失败
+python Tool/FetchHistory.py --limit 20     # 先试 20 只
+python Tool/FetchHistory.py --workers 8    # 全量：2004-12-01 至今
+python Tool/FetchHistory.py --verify       # 校验覆盖（2004-12 天数、缺口月份）
+python Tool/FetchHistory.py --rebuild 2026 # 由 Archive 切出 Data/Latest
+```
+
+| 项 | 说明 |
+| --- | --- |
+| 数据源 | 雪球 `chart/kline.json`（`type=normal` 不复权，一次返回全历史）；失败自动退避，`--source eastmoney` 换备源 |
+| 起点 | `2004-12-01`（2004 年 12 月有 **22 个交易日**，用于评估初始选样与建仓形态） |
+| 落盘 | `Archive/Security/<Code>.mvsv`，头部 16 行元数据与既有文件逐字一致（仅 `Count`/`Title` 变），数据行 13 列 |
+| 单位 | 成交量=**股**、成交额=**元**；股本沿用既有序列（最近邻填充，送转/增发日不跳变），市值 = 收盘 × 股本 |
+| 断点续采 | 状态写 `Archive/.FetchState.json`（不入库）：中断后**重跑同一条命令**即续采；`--force` 全量重采 |
+| 幂等 | 采集区间内以新数据为准、区间外既有行保留，按日期升序写回 |
+
 ## 目录
 
 ```

@@ -267,6 +267,21 @@ Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 - 年末分发：`Data/<yyyy>/` 的月份文件追加进各 `Archive/Security/<Code>.mvsv`（一年一次）
 - 生成工具（父仓库 `WindMicroCapIdx/tools/BuildCnamcsi.py`）：`python tools/BuildCnamcsi.py --force`
 
+#### 7.2.1 历史全量采集（`Tool/FetchHistory.py`，断点续采）
+
+早期数据存在两类问题：`Amount` 为近似值、部分日期为转换/缺省值占位。重采工具：
+
+| 项 | 规则 |
+| --- | --- |
+| 区间 | `--start 20041201`（2004-12 有 **22 个交易日**，作为初始选样/建仓评估样本）~ `--end`（默认今天） |
+| 主源 | 雪球 `stock/chart/kline.json`（`type=normal` 不复权，`count=-8000` 一次返回全历史；`volume` 已是股、`amount` 已是元） |
+| 备源 | 东财 `push2his ... klt=101&fqt=0`（`f56` 手 ×100 换算，大区间易被限流），`--source eastmoney` |
+| 落盘 | `Archive/Security/<Code>.mvsv`：16 行头部（`Symbol`/`SecuCode`/`USC`/`Market`/`Name` 按证券生成）+ 13 列数据，按日期升序 |
+| 合并 | 采集区间内以新数据为准，区间外既有行保留（`mergeRows`），同日重复执行幂等 |
+| 股本 | 沿用既有序列（`nearestShares` 最近邻），`MvTotal = Close × SharesTotal` |
+| 状态 | `Archive/.FetchState.json`（不入库）：`status/rows/from/first/last/source/ts`，重跑只补未完成的；`--force` 忽略状态 |
+| 派生视图 | `--rebuild <年>` 从 Archive 切出 `Data/<年>/<yyyyMM>.mvsv` 与 `Latest/Latest.mvsv`；`--verify` 校验覆盖与缺口 |
+
 ### 7.3 微盘选样数据（Archive/Micro400、Archive/Candidates）
 
 | 层 | 路径 | 内容 |
