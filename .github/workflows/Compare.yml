@@ -1,6 +1,6 @@
-# CNAMCI Compare：三只自建指数 vs 业绩比较基准（国证2000 / 中证2000 / 中证全指）。
+# CNAMCICompare：三只自建指数 vs 业绩比较基准（国证2000 / 中证2000 / 中证全指）。
 # 每日 15:35（三个指数工作流之后）运行，生成 Statistic/Comparison.svg 并提交。
-name: CNAMCI Compare
+name: CNAMCICompare
 
 on:
   schedule:

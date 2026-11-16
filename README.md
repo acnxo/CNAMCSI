@@ -175,7 +175,7 @@ python3 Compare.py --no-fetch # 只用本地缓存（Benchmarks/）
 
 3. GitHub → Actions 启用 workflow，Settings → Workflow permissions 选 **Read and write**。
 
-4. **历史回放**：Actions → **CNAMCI Replay** → Run workflow
+4. **历史回放**：Actions → **CNAMCIReplay** → Run workflow
    - `start`：默认 `2004-12-31`
    - `index`：`all` 或单个代码
    - `daily_since`：留空=最近 1 年+年末；填 `2004-12-31`=逐日全量归档（体积约 1.1 GB）
