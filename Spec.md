@@ -294,10 +294,10 @@ Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 | L2 当年 | `Data/<yyyy>/Candidates/<yyyyMM>.mvsv` | 当年按月切分 |
 
 - 字段：`Code|Name|Date|Rank|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal|MvFloat`
-- 规模：Micro400 2,109,200 行（`Archive` 2,025,600 + `Data/2026` 83,600）、Candidates 1,220,154 行
 - 选样（与 §7.2 行情同源）：沪深主板、非 ST、当日 `Volume>0`、上市满 60 个交易日，总市值升序取 400；候选 = 名单中 `Close < 10`
-- 查询/生成（本仓库）：`python Tool/Micro400.py --date 2026-11-16`；`--csv` 导出；`--build-day/--build-year/--build-all` 生成
-- 面板缓存：`Index/Cache/Panel/<年>.mvsv` + `first.json`/`days.json`（不入库，`--rebuild-cache` 重建）
+- **不默认入库**：名单由 `Tool/Micro400.py` 从行情现场计算（`--date`/`--code`/`--csv`），
+  避免与 `Archive/Security` 重复存储；仅在 `Index/Cache/Panel/` 建查询缓存（不入库）
+- 确需落盘时由父仓库 `python tools/BuildMicro.py` 按需生成
 
 ## 8. 复现步骤
 

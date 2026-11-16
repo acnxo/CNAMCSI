@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""微盘 400 名单（Micro400）与候选池（Candidates）的查询 / 生成。
+"""微盘 400 名单：**按需现场计算，不落盘**（数据源是 Archive/Security + Data 的行情）。
+
+名单 = 每日横截面上「主板 + 非 ST + 有成交 + 上市满 60 交易日」按总市值升序取前 400，
+所以不需要再存一份：直接算即得。
 
 查看某一天的 400 只成分股::
 
@@ -9,16 +12,10 @@
     python Tool/Micro400.py --code 600000                  # 查某只股票是否在名单内
     python Tool/Micro400.py --date 2004-12-31 --bottom 10  # 市值最大的 10 只（边界观察）
 
-生成并入库（Spec 7.3 格式）::
-
-    python Tool/Micro400.py --build-year 2026 --candidates   # 当年 → Data/2026/Micro400/
-    python Tool/Micro400.py --build-all --candidates         # 全部年份 → Archive/Micro400/
-
 选样规则（与 AGENTS.md §3 一致）：沪深主板、非 ST、当日有成交、上市满 60 个交易日，
 按总市值升序取前 400 只；候选池 = 这 400 只里收盘价 < 10 元的。
 
-字段：``Code|Name|Date|Rank|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal|MvFloat``
-（与 `Archive/Security`、`Data` 行情同格式，头部 ``# Key : Value``）。
+只读：不写 `Archive/`、`Data/`、`Latest/`；仅在 `Index/Cache/Panel/`（.gitignore）建查询缓存。
 """
 
 import argparse
@@ -171,15 +168,6 @@ def dayRows(root, day):
     return [row for row in rows if row.split("|")[2] == day]
 
 
-def toLine(item, day, rank=None):
-    mcap, code, row, _, original = item
-    field = row.split("|")
-    return "|".join([code, field[1], day, str(rank or original)] + field[3:])
-
-
-# --------------------------------------------------------------------------- #
-# 查询
-# --------------------------------------------------------------------------- #
 def exportCsv(picked, day, path):
     """导出 CSV（UTF-8 BOM，Excel 可直接双击打开）。"""
     import csv
@@ -234,102 +222,6 @@ def show(root, day, top=None, bottom=None, candidates=False, code=None, log=prin
 # --------------------------------------------------------------------------- #
 # 生成（Spec 7.3 格式）
 # --------------------------------------------------------------------------- #
-def headers(title, count):
-    return [("标题", title), ("字段名称", f'"{FIELD_CN}"'), ("DataProvider", "CNAMCSI"),
-            ("Field", f'"{FIELD}"'), ("FieldName", f'"{FIELD}"'),
-            ("FieldType", f'"{FIELD_TYPE}"'), ("TypeKLine", "Day"),
-            ("Count", str(count)), ("Symbol", ""), ("SecuCode", ""), ("USC", ""),
-            ("Name", '""'), ("Region", "CN"), ("Market", "SSE|SZSE"),
-            ("TimeZone", "Asia/Shanghai"), ("Currency", "CNY")]
-
-
-def buildYear(root, year, withCandidates=False, log=print):
-    """生成 ``<年>`` 的 Micro400（历史进 Archive、当年进 Data）。"""
-    ensurePanel(root, log=log)
-    year = str(year)
-    rows = yearRows(root, year)
-    if not rows:
-        log(f"{year} 年无面板数据")
-        return {}
-    days = calendarDays(root)
-    first = firstDays(root)
-    byDay = {}
-    for row in rows:
-        byDay.setdefault(row.split("|")[2], []).append(row)
-    micro, cand = {}, {}
-    for day in sorted(byDay):
-        picked = pick(byDay[day], days, first)
-        for rank, item in enumerate(picked, 1):
-            line = toLine(item, day, rank)
-            micro.setdefault(day[:6], []).append(line)
-            if withCandidates and float(item[2].split("|")[4]) < 10:
-                cand.setdefault(day[:6], []).append(line)
-    isCurrent = year == max(days)[:4] or int(year) > int(max(days)[:4])
-    written = {}
-    for kind, data in (("Micro400", micro), ("Candidates", cand)):
-        if not data:
-            continue
-        if isCurrent:                       # 当年 → Data/<年>/<kind>/<yyyyMM>.mvsv
-            for month, lines in sorted(data.items()):
-                lines.sort(key=lambda line: (line.split("|")[0], line.split("|")[2]))
-                path = os.path.join(root, "Data", year, kind, f"{month}.mvsv")
-                title = f"中证微盘股{kind} {year} 年 {int(month[4:])} 月（{len(lines):,} 行）"
-                Market._write(path, headers(title, len(lines)), lines)
-                written[f"{kind}/{month}"] = len(lines)
-        else:                               # 历史年 → Archive/<kind>/<年>.mvsv（全年一个文件）
-            lines = [line for month in sorted(data) for line in data[month]]
-            lines.sort(key=lambda line: (line.split("|")[0], line.split("|")[2]))
-            path = os.path.join(root, "Archive", kind, f"{year}.mvsv")
-            title = f"中证微盘股{kind} {year} 年（{len(lines):,} 行）"
-            Market._write(path, headers(title, len(lines)), lines)
-            written[kind] = len(lines)
-    total_micro = sum(len(v) for v in micro.values())
-    log(f"{year} 年：Micro400 {total_micro:,} 行 · Candidates "
-        f"{sum(len(v) for v in cand.values()):,} 行 · 写入 {len(written)} 个文件")
-    return written
-
-
-def buildDay(root, day, withCandidates=True, log=print):
-    """只生成某一天的 Micro400（写当年 Data 目录），供每日流水线调用。"""
-    ensurePanel(root, log=log)
-    rows = dayRows(root, day)
-    if not rows:
-        log(f"{day} 无行情数据，跳过 Micro400")
-        return {}
-    picked = pick(rows, calendarDays(root), firstDays(root))
-    year = day[:4]
-    lines = [toLine(item, day) for item in picked]
-    lines.sort(key=lambda line: int(line.split("|")[3]))
-    path = os.path.join(root, "Data", year, "Micro400", f"{day[:6]}.mvsv")
-    merged = {(row.split("|")[0], row.split("|")[2]): row for row in Market.readRows(path)}
-    merged.update({(row.split("|")[0], row.split("|")[2]): row for row in lines})
-    out = [merged[key] for key in sorted(merged)]
-    Market._write(path, headers(f"中证微盘股Micro400 {year} 年 {int(day[4:6])} 月"
-                                f"（{len(out):,} 行）", len(out)), out)
-    log(f"{day} · Micro400 {len(lines)} 只 → Data/{year}/Micro400/{day[:6]}.mvsv")
-    if withCandidates:
-        cand = [line for line in lines if float(line.split("|")[5]) < 10]
-        cpath = os.path.join(root, "Data", year, "Candidates", f"{day[:6]}.mvsv")
-        cmerged = {(row.split("|")[0], row.split("|")[2]): row
-                   for row in Market.readRows(cpath)}
-        cmerged.update({(row.split("|")[0], row.split("|")[2]): row for row in cand})
-        cout = [cmerged[key] for key in sorted(cmerged)]
-        Market._write(cpath, headers(f"中证微盘股Candidates {year} 年 {int(day[4:6])} 月"
-                                     f"（{len(cout):,} 行）", len(cout)), cout)
-        log(f"{day} · Candidates {len(cand)} 只 → Data/{year}/Candidates/{day[:6]}.mvsv")
-    return {"micro400": len(lines), "candidates": len(cand) if withCandidates else 0}
-
-
-def buildAll(root, withCandidates=False, log=print):
-    ensurePanel(root, log=log)
-    years = sorted(os.path.basename(path)[:-5] for path
-                   in glob.glob(os.path.join(panelDir(root), "*.mvsv")))
-    done = {}
-    for year in years:
-        done[year] = buildYear(root, year, withCandidates, log=log)
-    return done
-
-
 def main():
     parser = argparse.ArgumentParser(description="微盘 400 名单查询 / 生成")
     parser.add_argument("--date", default=None, help="交易日 YYYY-MM-DD（默认最新）")
@@ -337,10 +229,6 @@ def main():
     parser.add_argument("--bottom", type=int, default=None, help="只看市值最大的 N 只")
     parser.add_argument("--code", default=None, help="查某只股票在名单中的排名")
     parser.add_argument("--candidates", action="store_true", help="只看收盘价 <10 元的候选")
-    parser.add_argument("--build-year", default=None, metavar="YEAR")
-    parser.add_argument("--build-day", default=None, metavar="DATE",
-                        help="只生成某一天（供每日流水线调用）")
-    parser.add_argument("--build-all", action="store_true")
     parser.add_argument("--csv", default=None, metavar="PATH",
                         help="把查询结果导出为 CSV（Excel 可直接打开）")
     parser.add_argument("--rebuild-cache", action="store_true", help="强制重建面板缓存")
@@ -349,15 +237,6 @@ def main():
     root = BASE
     if args.rebuild_cache:
         ensurePanel(root, force=True)
-    if args.build_day:
-        buildDay(root, args.build_day.replace("-", "")[:8])
-        return
-    if args.build_year:
-        buildYear(root, args.build_year, args.candidates)
-        return
-    if args.build_all:
-        buildAll(root, args.candidates)
-        return
     day = (args.date or "").replace("-", "")[:8] or None
     if not day:
         ensurePanel(root, log=print)
