@@ -1,50 +1,48 @@
 {
  "code": "CNAMCSWEWI",
  "name": "中证微盘股周频等权指数",
- "trade_date": "2026-11-13",
- "point": 93019.164337,
- "prev_point": 94640.737792,
- "ret": -0.01713399,
- "cum_return": 92.01916434,
+ "trade_date": "2026-11-16",
+ "point": 91402.14709,
+ "prev_point": 93019.164337,
+ "ret": -0.0173837,
+ "cum_return": 90.40214709,
  "base_date": "2004-12-31",
  "data_start": "2004-12-31",
  "base_point": 1000.0,
  "components": 400,
- "eligible_count": 3043,
+ "eligible_count": null,
  "weight_mode": "equal",
  "rebalance": "weekly",
- "border_mcap": 2868000000.0,
- "next_mcap": 2870000000.0,
- "skipped": {
-  "st": 141,
-  "new_listing": 5
- },
+ "border_mcap": null,
+ "next_mcap": null,
+ "skipped": null,
  "mode": "changes",
  "portfolio": {
-  "cash": 35700643.26,
-  "market_value": 77212930.0,
-  "total_asset": 112913573.26,
+  "cash": 36016687.05,
+  "market_value": 75525149.0,
+  "total_asset": 111541836.05,
   "holdings_count": 400,
-  "plan_orders": 36,
-  "plan_meta": {
-   "mode": "changes",
-   "entries": 18,
-   "exits": 18,
-   "cash_after_est": 35988572.61
-  },
-  "executed_orders": 0
+  "plan_orders": 0,
+  "plan_meta": {},
+  "executed_orders": 36
  },
  "scan": {
-  "replay": true,
-  "days": 5310,
-  "rebalance": true
+  "pages": 0,
+  "stock_list": "cache",
+  "codes": 3499,
+  "scanned": 3493
  },
  "http": {
-  "requests": 0,
-  "attempts": 0,
-  "bytes": 0,
-  "bytes_mb": 0.0,
-  "hosts": {}
+  "requests": 4,
+  "attempts": 4,
+  "bytes": 1695614,
+  "bytes_mb": 1.617,
+  "hosts": {
+   "qt.gtimg.cn": {
+    "requests": 4,
+    "bytes": 1695614
+   }
+  }
  },
- "generated_at": "2026-11-13T15:00:00+0800"
+ "generated_at": "2026-11-17T03:38:47+0800"
 }
