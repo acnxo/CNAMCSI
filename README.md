@@ -101,6 +101,36 @@ python Tool/FetchHistory.py --rebuild 2026 # .pending 落盘到 Data + 由 Data 
 | 断点续采 | 状态写 `Archive/.FetchState.json`（不入库）：中断后**重跑同一条命令**即续采；`--force` 全量重采 |
 | 幂等 | 采集区间内以新数据为准、区间外既有行保留，按日期升序写回 |
 
+## 查看每日微盘 400 成分
+
+```bash
+python Tool/Micro400.py --date 2026-11-16          # 打印当日 400 只（排名/代码/名称/收盘/总市值/上市天数）
+python Tool/Micro400.py --date 2026-11-16 --top 20 # 只看市值最小的 20 只
+python Tool/Micro400.py --date 2026-11-16 --candidates   # 只看收盘价 <10 元的候选池
+python Tool/Micro400.py --code 600768              # 查某只股票当日排名（不在名单会提示）
+python Tool/Micro400.py --date 2026-11-16 --csv 400.csv  # 导出 CSV（Excel 直接打开）
+python Tool/Micro400.py --date 2004-12-31          # 历史任意交易日
+```
+
+也可以直接读数据文件（竖线分隔，`grep` 某天即可）：
+
+```bash
+grep '|20261116|' Data/2026/Micro400/202611.mvsv        # 当年
+grep '|20241231|' Archive/Micro400/2024.mvsv            # 历史年
+grep '|20261116|' Data/2026/Candidates/202611.mvsv      # 候选池（<10 元）
+```
+
+| 路径 | 内容 |
+| --- | --- |
+| `Archive/Micro400/<年>.mvsv` | 历史年每日 400 名单（21 个文件 / 2,025,600 行） |
+| `Archive/Candidates/<年>.mvsv` | 历史年候选池（1,175,556 行） |
+| `Data/<年>/Micro400/<yyyyMM>.mvsv` | 当年按月（2026：11 个文件 / 83,600 行） |
+| `Data/<年>/Candidates/<yyyyMM>.mvsv` | 当年按月（44,598 行） |
+
+字段：`Code|Name|Date|Rank|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal|MvFloat`
+选样规则：沪深主板、非 ST、当日有成交、上市满 60 个交易日，按总市值升序取前 400；
+候选池 = 名单中收盘价 < 10 元。生成：`--build-day <日期>`（每日）、`--build-year <年>`、`--build-all`。
+
 ## 目录
 
 ```
