@@ -55,6 +55,7 @@ class TestSummarize(unittest.TestCase):
         self.assertAlmostEqual(s["return"], -0.10, places=8)
         self.assertAlmostEqual(s["max_drawdown"], -0.25, places=8)
         self.assertLess(s["annualized"], 0)
+        self.assertAlmostEqual(s["drawdown_percentile"], 1.0, places=6)   # 当前即最深回撤
 
     def test_empty(self):
         self.assertIsNone(Compare.summarize([])["last"])
@@ -69,15 +70,24 @@ class TestRenderSvg(unittest.TestCase):
         self.assertEqual(svg.count('class="series"'), 6)
         self.assertEqual(svg.count('class="drawdown"'), 6)
         self.assertEqual(svg.count('class="drawdown-line"'), 6)
+        self.assertEqual(svg.count('class="percentile"'), 6)   # 每个回撤面板右侧一条分位曲线
         self.assertIn("回撤", svg)
         self.assertIn("最大回撤", svg)
         self.assertIn("当前回撤", svg)          # 每个回撤面板右侧同时给出当前回撤
+        self.assertIn("回撤分位", svg)          # 以及当前回撤在窗口内的分位
+        self.assertIn("回撤分位曲线", svg)          # 右侧分位小图标题
+        self.assertIn("回撤率", svg)              # 左侧回撤面板 Y 轴标题
+        self.assertIn("回撤率（%）", svg)            # 分位小图 Y 轴（左）标题
+        self.assertIn("分位（%）", svg)              # 分位小图 X 轴标题
+        self.assertIn("回撤天数分布", svg)          # 最右侧直方图标题
+        self.assertIn(">天数</text>", svg)          # 直方图 X 轴标题
+        self.assertGreaterEqual(svg.count('class="histogram"'), 6)   # 每个面板一组天数直方图
         self.assertIn("国证2000", svg)
         self.assertIn("中证2000", svg)
         self.assertIn("中证全指", svg)
         self.assertIn("CNAMCSDEWI 日频", svg)
         self.assertIn("对比", svg)
-        self.assertEqual(root.get("width"), "2360")          # 默认 2 倍画布
+        self.assertEqual(root.get("width"), "2880")          # 默认 2 倍画布
         self.assertGreater(int(root.get("height")), 2000)    # 主图 + 6 个回撤子图
         self.assertIn('transform="scale(2)"', svg)
         # 图例固定在绘图区左上角（left=78，与 Y 轴留 16px 间隙），带半透明白底
@@ -122,6 +132,28 @@ class TestDrawdown(unittest.TestCase):
         self.assertEqual(dd[1][1], 0.0)
         self.assertAlmostEqual(dd[2][1], -0.25, places=8)
         self.assertAlmostEqual(dd[3][1], -1 + 1100 / 1200, places=6)
+
+
+class TestPercentile(unittest.TestCase):
+    def test_boundaries_and_middle(self):
+        self.assertEqual(Compare.drawdownPercentile([("a", 0.0), ("b", -0.20)]), 1.0)  # 最深
+        self.assertEqual(Compare.drawdownPercentile([("a", -0.20), ("b", 0.0)]), 0.0)  # 创新高
+        middle = [("a", 0.0), ("b", 0.0), ("c", -0.20), ("d", -0.10)]   # 当前 -0.10
+        self.assertAlmostEqual(Compare.drawdownPercentile(middle), 2 / 3, places=6)
+        self.assertEqual(Compare.drawdownPercentile([]), 0.0)
+        self.assertEqual(Compare.drawdownPercentile([("a", 0.0)]), 0.0)
+
+
+class TestHistogramBins(unittest.TestCase):
+    def test_half_percent_bins(self):
+        dd = [("d0", 0.0), ("d1", -0.004), ("d2", -0.006), ("d3", -0.09), ("d4", -0.15)]
+        counts = Compare.drawdownBins(dd, 0.15)
+        self.assertEqual(len(counts), 30)                 # 每箱 0.5% 回撤率
+        self.assertEqual(counts[0], 2)                    # 0 ~ -0.5%
+        self.assertEqual(counts[1], 1)                    # -0.5% ~ -1%
+        self.assertEqual(counts[18], 1)                   # -9% ~ -9.5%
+        self.assertEqual(counts[29], 1)                   # -14.5% ~ -15%（封顶入末箱）
+        self.assertEqual(sum(counts), len(dd))
 
 
 class TestSliceWindow(unittest.TestCase):

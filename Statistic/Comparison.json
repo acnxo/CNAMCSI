@@ -14,7 +14,8 @@
      "last": 90318.0887,
      "return": 89.31808875,
      "annualized": 0.23822324,
-     "max_drawdown": -0.69939371
+     "max_drawdown": -0.69939371,
+     "drawdown_percentile": 0.477024
     },
     {
      "label": "CNAMCSWEWI 周频",
@@ -22,7 +23,8 @@
      "last": 91402.1471,
      "return": 90.40214709,
      "annualized": 0.23892442,
-     "max_drawdown": -0.69686089
+     "max_drawdown": -0.69686089,
+     "drawdown_percentile": 0.440678
     },
     {
      "label": "CNAMCSMEWI 月频",
@@ -30,7 +32,8 @@
      "last": 52118.3198,
      "return": 51.11831976,
      "annualized": 0.20633783,
-     "max_drawdown": -0.70385832
+     "max_drawdown": -0.70385832,
+     "drawdown_percentile": 0.421846
     },
     {
      "label": "国证2000",
@@ -38,7 +41,8 @@
      "last": 2040.9461,
      "return": 1.04094614,
      "annualized": 0.06028873,
-     "max_drawdown": -0.66750998
+     "max_drawdown": -0.66750998,
+     "drawdown_percentile": 0.430945
     },
     {
      "label": "中证2000",
@@ -46,7 +50,8 @@
      "last": 1117.8483,
      "return": 0.1178483,
      "annualized": 0.03622266,
-     "max_drawdown": -0.36401511
+     "max_drawdown": -0.36401511,
+     "drawdown_percentile": 0.953046
     },
     {
      "label": "中证全指",
@@ -54,7 +59,8 @@
      "last": 4959.1,
      "return": 3.9591,
      "annualized": 0.07892124,
-     "max_drawdown": -0.71480471
+     "max_drawdown": -0.71480471,
+     "drawdown_percentile": 0.466579
     }
    ]
   },
@@ -69,7 +75,8 @@
      "last": 2885.006,
      "return": 1.88500603,
      "annualized": 0.11624166,
-     "max_drawdown": -0.55071848
+     "max_drawdown": -0.55071848,
+     "drawdown_percentile": 0.487021
     },
     {
      "label": "CNAMCSWEWI 周频",
@@ -77,7 +84,8 @@
      "last": 3367.7737,
      "return": 2.36777373,
      "annualized": 0.13431183,
-     "max_drawdown": -0.5291814
+     "max_drawdown": -0.5291814,
+     "drawdown_percentile": 0.517923
     },
     {
      "label": "CNAMCSMEWI 月频",
@@ -85,7 +93,8 @@
      "last": 2542.882,
      "return": 1.542882,
      "annualized": 0.10171295,
-     "max_drawdown": -0.54571542
+     "max_drawdown": -0.54571542,
+     "drawdown_percentile": 0.456943
     },
     {
      "label": "国证2000",
@@ -93,7 +102,8 @@
      "last": 851.6815,
      "return": -0.1483185,
      "annualized": -0.01652453,
-     "max_drawdown": -0.52231425
+     "max_drawdown": -0.52231425,
+     "drawdown_percentile": 0.746189
     },
     {
      "label": "中证2000",
@@ -101,7 +111,8 @@
      "last": 1117.8483,
      "return": 0.1178483,
      "annualized": 0.03622266,
-     "max_drawdown": -0.36401511
+     "max_drawdown": -0.36401511,
+     "drawdown_percentile": 0.953046
     },
     {
      "label": "中证全指",
@@ -109,7 +120,8 @@
      "last": 982.5389,
      "return": -0.01746106,
      "annualized": -0.00182586,
-     "max_drawdown": -0.39331456
+     "max_drawdown": -0.39331456,
+     "drawdown_percentile": 0.870264
     }
    ]
   },
@@ -124,7 +136,8 @@
      "last": 3064.6693,
      "return": 2.06466933,
      "annualized": 0.26220317,
-     "max_drawdown": -0.41078147
+     "max_drawdown": -0.41078147,
+     "drawdown_percentile": 0.828241
     },
     {
      "label": "CNAMCSWEWI 周频",
@@ -132,7 +145,8 @@
      "last": 3329.5561,
      "return": 2.32955608,
      "annualized": 0.28414771,
-     "max_drawdown": -0.40738766
+     "max_drawdown": -0.40738766,
+     "drawdown_percentile": 0.818332
     },
     {
      "label": "CNAMCSMEWI 月频",
@@ -140,7 +154,8 @@
      "last": 2824.8738,
      "return": 1.82487376,
      "annualized": 0.24100085,
-     "max_drawdown": -0.4034693
+     "max_drawdown": -0.4034693,
+     "drawdown_percentile": 0.811726
     },
     {
      "label": "国证2000",
@@ -148,7 +163,8 @@
      "last": 951.3561,
      "return": -0.04864386,
      "annualized": -0.01031478,
-     "max_drawdown": -0.42680426
+     "max_drawdown": -0.42680426,
+     "drawdown_percentile": 0.920727
     },
     {
      "label": "中证2000",
@@ -156,7 +172,8 @@
      "last": 1117.8483,
      "return": 0.1178483,
      "annualized": 0.03622266,
-     "max_drawdown": -0.36401511
+     "max_drawdown": -0.36401511,
+     "drawdown_percentile": 0.953046
     },
     {
      "label": "中证全指",
@@ -164,7 +181,8 @@
      "last": 857.6998,
      "return": -0.14230023,
      "annualized": -0.03141214,
-     "max_drawdown": -0.39331456
+     "max_drawdown": -0.39331456,
+     "drawdown_percentile": 0.824112
     }
    ]
   },
@@ -179,7 +197,8 @@
      "last": 1755.6339,
      "return": 0.75563391,
      "annualized": 0.21575159,
-     "max_drawdown": -0.41078147
+     "max_drawdown": -0.41078147,
+     "drawdown_percentile": 0.722759
     },
     {
      "label": "CNAMCSWEWI 周频",
@@ -187,7 +206,8 @@
      "last": 1870.0698,
      "return": 0.87006978,
      "annualized": 0.24269305,
-     "max_drawdown": -0.40738766
+     "max_drawdown": -0.40738766,
+     "drawdown_percentile": 0.707586
     },
     {
      "label": "CNAMCSMEWI 月频",
@@ -195,7 +215,8 @@
      "last": 1658.8395,
      "return": 0.65883949,
      "annualized": 0.19205345,
-     "max_drawdown": -0.4034693
+     "max_drawdown": -0.4034693,
+     "drawdown_percentile": 0.695172
     },
     {
      "label": "国证2000",
@@ -203,7 +224,8 @@
      "last": 1039.7863,
      "return": 0.03978634,
      "annualized": 0.0136346,
-     "max_drawdown": -0.33394037
+     "max_drawdown": -0.33394037,
+     "drawdown_percentile": 0.990345
     },
     {
      "label": "中证2000",
@@ -211,7 +233,8 @@
      "last": 1069.824,
      "return": 0.06982396,
      "annualized": 0.02370429,
-     "max_drawdown": -0.36401511
+     "max_drawdown": -0.36401511,
+     "drawdown_percentile": 0.948966
     },
     {
      "label": "中证全指",
@@ -219,7 +242,8 @@
      "last": 1080.9155,
      "return": 0.08091555,
      "annualized": 0.0273759,
-     "max_drawdown": -0.25936948
+     "max_drawdown": -0.25936948,
+     "drawdown_percentile": 0.998621
     }
    ]
   },
@@ -234,7 +258,8 @@
      "last": 938.2998,
      "return": -0.06170015,
      "annualized": -0.06416617,
-     "max_drawdown": -0.26194229
+     "max_drawdown": -0.26194229,
+     "drawdown_percentile": 0.813278
     },
     {
      "label": "CNAMCSWEWI 周频",
@@ -242,7 +267,8 @@
      "last": 956.55,
      "return": -0.04345002,
      "annualized": -0.04520429,
-     "max_drawdown": -0.25583463
+     "max_drawdown": -0.25583463,
+     "drawdown_percentile": 0.792531
     },
     {
      "label": "CNAMCSMEWI 月频",
@@ -250,7 +276,8 @@
      "last": 942.4393,
      "return": -0.05756073,
      "annualized": -0.05986664,
-     "max_drawdown": -0.2452405
+     "max_drawdown": -0.2452405,
+     "drawdown_percentile": 0.809129
     },
     {
      "label": "国证2000",
@@ -258,7 +285,8 @@
      "last": 836.1324,
      "return": -0.16386759,
      "annualized": -0.1700283,
-     "max_drawdown": -0.30770411
+     "max_drawdown": -0.30770411,
+     "drawdown_percentile": 0.995851
     },
     {
      "label": "中证2000",
@@ -266,7 +294,8 @@
      "last": 829.5305,
      "return": -0.17046952,
      "annualized": -0.17685127,
-     "max_drawdown": -0.3028069
+     "max_drawdown": -0.3028069,
+     "drawdown_percentile": 0.991701
     },
     {
      "label": "中证全指",
@@ -274,7 +303,8 @@
      "last": 845.6668,
      "return": -0.15433321,
      "annualized": -0.16017078,
-     "max_drawdown": -0.25936948
+     "max_drawdown": -0.25936948,
+     "drawdown_percentile": 0.995851
     }
    ]
   },
@@ -289,7 +319,8 @@
      "last": 1947.1582,
      "return": 0.94715821,
      "annualized": 0.23717842,
-     "max_drawdown": -0.41078147
+     "max_drawdown": -0.41078147,
+     "drawdown_percentile": 0.744924
     },
     {
      "label": "CNAMCSWEWI 周频",
@@ -297,7 +328,8 @@
      "last": 2073.0894,
      "return": 1.07308942,
      "annualized": 0.26219121,
-     "max_drawdown": -0.40738766
+     "max_drawdown": -0.40738766,
+     "drawdown_percentile": 0.730964
     },
     {
      "label": "CNAMCSMEWI 月频",
@@ -305,7 +337,8 @@
      "last": 1825.2368,
      "return": 0.82523681,
      "annualized": 0.21188992,
-     "max_drawdown": -0.4034693
+     "max_drawdown": -0.4034693,
+     "drawdown_percentile": 0.719543
     },
     {
      "label": "国证2000",
@@ -313,7 +346,8 @@
      "last": 1050.5719,
      "return": 0.05057187,
      "annualized": 0.01588187,
-     "max_drawdown": -0.33394037
+     "max_drawdown": -0.33394037,
+     "drawdown_percentile": 0.991117
     },
     {
      "label": "中证2000",
@@ -321,7 +355,8 @@
      "last": 1117.8483,
      "return": 0.1178483,
      "annualized": 0.03622266,
-     "max_drawdown": -0.36401511
+     "max_drawdown": -0.36401511,
+     "drawdown_percentile": 0.953046
     },
     {
      "label": "中证全指",
@@ -329,7 +364,8 @@
      "last": 1033.4516,
      "return": 0.03345156,
      "annualized": 0.01056475,
-     "max_drawdown": -0.25936948
+     "max_drawdown": -0.25936948,
+     "drawdown_percentile": 0.998731
     }
    ]
   }

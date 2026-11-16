@@ -209,22 +209,24 @@ def sliceWindow(points, start, anchor=None):
 
 
 def summarize(points):
-    """末值、区间收益（相对窗口首值）、年化、最大回撤。"""
+    """末值、区间收益（相对窗口首值）、年化、最大回撤、回撤分位。"""
     if not points:
         return {"begin": None, "last": None, "return": None, "annualized": None,
-                "max_drawdown": None}
+                "max_drawdown": None, "drawdown_percentile": None}
     values = [value for _, value in points]
     last, base = values[-1], values[0]
     total = last / base - 1.0 if base else 0.0
     days = max(len(values), 1)
     annualized = (last / base) ** (252.0 / days) - 1.0 if base > 0 and last > 0 else 0.0
-    peak, drawdown = -1e18, 0.0
+    peak, worst = -1e18, 0.0
     for value in values:
         peak = max(peak, value)
         if peak > 0:
-            drawdown = min(drawdown, value / peak - 1.0)
+            worst = min(worst, value / peak - 1.0)
+    percentile = drawdownPercentile(drawdown(points))
     return {"begin": points[0][0], "last": round(last, 4), "return": round(total, 8),
-            "annualized": round(annualized, 8), "max_drawdown": round(drawdown, 8)}
+            "annualized": round(annualized, 8), "max_drawdown": round(worst, 8),
+            "drawdown_percentile": round(percentile, 6)}
 
 
 def _nextMonth(day):
@@ -242,6 +244,21 @@ def drawdown(points):
         peak = max(peak, value)
         out.append((day, round(value / peak - 1.0, 6) if peak > 0 else 0.0))
     return out
+
+
+def drawdownPercentile(dd):
+    """当前回撤在逐日回撤样本中的分位（比它更浅的交易日占比，0~1）。
+
+    分位 0% = 无回撤（创新高），100% = 窗口内最深回撤；不含当前日自身。
+    """
+    if not dd:
+        return 0.0
+    values = [value for _, value in dd]
+    current = values[-1]
+    others = len(values) - 1
+    if others <= 0:
+        return 0.0
+    return sum(1 for value in values if value > current) / others
 
 
 TICK_MIN_PX = 22          # 相邻 X 轴月份标签的最小水平间距
@@ -285,15 +302,30 @@ def thinYearTicks(marks, width, left, minPx=YEAR_TICK_MIN_PX):
     return thinTicks(marks, width, minPx)
 
 
-def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
+def drawdownBins(dd, depth, binPercent=0.005):
+    """按固定 0.5% 分箱统计各回撤区间的交易日天数（自 0 向 -depth）。
+
+    返回长度为 ``depth / binPercent`` 的列表，索引 0 对应 0~-0.5%，依此类推。
+    """
+    binCount = max(1, int(round(depth / binPercent)))
+    counts = [0] * binCount
+    for _, value in dd:
+        index = min(binCount - 1, int(abs(value) / depth * binCount + 1e-9))
+        counts[index] += 1
+    return counts
+
+
+def renderSvg(series, meta, scale=2, baseWidth=1440, mainHeight=640):
     """生成 SVG：上方 6 条净值曲线，下方 6 个时间轴对齐的回撤子图。
 
     画布按 ``scale`` 放大（默认 2 倍），内容用 ``<g transform="scale()">`` 等比缩放。
     所有曲线均为实线、以颜色区分；回撤子图与主图共用同一时间轴（x 映射一致）。
+    回撤子图右侧依次为回撤分位曲线（980~1128）与回撤天数直方图（1172~width-36），
+    三者共用同一 Y 轴刻度（回撤率）。
     series: [{"label","color","points":[(date, value)]}]
     """
     width, height = baseWidth, mainHeight
-    left, right, top, bottom = 78, width - 250, 66, height - 92
+    left, right, top, bottom = 78, 930, 66, height - 92
     ordinals = [datetime.date.fromisoformat(day).toordinal()
                 for item in series for day, _ in item["points"]]
     values = [value for item in series for _, value in item["points"]]
@@ -337,7 +369,7 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
     yearTicks = thinYearTicks(yearLines, right - left, left)
 
     # 回撤子图布局
-    ddHeight, ddGap = 112, 16
+    ddHeight, ddGap = 112, 44
     ddStart = height + 18
     canvasHeight = ddStart + len(series) * (ddHeight + ddGap) + 44
     canvasWidth = int(width * scale)
@@ -416,13 +448,22 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
 
     # 回撤子图：与主图共用时间轴；6 个面板共用统一 Y 轴深度（便于横向比较）
     ddSeries = [(item, drawdown(item["points"])) for item in series]
+    # 右侧两个小面板：分位曲线（980~1128）与回撤天数直方图（1172~width-36）
+    panelX0, panelX1 = 980, 1128
+    histX0, histX1 = 1172, width - 36
     depth = max(max(abs(min(value for _, value in dd)) for _, dd in ddSeries), 0.05)
     depth = round(math.ceil(depth / 0.05) * 0.05, 4)
     # 回撤子图的高度有限，横线数量同样自适应（约 14px 一条）
     ddStep = niceStep(depth, max(2, int(ddHeight / 14)), floorStep=0.01)
-    for index, (item, dd) in enumerate(ddSeries):
+    # 1% 一箱的天数分布；x 轴量程（最大天数）跨 6 条序列统一，柱长可直接横向对比
+    histCounts = [drawdownBins(dd, depth) for _, dd in ddSeries]
+    peakCount = max((max(counts) for counts in histCounts), default=1) or 1
+    for index, ((item, dd), counts) in enumerate(zip(ddSeries, histCounts)):
+        binCount = len(counts)               # 每箱 0.5% 回撤率
+        slot = ddHeight / binCount
         worst = min(value for _, value in dd)
         current = dd[-1][1]          # 最新交易日的回撤（相对历史峰值）
+        percentile = drawdownPercentile(dd)   # 当前回撤在窗口内的分位（0~1）
         pTop = ddStart + index * (ddHeight + ddGap)
         pBottom = pTop + ddHeight
 
@@ -431,11 +472,12 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
 
         parts.append(f'<text x="{left}" y="{pTop - 5}" font-size="12" fill="#111827" '
                      f'font-weight="600">{item["label"]} 回撤</text>')
-        # 右侧：最大回撤 + 当前回撤（当前值用系列颜色加粗，便于横向对比）
+        # 右侧：最大回撤 + 当前回撤 + 回撤分位（当前值用系列颜色加粗，便于横向对比）
         parts.append(f'<text x="{right}" y="{pTop - 5}" font-size="11" text-anchor="end">'
                      f'<tspan fill="#6b7280">最大回撤 {worst:.2%}</tspan>'
                      f'<tspan dx="12" fill="{item["color"]}" font-weight="600">'
-                     f'当前回撤 {current:.2%}</tspan></text>')
+                     f'当前回撤 {current:.2%}</tspan>'
+                     f'<tspan dx="12" fill="#6b7280">回撤分位 {percentile:.0%}</tspan></text>')
         # 水平网格 + 百分比刻度
         for levelIndex in range(int(depth / ddStep + 1e-9) + 1):
             level = levelIndex * ddStep
@@ -464,6 +506,98 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
                      f'fill-opacity="0.16" stroke="none"/>')
         parts.append(f'<path class="drawdown-line" d="{line}" fill="none" '
                      f'stroke="{item["color"]}" stroke-width="1"/>')
+        # 右侧小面板：回撤分位曲线（x = 分位 0%→100%，y = 回撤率，与左侧同一刻度）
+        values = sorted(value for _, value in dd)          # 升序：最深 → 0
+        count = len(values)
+        parts.append(f'<text x="{panelX0}" y="{pTop - 5}" font-size="10" fill="#374151" '
+                     f'font-weight="600">回撤分位曲线</text>')
+        for ratio in (0.0, 0.25, 0.5, 0.75, 1.0):
+            x = panelX0 + ratio * (panelX1 - panelX0)
+            parts.append(f'<line x1="{x:.2f}" y1="{pTop}" x2="{x:.2f}" y2="{pBottom}" '
+                         f'stroke="#f4f5f7"/>')
+        # Y 轴（左）：与左侧回撤面板同一刻度，逐条标百分比值
+        for levelIndex in range(int(depth / ddStep + 1e-9) + 1):
+            level = levelIndex * ddStep
+            y = pTop + level / depth * ddHeight
+            parts.append(f'<line x1="{panelX0}" y1="{y:.2f}" x2="{panelX1}" y2="{y:.2f}" '
+                         f'stroke="#f9fafb"/>')
+            label = f"{-level:.0%}" if level else "0%"
+            parts.append(f'<text x="{panelX0 - 5}" y="{y + 3:.2f}" font-size="9" '
+                         f'fill="#9ca3af" text-anchor="end">{label}</text>')
+        # Y 轴标题（竖排）：回撤率
+        parts.append(f'<text x="{panelX0 - 38}" y="{(pTop + pBottom) / 2:.1f}" font-size="9" '
+                     f'fill="#6b7280" text-anchor="middle" '
+                     f'transform="rotate(-90 {panelX0 - 38} {(pTop + pBottom) / 2:.1f})">'
+                     f'回撤率（%）</text>')
+        # 坐标轴：左侧竖轴 + 底部横轴 + 分位刻度标签（0% / 50% / 100%）
+        parts.append(f'<line x1="{panelX0}" y1="{pTop}" x2="{panelX0}" y2="{pBottom}" '
+                     f'stroke="#d1d5db"/>')
+        parts.append(f'<line x1="{panelX0}" y1="{pBottom}" x2="{panelX1}" y2="{pBottom}" '
+                     f'stroke="#9ca3af"/>')
+        for ratio, anchor in ((0.0, "start"), (0.5, "middle"), (1.0, "end")):
+            x = panelX0 + ratio * (panelX1 - panelX0)
+            parts.append(f'<line x1="{x:.2f}" y1="{pBottom}" x2="{x:.2f}" y2="{pBottom + 4}" '
+                         f'stroke="#9ca3af"/>')
+            parts.append(f'<text x="{x:.2f}" y="{pBottom + 12}" font-size="9" fill="#6b7280" '
+                         f'text-anchor="{anchor}">{ratio:.0%}</text>')
+        # X 轴标题：分位
+        parts.append(f'<text x="{(panelX0 + panelX1) / 2:.2f}" y="{pBottom + 26}" font-size="9" '
+                     f'fill="#6b7280" text-anchor="middle">分位（%）</text>')
+
+        curve = []
+        for step in range(101):                             # 分位 0%..100%，每 1% 取一点
+            ratio = step / 100.0
+            value = values[int(round((1.0 - ratio) * (count - 1)))]
+            x = panelX0 + ratio * (panelX1 - panelX0)
+            curve.append(f"{'M' if step == 0 else 'L'}{x:.2f},{ddY(value):.2f}")
+        parts.append(f'<path class="percentile" d="{" ".join(curve)}" fill="none" '
+                     f'stroke="{item["color"]}" stroke-width="1"/>')
+        # 当前点：当前回撤（y）及其分位（x）
+        parts.append(f'<circle cx="{panelX0 + percentile * (panelX1 - panelX0):.2f}" '
+                     f'cy="{ddY(current):.2f}" r="2.5" fill="{item["color"]}"/>')
+        # 左侧回撤面板：Y 轴标题（竖排），与百分比刻度分离
+        parts.append(f'<text x="{left - 52}" y="{(pTop + pBottom) / 2:.1f}" font-size="10" '
+                     f'fill="#6b7280" text-anchor="middle" '
+                     f'transform="rotate(-90 {left - 52} {(pTop + pBottom) / 2:.1f})">回撤率</text>')
+
+        # 最右侧直方图：按 0.5% 回撤率分段统计天数（y = 回撤率，x = 天数）
+        parts.append(f'<text x="{histX0}" y="{pTop - 5}" font-size="10" fill="#374151" '
+                     f'font-weight="600">回撤天数分布（每段 0.5%）</text>')
+        # 水平网格 + 左侧刻度（与回撤面板同 level）
+        for levelIndex in range(int(depth / ddStep + 1e-9) + 1):
+            level = levelIndex * ddStep
+            y = pTop + level / depth * ddHeight
+            parts.append(f'<line x1="{histX0}" y1="{y:.2f}" x2="{histX1}" y2="{y:.2f}" '
+                         f'stroke="#f9fafb"/>')
+            label = f"{-level:.0%}" if level else "0%"
+            parts.append(f'<text x="{histX0 - 5}" y="{y + 3:.2f}" font-size="8" '
+                         f'fill="#9ca3af" text-anchor="end">{label}</text>')
+        # 横向柱：每箱一根（1% 一段），宽度按天数占全局递增箱的比例（x 轴跨序列统一）
+        for binIndex, count in enumerate(counts):
+            if not count:
+                continue
+            yTop = pTop + binIndex * slot
+            parts.append(f'<rect class="histogram" x="{histX0}" y="{yTop:.2f}" '
+                         f'width="{count / peakCount * (histX1 - histX0):.2f}" '
+                         f'height="{slot:.2f}" fill="{item["color"]}" fill-opacity="0.55"/>')
+        # 坐标轴：左侧竖轴 + 底部横轴 + 天数刻度与轴标题
+        parts.append(f'<line x1="{histX0}" y1="{pTop}" x2="{histX0}" y2="{pBottom}" '
+                     f'stroke="#d1d5db"/>')
+        parts.append(f'<line x1="{histX0}" y1="{pBottom}" x2="{histX1}" y2="{pBottom}" '
+                     f'stroke="#9ca3af"/>')
+        for ratio, anchor in ((0.0, "start"), (0.5, "middle"), (1.0, "end")):
+            x = histX0 + ratio * (histX1 - histX0)
+            parts.append(f'<line x1="{x:.2f}" y1="{pBottom}" x2="{x:.2f}" y2="{pBottom + 4}" '
+                         f'stroke="#9ca3af"/>')
+            parts.append(f'<text x="{x:.2f}" y="{pBottom + 12}" font-size="8" fill="#6b7280" '
+                         f'text-anchor="{anchor}">{round(peakCount * ratio):,}</text>')
+        parts.append(f'<text x="{(histX0 + histX1) / 2:.2f}" y="{pBottom + 26}" font-size="9" '
+                     f'fill="#6b7280" text-anchor="middle">天数</text>')
+        # Y 轴标题（竖排）：回撤率
+        parts.append(f'<text x="{histX0 - 36}" y="{(pTop + pBottom) / 2:.1f}" font-size="8" '
+                     f'fill="#6b7280" text-anchor="middle" '
+                     f'transform="rotate(-90 {histX0 - 36} {(pTop + pBottom) / 2:.1f})">'
+                     f'回撤率（%）</text>')
 
     # 底部时间轴（与主图一致：年份少时月份一行、年份一行，年份多时只留年份）
     axisTop = canvasHeight - 42
@@ -484,21 +618,22 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
 
 
 def renderMarkdown(windowStats):
-    """四个时间窗口的统计表。"""
+    """六个时间窗口的统计表。"""
     lines = ["# 中证微盘股基线指数 vs 业绩比较基准", ""]
     for data in windowStats.values():
         lines += [f"## {data['title']}（{data['begin']} ~ {data['end']}）", "",
-                  "| 指数 | 起点 | 末值 | 区间收益 | 年化 | 最大回撤 |",
-                  "| --- | --- | ---: | ---: | ---: | ---: |"]
+                  "| 指数 | 起点 | 末值 | 区间收益 | 年化 | 最大回撤 | 回撤分位 |",
+                  "| --- | --- | ---: | ---: | ---: | ---: | ---: |"]
         for row in data["rows"]:
             if row["last"] is None:
-                lines.append(f"| {row['label']} | - | - | - | - | - |")
+                lines.append(f"| {row['label']} | - | - | - | - | - | - |")
                 continue
             lines.append(f"| {row['label']} | {row['begin']} | {row['last']:.2f} | "
                          f"{row['return']:+.2%} | {row['annualized']:+.2%} | "
-                         f"{row['max_drawdown']:.2%} |")
+                         f"{row['max_drawdown']:.2%} | {row['drawdown_percentile']:.0%} |")
         lines.append("")
-    lines.append("说明：各序列以自身数据起点归一为 1000；中证全指基日 2004-12-31（基日点位 1000），"
+    lines.append("说明：各序列以自身数据起点归一为 1000；回撤分位 = 窗口内回撤比当前更浅的交易日占比"
+                 "（0% = 创新高，100% = 窗口最深回撤）；中证全指基日 2004-12-31（基日点位 1000），"
                  "CNAMCI 受本地面板数据限制自 2009-06-01 起算，中证2000 自 2023-08-11 发布日起。")
     lines.append("")
     return "\n".join(lines)
