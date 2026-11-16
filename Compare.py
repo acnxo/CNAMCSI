@@ -244,6 +244,47 @@ def drawdown(points):
     return out
 
 
+TICK_MIN_PX = 22          # 相邻 X 轴月份标签的最小水平间距
+YEAR_TICK_MIN_PX = 44     # 相邻年份标签的最小水平间距（长跨度时自动隔年标注）
+
+
+def niceStep(span, maxTicks, floorStep=0.0):
+    """挑选 1/2/2.5/5×10^k 的“整齐”步长，使刻度数不超过 ``maxTicks``。"""
+    count = max(1, int(maxTicks))
+    raw = max(span / count, floorStep, 1e-12)
+    exponent = math.floor(math.log10(raw) + 1e-9)
+    for mult in (1.0, 2.0, 2.5, 5.0, 10.0):
+        step = mult * 10.0 ** exponent
+        if step >= raw - 1e-12:
+            return step
+    return 10.0 ** (exponent + 1)
+
+
+def thinTicks(ticks, width, minPx):
+    """按最小像素间距等间隔抽稀刻度（至少保留 1 个）。"""
+    if not ticks:
+        return []
+    limit = max(1, int(width / max(minPx, 1.0)))
+    stride = max(1, math.ceil(len(ticks) / limit))
+    return ticks[::stride]
+
+
+def buildYearTicks(begin, end, xMap, left, right):
+    """每年 1 月 1 日一个年份分界点（裁剪到 [left, right]），用于画逐年分界竖线。"""
+    beginDate = datetime.date.fromisoformat(begin)
+    endDate = datetime.date.fromisoformat(end)
+    return [(year, max(left, min(right, xMap(datetime.date(year, 1, 1).isoformat()))))
+            for year in range(beginDate.year, endDate.year + 1)]
+
+
+def thinYearTicks(marks, width, left, minPx=YEAR_TICK_MIN_PX):
+    """年份标签抽稀（分界竖线仍每年一条）：首年贴左边界且与次年太近时略去首年。"""
+    marks = list(marks)
+    if len(marks) > 1 and marks[0][1] < left + 24 and marks[1][1] - marks[0][1] < minPx * 1.4:
+        marks.pop(0)
+    return thinTicks(marks, width, minPx)
+
+
 def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
     """生成 SVG：上方 6 条净值曲线，下方 6 个时间轴对齐的回撤子图。
 
@@ -267,24 +308,33 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
     def yMap(value):
         return bottom - (value - yMin) / (yMax - yMin) * (bottom - top)
 
-    span = yMax - yMin
-    step = 100 if span < 800 else 200 if span < 1600 else 500
+    # Y 轴：按可用高度自适应（约 34px 一个刻度），取整齐步长
+    maxYTicks = max(2, int((bottom - top) / 34))
+    yStep = niceStep(yMax - yMin, maxYTicks)
+    yDigits = 0 if abs(yStep - round(yStep)) < 1e-9 else 2
     yTicks = []
-    tick = math.ceil(yMin / step) * step
-    while tick <= yMax:
-        yTicks.append(tick)
-        tick += step
+    tick = math.ceil(yMin / yStep - 1e-9) * yStep
+    while tick <= yMax + 1e-9:
+        yTicks.append(round(tick, 10))
+        tick += yStep
 
-    # X 轴刻度：每季度（1/4/7/10 月）一个刻度；月份与年份分两行显示
-    xTicks = []
+    # X 轴刻度：先按季度（1/4/7/10 月）取候选，再按可用宽度抽稀，避免标签重叠
+    xCandidates = []
     cursor = datetime.date.fromisoformat(meta["begin"]).replace(day=1)
     while cursor.month not in (1, 4, 7, 10):
         cursor = _nextMonth(cursor)
     while cursor.toordinal() <= xMax:
-        xTicks.append((cursor.isoformat(), cursor.month, cursor.year))
+        xCandidates.append((cursor.isoformat(), cursor.month, cursor.year))
         cursor = _nextMonth(cursor)
         while cursor.month not in (1, 4, 7, 10):
             cursor = _nextMonth(cursor)
+    xTicks = thinTicks(xCandidates, right - left, TICK_MIN_PX)
+    # 年份较多的图：季度刻度只画淡线不写月份文字（写满会很密），空格留白即可
+    compactX = len(xTicks) < len(xCandidates)
+    gridTicks = xCandidates if compactX else xTicks
+    # 分界竖线逐年一条（每年 1 月 1 日），年份文字再按宽度抽稀
+    yearLines = buildYearTicks(meta["begin"], meta["as_of"], xMap, left, right)
+    yearTicks = thinYearTicks(yearLines, right - left, left)
 
     # 回撤子图布局
     ddHeight, ddGap = 112, 16
@@ -309,20 +359,26 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
         y = yMap(tick)
         parts.append(f'<line x1="{left}" y1="{y:.2f}" x2="{right}" y2="{y:.2f}" stroke="#e5e7eb"/>')
         parts.append(f'<text x="{left - 10}" y="{y + 4:.2f}" font-size="11" fill="#6b7280" '
-                     f'text-anchor="end">{tick:g}</text>')
-    # 主图：季度网格 + 月份/年份两行
-    for day, month, year in xTicks:
+                     f'text-anchor="end">{tick:,.{yDigits}f}</text>')
+    # 主图：季度网格（每年年初 / 3 / 6 / 9 月底四个点）；年份少时才写月份文字
+    for day, _month, _year in gridTicks:
         x = xMap(day)
         parts.append(f'<line x1="{x:.2f}" y1="{top}" x2="{x:.2f}" y2="{bottom}" stroke="#f3f4f6"/>')
-        parts.append(f'<text x="{x:.2f}" y="{bottom + 18}" font-size="11" fill="#6b7280" '
-                     f'text-anchor="middle">{month:02d}</text>')
-    yearMarks = {}
-    for day, month, year in xTicks:
-        yearMarks.setdefault(year, xMap(day))
-    for year, x in yearMarks.items():
-        parts.append(f'<line x1="{x:.2f}" y1="{top}" x2="{x:.2f}" y2="{bottom}" stroke="#d1d5db"/>')
+    if not compactX:
+        for day, month, _year in xTicks:
+            x = xMap(day)
+            parts.append(f'<text x="{x:.2f}" y="{bottom + 18}" font-size="11" fill="#6b7280" '
+                         f'text-anchor="middle">{month:02d}</text>')
+    yearLabelY = bottom + (20 if compactX else 38)
+    # 年份分界线：每年一条（上一年年末与下一年年初之间），比季度线更明显
+    for _year, x in yearLines:
+        if x <= left + 0.5:            # 起点年 1 月 1 日在绘图区外，不重复画在 Y 轴上
+            continue
+        parts.append(f'<line x1="{x:.2f}" y1="{top}" x2="{x:.2f}" y2="{bottom}" stroke="#cbd5e1"/>')
+    # 年份文字：按可用宽度抽稀（长跨度隔年标注）
+    for year, x in yearTicks:
         anchor = "start" if x < left + 24 else "middle"
-        parts.append(f'<text x="{x + (2 if anchor == "start" else 0):.2f}" y="{bottom + 38}" '
+        parts.append(f'<text x="{x + (2 if anchor == "start" else 0):.2f}" y="{yearLabelY}" '
                      f'font-size="12" fill="#374151" text-anchor="{anchor}" '
                      f'font-weight="600">{year}</text>')
     # 主图：坐标轴
@@ -341,8 +397,9 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
                      f'stroke-width="1" stroke-linejoin="round">'
                      f'<title>{item["label"]}</title></path>')
 
-    # 图例（左上角，半透明白底）
-    legendX, legendY = left + 10, top + 16
+    # 图例（左上角，半透明白底）：与 Y 轴（left）留出间隙，避免贴边遮住刻度值
+    legendGap = 16
+    legendX, legendY = left + legendGap + 10, top + 16
     legendW, legendH = 214, len(series) * 30 + 12
     parts.append(f'<rect x="{legendX - 10}" y="{legendY - 16}" width="{legendW}" '
                  f'height="{legendH}" rx="6" fill="#ffffff" fill-opacity="0.95" '
@@ -360,9 +417,12 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
     # 回撤子图：与主图共用时间轴；6 个面板共用统一 Y 轴深度（便于横向比较）
     ddSeries = [(item, drawdown(item["points"])) for item in series]
     depth = max(max(abs(min(value for _, value in dd)) for _, dd in ddSeries), 0.05)
-    depth = math.ceil(depth / 0.05) * 0.05
+    depth = round(math.ceil(depth / 0.05) * 0.05, 4)
+    # 回撤子图的高度有限，横线数量同样自适应（约 14px 一条）
+    ddStep = niceStep(depth, max(2, int(ddHeight / 14)), floorStep=0.01)
     for index, (item, dd) in enumerate(ddSeries):
         worst = min(value for _, value in dd)
+        current = dd[-1][1]          # 最新交易日的回撤（相对历史峰值）
         pTop = ddStart + index * (ddHeight + ddGap)
         pBottom = pTop + ddHeight
 
@@ -371,19 +431,22 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
 
         parts.append(f'<text x="{left}" y="{pTop - 5}" font-size="12" fill="#111827" '
                      f'font-weight="600">{item["label"]} 回撤</text>')
-        parts.append(f'<text x="{right}" y="{pTop - 5}" font-size="11" fill="#6b7280" '
-                     f'text-anchor="end">最大回撤 {worst:.2%}</text>')
+        # 右侧：最大回撤 + 当前回撤（当前值用系列颜色加粗，便于横向对比）
+        parts.append(f'<text x="{right}" y="{pTop - 5}" font-size="11" text-anchor="end">'
+                     f'<tspan fill="#6b7280">最大回撤 {worst:.2%}</tspan>'
+                     f'<tspan dx="12" fill="{item["color"]}" font-weight="600">'
+                     f'当前回撤 {current:.2%}</tspan></text>')
         # 水平网格 + 百分比刻度
-        level, lstep = 0.0, (0.05 if depth <= 0.15 else 0.10)
-        while level <= depth + 1e-9:
+        for levelIndex in range(int(depth / ddStep + 1e-9) + 1):
+            level = levelIndex * ddStep
             y = pTop + level / depth * ddHeight
             parts.append(f'<line x1="{left}" y1="{y:.2f}" x2="{right}" y2="{y:.2f}" '
                          f'stroke="#f3f4f6"/>')
+            label = f"{-level:.0%}" if level else "0%"
             parts.append(f'<text x="{left - 10}" y="{y + 4:.2f}" font-size="10" '
-                         f'fill="#9ca3af" text-anchor="end">{-level:.0%}</text>')
-            level += lstep
-        # 季度竖线（与主图对齐）
-        for day, month, year in xTicks:
+                         f'fill="#9ca3af" text-anchor="end">{label}</text>')
+        # 季度竖线（与主图对齐，每年四个季度分界点）
+        for day, _month, _year in gridTicks:
             x = xMap(day)
             parts.append(f'<line x1="{x:.2f}" y1="{pTop}" x2="{x:.2f}" y2="{pBottom}" '
                          f'stroke="#f9fafb"/>')
@@ -402,15 +465,17 @@ def renderSvg(series, meta, scale=2, baseWidth=1180, mainHeight=640):
         parts.append(f'<path class="drawdown-line" d="{line}" fill="none" '
                      f'stroke="{item["color"]}" stroke-width="1"/>')
 
-    # 底部时间轴（与主图一致：月份一行、年份一行）
+    # 底部时间轴（与主图一致：年份少时月份一行、年份一行，年份多时只留年份）
     axisTop = canvasHeight - 42
-    for day, month, year in xTicks:
-        x = xMap(day)
-        parts.append(f'<text x="{x:.2f}" y="{axisTop + 16}" font-size="11" fill="#6b7280" '
-                     f'text-anchor="middle">{month:02d}</text>')
-    for year, x in yearMarks.items():
+    if not compactX:
+        for day, month, _year in xTicks:
+            x = xMap(day)
+            parts.append(f'<text x="{x:.2f}" y="{axisTop + 16}" font-size="11" fill="#6b7280" '
+                         f'text-anchor="middle">{month:02d}</text>')
+    axisYearY = axisTop + (16 if compactX else 34)
+    for year, x in yearTicks:
         anchor = "start" if x < left + 24 else "middle"
-        parts.append(f'<text x="{x + (2 if anchor == "start" else 0):.2f}" y="{axisTop + 34}" '
+        parts.append(f'<text x="{x + (2 if anchor == "start" else 0):.2f}" y="{axisYearY}" '
                      f'font-size="12" fill="#374151" text-anchor="{anchor}" '
                      f'font-weight="600">{year}</text>')
     parts.append("</g>")

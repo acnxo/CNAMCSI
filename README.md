@@ -12,7 +12,8 @@
 | `CNAMCSMEWI` | 中证微盘股月频等权指数 | 每月最后一个交易日 | 52988.88（+5198.89%），263 次调仓 |
 
 业绩比较基准：**国证2000（399303）**、**中证2000（932000）**、**中证全指（000985）**，与三只自建指数
-同图展示（`Statistic/Comparison.svg`），基期同为 2023-08-11 = 1000 点。
+同图展示（`Statistic/Comparison.svg`，说明见 [`Statistic/README.md`](Statistic/README.md)），
+每个时间窗口内各序列以窗口首个数据点归一为 1000 点。
 
 备选业绩参考（未接入同图）：
 
@@ -163,7 +164,7 @@ CNAMCI/                        本仓库
     CNAMCSDEWI/  CNAMCSWEWI/  CNAMCSMEWI/   各自的 Index/Nav/State/Portfolio/Latest/Daily
     Cache/                              交易日历/代码清单缓存（三个指数共享，不提交）
     Benchmarks/                         基准收盘价缓存（国证2000/中证2000/中证全指）
-    Comparison.svg / .md / .json        6 指数对比图与统计
+    Comparison.svg / .md / .json        6 指数对比图与统计（说明见 Statistic/README.md）
 ```
 
 ## 运行
@@ -209,15 +210,19 @@ python3 Compare.py            # 拉取基准并生成 Statistic/Comparison.svg /
 python3 Compare.py --no-fetch # 只用本地缓存（Benchmarks/）
 ```
 
-- 基准数据：国证2000、中证全指走腾讯日线；中证2000 走中证指数官网（腾讯无 932000 行情）；
-- 归一化：均以 2025-01-02 收盘 = 1000 点，与 CNAMCI 基点一致；
-- 输出**六张**时间窗口的 SVG（纯手写，2360×2940，含主图 + 6 个回撤子图）：
+- 基准数据：国证2000 走新浪日线；中证全指、中证2000 走中证指数官网（腾讯无 932000 行情）；
+- 归一化：每个窗口内各序列均以**该窗口首个数据点 = 1000 点**折算；全时段图因此起点各不相同
+  （CNAMCI 与中证全指 2004-12-31、国证2000 2014-03-31、中证2000 2023-08-11）；
+- 输出**六张**时间窗口的 SVG（纯手写，主图 + 6 个回撤子图）：
   `Comparison-All.svg`（全时段）、`Comparison-10Y.svg`、`Comparison-5Y.svg`、
   `Comparison-3Y.svg`、`Comparison-1Y.svg`、
   `Comparison-CSI2000.svg`（2023-08-11 中证2000 发布以来）；`Comparison.svg` 为全时段副本；
-- 全时段图以 2023-08-11 = 1000 锚定（中证2000 从发布日接入，国证2000/中证全指覆盖更长历史）；
-  三年/一年窗口以窗口首日归一为 1000；
-- 同时输出 `Comparison.md`（六窗口统计表，含各自起点）与 `Comparison.json`。
+- 回撤子图右侧同时标注「最大回撤」与「当前回撤」（当前值用系列颜色突出）；
+- 坐标轴按画布像素自适应：X 轴按季度（年初与 3/6/9 月底）画淡色网格线，**每年年初另有一条更
+  明显的年份分界线**；年份多的图只留网格不写月份文字，年份文字按间距抽稀（全时段自动隔年），
+  Y 轴取整齐步长，避免标签重叠；
+- 同时输出 `Comparison.md`（六窗口统计表，含各自起点）与 `Comparison.json`；
+  各文件的阅读顺序与口径详见 [`Statistic/README.md`](Statistic/README.md)。
 
 ## 部署到 GitHub（仓库自包含）
 
@@ -280,7 +285,7 @@ python3 Index.py --index CNAMCSMEWI --replay-start 2004-12-31
 | `Archive/<年>/*.mvsv` | **L1 已归档**（只读）：Components/Holdings/Trades/Summary 按年长表 |
 | `Pending/<年>/*.mvsv` | **L2 待归档**：当年数据，可修正；次年 3 月 1 日整体转 L1 |
 | `Current/*.jsonl` | **L3 当日/未完整**：最近 5 个交易日，分类型 4 个文件，每天覆盖写 |
-| `Statistic/Comparison-All.svg` | 全时段（2013 起）6 指数走势 + 回撤 |
+| `Statistic/Comparison-All.svg` | 全时段（2004-12-31 起）6 指数走势 + 回撤 |
 | `Statistic/Comparison-10Y.svg` | 最近十年 |
 | `Statistic/Comparison-5Y.svg` | 最近五年 |
 | `Statistic/Comparison-3Y.svg` | 最近三年 |
@@ -288,6 +293,7 @@ python3 Index.py --index CNAMCSMEWI --replay-start 2004-12-31
 | `Statistic/Comparison-CSI2000.svg` | 中证2000 发布以来（2023-08-11 起） |
 | `Statistic/Comparison.md` | 六窗口统计表（收益/年化/回撤，含各自起点） |
 | `Statistic/Comparison.json` | 结构化对比结果 |
+| `Statistic/README.md` | 对比图阅读顺序、口径与重新生成方式 |
 
 > 缓存统一放在 `Cache/`（三个指数共享，`.gitignore` 已排除），不进入各指数产物目录。
 

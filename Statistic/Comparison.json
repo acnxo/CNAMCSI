@@ -19,9 +19,9 @@
     {
      "label": "CNAMCSWEWI 周频",
      "begin": "2004-12-31",
-     "last": 93019.1643,
-     "return": 92.01916434,
-     "annualized": 0.24000597,
+     "last": 91402.1471,
+     "return": 90.40214709,
+     "annualized": 0.23892442,
      "max_drawdown": -0.69686089
     },
     {
@@ -74,9 +74,9 @@
     {
      "label": "CNAMCSWEWI 周频",
      "begin": "2016-11-16",
-     "last": 3427.3538,
-     "return": 2.42735382,
-     "annualized": 0.13643813,
+     "last": 3367.7737,
+     "return": 2.36777373,
+     "annualized": 0.13431183,
      "max_drawdown": -0.5291814
     },
     {
@@ -129,9 +129,9 @@
     {
      "label": "CNAMCSWEWI 周频",
      "begin": "2021-11-16",
-     "last": 3388.4601,
-     "return": 2.38846005,
-     "annualized": 0.28910861,
+     "last": 3329.5561,
+     "return": 2.32955608,
+     "annualized": 0.28414771,
      "max_drawdown": -0.40738766
     },
     {
@@ -184,9 +184,9 @@
     {
      "label": "CNAMCSWEWI 周频",
      "begin": "2023-11-16",
-     "last": 1903.1536,
-     "return": 0.90315363,
-     "annualized": 0.25066574,
+     "last": 1870.0698,
+     "return": 0.87006978,
+     "annualized": 0.24269305,
      "max_drawdown": -0.40738766
     },
     {
@@ -239,9 +239,9 @@
     {
      "label": "CNAMCSWEWI 周频",
      "begin": "2025-11-17",
-     "last": 973.4725,
-     "return": -0.02652747,
-     "annualized": -0.02772133,
+     "last": 956.55,
+     "return": -0.04345002,
+     "annualized": -0.04520429,
      "max_drawdown": -0.25583463
     },
     {
@@ -294,9 +294,9 @@
     {
      "label": "CNAMCSWEWI 周频",
      "begin": "2023-08-11",
-     "last": 2109.7649,
-     "return": 1.10976494,
-     "annualized": 0.26966477,
+     "last": 2073.0894,
+     "return": 1.07308942,
+     "annualized": 0.26219121,
      "max_drawdown": -0.40738766
     },
     {
