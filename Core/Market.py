@@ -224,7 +224,11 @@ def _saveArchived(root, years):
 
 
 def archiveYear(root, year, log=print):
-    """把 ``Data/<year>/`` 的月度横截面合并进 ``Archive/Security/<Code>.mvsv``（幂等）。"""
+    """把 ``Data/<year>/`` 的月度横截面**追加**进 ``Archive/Security/<Code>.mvsv``（幂等）。
+
+    已存在的日期保留 Archive 原值（历史重采/更精确的数据不被当年增量覆盖），
+    只补 Archive 缺失的交易日。
+    """
     files = sorted(glob.glob(os.path.join(root, "Data", str(year), "*.mvsv")))
     if not files:
         return 0
@@ -236,7 +240,8 @@ def archiveYear(root, year, log=print):
     for code, dated in sorted(byCode.items()):
         path = os.path.join(root, "Archive", "Security", f"{code}.mvsv")
         existing = {row.split("|")[2]: row for row in readRows(path)}
-        existing.update(dated)               # 同一天以 Data 为准
+        for date, row in dated.items():
+            existing.setdefault(date, row)   # 只 append 补缺，不覆盖 Archive 已有日期
         merged = [existing[date] for date in sorted(existing)]
         name = merged[-1].split("|")[1]
         title = f"中证微盘股行情 {code} {name} 日线"

@@ -76,7 +76,9 @@ def main():
     parser.add_argument("--status", action="store_true", help="只打印进度，不采集")
     parser.add_argument("--verify", action="store_true", help="校验历史覆盖（不采集）")
     parser.add_argument("--rebuild", default=None,
-                        help="从 Archive 重建某年的 Data/Latest，如 --rebuild 2026")
+                        help="把 Data/<年>/.pending/ 落到 Data，并由 Data 重建 Latest（如 --rebuild 2026）")
+    parser.add_argument("--split", default=None, metavar="YEAR",
+                        help="把 Archive 里 >= YEAR 的行搬到 Data/<YEAR>/.pending/（一次性迁移）")
     args = parser.parse_args()
 
     root = BASE
@@ -85,6 +87,9 @@ def main():
         return
     if args.verify:
         History.verify(root)
+        return
+    if args.split:
+        History.splitArchive(root, args.split)
         return
     if args.rebuild:
         History.rebuild(root, args.rebuild)

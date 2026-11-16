@@ -125,6 +125,70 @@ class TestRows(unittest.TestCase):
         self.assertEqual(headers["TypeKLine"], "Day")
 
 
+class TestSplitAndPending(unittest.TestCase):
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def rowsFor(self, code, days):
+        return [f"{code}|测试|{day}|1|1|1|1|100|100|1000|1000|1000.00|1000.00"
+                for day in days]
+
+    def test_split_rows_by_year(self):
+        rows = self.rowsFor("000001", ["20251231", "20260105", "20261116"])
+        hist, current = History.splitRows(rows, "2026")
+        self.assertEqual([r.split("|")[2] for r in hist], ["20251231"])
+        self.assertEqual([r.split("|")[2] for r in current], ["20260105", "20261116"])
+
+    def test_archive_only_keeps_history(self):
+        os.makedirs(os.path.join(self.tmp, "Archive", "Security"))
+        rows = self.rowsFor("000001", ["20251231", "20260105"])
+        History.saveSecurity(self.tmp, "000001", "测试", rows)
+        moved = History.splitArchive(self.tmp, "2026", log=lambda *_: None)
+        self.assertEqual(moved, 1)
+        kept = Market.readRows(History.archivePath(self.tmp, "000001"))
+        self.assertEqual([r.split("|")[2] for r in kept], ["20251231"])
+        pending = Market.readRows(History.pendingPath(self.tmp, "2026", "000001"))
+        self.assertEqual([r.split("|")[2] for r in pending], ["20260105"])
+
+    def test_apply_pending_merges_into_month_file(self):
+        months = os.path.join(self.tmp, "Data", "2026")
+        os.makedirs(months, exist_ok=True)
+        Market.writeMonthly(self.tmp, self.rowsFor("600000", ["20260105"]))
+        History.savePending(self.tmp, "2026", "000001", self.rowsFor("000001", ["20260105"]))
+        History.savePending(self.tmp, "2026", "000001", self.rowsFor("000001", ["20260106"]))
+        written = History.applyPending(self.tmp, "2026", log=lambda *_: None)
+        self.assertEqual(written, {"202601": 3})     # 600000 一行 + 000001 两行
+        rows = Market.readRows(os.path.join(months, "202601.mvsv"))
+        self.assertEqual([r.split("|")[:1] + r.split("|")[2:3] for r in rows],
+                         [["000001", "20260105"], ["000001", "20260106"],
+                          ["600000", "20260105"]])
+        self.assertFalse(os.path.exists(os.path.join(months, ".pending")))
+
+    def test_rebuild_latest_from_data(self):
+        for day in ("20260105", "20260106", "20260107", "20260108", "20260109", "20260112"):
+            Market.writeMonthly(self.tmp, self.rowsFor("000001", [day]))
+        count = History.rebuildLatest(self.tmp, "2026", log=lambda *_: None)
+        self.assertEqual(count, 5)
+        latest = Market.readRows(os.path.join(self.tmp, "Latest", "Latest.mvsv"))
+        days = sorted({r.split("|")[2] for r in latest})
+        self.assertEqual(days, ["20260106", "20260107", "20260108", "20260109", "20260112"])
+
+    def test_archive_year_appends_without_overwrite(self):
+        os.makedirs(os.path.join(self.tmp, "Archive", "Security"))
+        History.saveSecurity(self.tmp, "000001", "测试",
+                             self.rowsFor("000001", ["20251231"]))
+        Market.writeMonthly(self.tmp, self.rowsFor("000001", ["20251231", "20251230"]))
+        Market.archiveYear(self.tmp, 2025, log=lambda *_: None)
+        rows = Market.readRows(History.archivePath(self.tmp, "000001"))
+        self.assertEqual([r.split("|")[2] for r in rows], ["20251230", "20251231"])
+        self.assertEqual(rows[1], self.rowsFor("000001", ["20251231"])[0])   # 原值未被覆盖
+
+
 class TestState(unittest.TestCase):
 
     def setUp(self):

@@ -2,11 +2,14 @@
 """历史行情全量采集：断点续采 + 状态/进度记录（雪球主源，东财备源）。
 
 目标：把 2004-12 起的**真实**日线（不复权）重新采一遍，替换历史上由转换/缺省值
-占位的数据；产物与现有三层格式完全一致：
+占位的数据；产物严格按三层语义分流（不重不漏）：
 
-    Archive/Security/<Code>.mvsv   按证券日线（2004-12 起，含 16 行头部元数据）
-    Data/<yyyy>/<yyyyMM>.mvsv      当年横截面（``rebuild`` 从 Archive 切出）
-    Latest/Latest.mvsv             最近 5 个交易日（``rebuild``）
+    Archive/Security/<Code>.mvsv   L1 归档：**历史年**（< 当年）按证券，16 行头部
+    Data/<yyyy>/<yyyyMM>.mvsv      L2 当年：**当年**按月横截面（采集期间先落 .pending/）
+    Latest/Latest.mvsv             L3 当前：最近 5 个交易日（由 Data 派生）
+
+当年数据不进 Archive，避免与 `Market.archiveYear()` 的年终归档互相覆盖；
+年终归档只做 append（`Archive` 已有日期保留，仅补缺失日期）。
 
 数据源（都用**不复权**）：
 
@@ -23,6 +26,7 @@
 import bisect
 import concurrent.futures
 import glob
+import shutil
 import http.cookiejar
 import json
 import os
@@ -376,6 +380,58 @@ def isDone(entry, start, end):
 # --------------------------------------------------------------------------- #
 # 主流程
 # --------------------------------------------------------------------------- #
+def pendingPath(root, year, code):
+    return os.path.join(root, "Data", str(year), ".pending", f"{code}.mvsv")
+
+
+def savePending(root, year, code, rows):
+    """当年数据暂存 ``Data/<year>/.pending/<Code>.mvsv``（按日期合并，幂等）。"""
+    if not rows:
+        return None
+    path = pendingPath(root, year, code)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    dated = {row.split("|")[2]: row for row in Market.readRows(path)}
+    dated.update({row.split("|")[2]: row for row in rows})
+    with open(path, "w", encoding="utf-8") as file:
+        file.write("\n".join(dated[date] for date in sorted(dated)) + "\n")
+    return path
+
+
+def splitRows(rows, dataYear):
+    """按年份分流：历史年 → Archive，当年 → Data（``dataYear`` 为字符串年份）。"""
+    year = str(dataYear)
+    hist, current = [], []
+    for row in rows:
+        (hist if row.split("|")[2][:4] < year else current).append(row)
+    return hist, current
+
+
+def applyPending(root, year, log=print):
+    """把 ``Data/<year>/.pending/`` 落到 ``Data/<year>/<yyyyMM>.mvsv``（按 Code+Date 覆盖）。"""
+    folder = os.path.join(root, "Data", str(year), ".pending")
+    if not os.path.isdir(folder):
+        return {}
+    byMonth = {}
+    for path in sorted(glob.glob(os.path.join(folder, "*.mvsv"))):
+        for row in Market.readRows(path):
+            field = row.split("|")
+            byMonth.setdefault(field[2][:6], {})[(field[0], field[2])] = row
+    written = {}
+    for month, dated in sorted(byMonth.items()):
+        path = os.path.join(root, "Data", str(year), f"{month}.mvsv")
+        merged = {(row.split("|")[0], row.split("|")[2]): row for row in Market.readRows(path)}
+        merged.update(dated)
+        rows = [merged[key] for key in sorted(merged)]
+        title = f"中证微盘股行情 {year} 年 {int(month[4:])} 月 日线横截面（{len(rows):,} 行）"
+        Market._write(path, Market._headers(path, title, len(rows)), rows)
+        written[month] = len(rows)
+    shutil.rmtree(folder, ignore_errors=True)
+    if written:
+        log(f"当年数据落盘：{sum(written.values()):,} 行 → Data/{year}/"
+            f"（{len(written)} 个月度文件）")
+    return written
+
+
 def oneSecurity(root, code, start, end, source, delay, extraShares=None):
     """采一只：读既有股本 → 抓取 → 合并 → 落盘。返回状态条目。
 
@@ -401,8 +457,12 @@ def oneSecurity(root, code, start, end, source, delay, extraShares=None):
     if not rows:
         return {"status": "no_shares", "rows": 0, "from": start, "source": source,
                 "ts": time.strftime("%Y-%m-%d %H:%M:%S")}
-    merged = mergeRows(old, rows, start, end)
-    saveSecurity(root, code, name, merged)
+    dataYear = end[:4]
+    histOld, curOld = splitRows(old, dataYear)     # 旧文件里残留的当年行，一并搬去 pending
+    histNew, curNew = splitRows(rows, dataYear)    # 本次采集：历史年 / 当年
+    saveSecurity(root, code, name, mergeRows(histOld, histNew, start, end))
+    if curOld or curNew:
+        savePending(root, dataYear, code, curOld + curNew)
     if delay:
         time.sleep(delay)
     return {"status": "ok", "rows": len(rows), "total": len(merged), "from": start,
@@ -478,6 +538,9 @@ def run(root, start=DEFAULT_START, end=None, source="xueqiu", workers=4, delay=0
 
     state.update({"start": start, "end": end, "source": source, "stats": stats})
     stateSave(root, state)
+    if not only:
+        applyPending(root, end[:4], log=log)
+        rebuildLatest(root, end[:4], log=log)
     stats["seconds"] = round(time.time() - started, 1)
     stats["todo"] = len(todo)
     stats["pending"] = bad
@@ -515,37 +578,56 @@ def verify(root, log=print, sample=5):
     return {"codes": len(perCode), "days": len(days), "months": months}
 
 
-def rebuild(root, year, keepDays=Market.KEEP_DAYS, log=print):
-    """从 Archive 切出 ``year`` 年的横截面 → ``Data/<year>/<yyyyMM>.mvsv`` + Latest。"""
-    year = str(year)
-    months = {}
-    days = set()
+def splitArchive(root, dataYear, log=print):
+    """把 Archive 里 ``>= dataYear`` 的行搬到 ``Data/<dataYear>/.pending/``（一次性迁移）。
+
+    迁移后 Archive 只保留历史年（不含当年），与 ``Market.archiveYear()`` 的年终归档
+    语义一致：归档只 append 补缺，不覆盖已有日期。
+    """
+    year = str(dataYear)
+    moved = 0
     for path in sorted(glob.glob(os.path.join(root, "Archive", "Security", "*.mvsv"))):
+        rows = Market.readRows(path)
+        if not rows:
+            continue
+        hist, current = splitRows(rows, year)
+        if not current:
+            continue
+        code = os.path.basename(path)[:-len(".mvsv")]
+        name = rows[-1].split("|")[1]
+        savePending(root, year, code, current)
+        Market._write(path, securityHeaders(code, name, len(hist)), hist)
+        moved += len(current)
+    log(f"迁移 Archive 当年数据：{moved:,} 行 → Data/{year}/.pending/")
+    return moved
+
+
+def rebuildLatest(root, year=None, keepDays=Market.KEEP_DAYS, log=print):
+    """由 ``Data/`` 生成 ``Latest/Latest.mvsv``（最近 ``keepDays`` 个交易日横截面）。"""
+    pattern = os.path.join(root, "Data", str(year), "*.mvsv") if year \
+        else os.path.join(root, "Data", "*", "*.mvsv")
+    rows, days = [], set()
+    for path in sorted(glob.glob(pattern)):
         for row in Market.readRows(path):
-            day = row.split("|")[2]
-            if day[:4] != year:
-                continue
-            months.setdefault(day[:6], []).append(row)
-            days.add(day)
-    if not months:
-        log(f"{year} 年无数据，跳过重建")
-        return {}
-    written = {}
-    for month, rows in sorted(months.items()):
-        rows.sort(key=lambda row: (row.split("|")[0], row.split("|")[2]))
-        path = os.path.join(root, "Data", year, f"{month}.mvsv")
-        Market._write(path, Market._headers(path, f"中证微盘股行情 {year} 年 "
-                                                   f"{int(month[4:])} 月 日线横截面"
-                                                   f"（{len(rows):,} 行）", len(rows)), rows)
-        written[month] = len(rows)
+            rows.append(row)
+            days.add(row.split("|")[2])
+    if not days:
+        log("Data 为空，跳过 Latest 重建")
+        return 0
     last = sorted(days)[-keepDays:]
-    latest = [row for month in months for row in months[month]
-              if row.split("|")[2] in last]
+    keep = set(last)
+    latest = [row for row in rows if row.split("|")[2] in keep]
     latest.sort(key=lambda row: (row.split("|")[0], row.split("|")[2]))
     path = os.path.join(root, "Latest", "Latest.mvsv")
     Market._write(path, Market._headers(
         path, f"中证微盘股行情 最近 {keepDays} 个交易日横截面（{last[0]} ~ {last[-1]}）",
         len(latest)), latest)
-    log(f"重建 {year} 年：{len(written)} 个月度文件（{sum(written.values()):,} 行）· "
-        f"Latest {len(latest):,} 行（{last[0]} ~ {last[-1]}）")
+    log(f"Latest 重建：{len(latest):,} 行（{last[0]} ~ {last[-1]}）")
+    return len(latest)
+
+
+def rebuild(root, year, log=print):
+    """把 ``.pending`` 落到 ``Data/<year>/``，再由 Data 重建 ``Latest``。"""
+    written = applyPending(root, year, log=log)
+    rebuildLatest(root, year, log=log)
     return written

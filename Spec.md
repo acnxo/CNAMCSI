@@ -277,11 +277,12 @@ Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 | 区间 | `--start 20041201`（2004-12 有 **22 个交易日**，作为初始选样/建仓评估样本）~ `--end`（默认今天） |
 | 主源 | 雪球 `stock/chart/kline.json`（`type=normal` 不复权，`count=-8000` 一次返回全历史；`volume` 已是股、`amount` 已是元） |
 | 备源 | 东财 `push2his ... klt=101&fqt=0`（`f56` 手 ×100 换算，大区间易被限流），`--source eastmoney` |
-| 落盘 | `Archive/Security/<Code>.mvsv`：16 行头部（`Symbol`/`SecuCode`/`USC`/`Market`/`Name` 按证券生成）+ 13 列数据，按日期升序 |
+| 落盘 | 三层**分流**：历史年 → `Archive/Security/<Code>.mvsv`（16 行头部 + 13 列，日期升序）；当年 → `Data/<yyyy>/<yyyyMM>.mvsv`（采集期间先落 `Data/<年>/.pending/`，`--rebuild` 落盘）；`Latest` 由 Data 派生 |
+| 年界 | Archive 不含当年数据；年终 `Market.archiveYear()` 只 **append 补缺**（Archive 已有日期保留，不被当年增量覆盖） |
 | 合并 | 采集区间内以新数据为准，区间外既有行保留（`mergeRows`），同日重复执行幂等 |
 | 股本 | 沿用既有序列（`nearestShares` 最近邻），`MvTotal = Close × SharesTotal` |
 | 状态 | `Archive/.FetchState.json`（不入库）：`status/rows/from/first/last/source/ts`，重跑只补未完成的；`--force` 忽略状态 |
-| 派生视图 | `--rebuild <年>` 从 Archive 切出 `Data/<年>/<yyyyMM>.mvsv` 与 `Latest/Latest.mvsv`；`--verify` 校验覆盖与缺口 |
+| 派生视图 | `--rebuild <年>`：`.pending` → `Data/<年>/<yyyyMM>.mvsv`，再由 Data 重建 `Latest`；`--split <年>` 把 Archive 里残留的当年行搬回 pending；`--verify` 校验覆盖与缺口 |
 
 ### 7.3 微盘选样数据（Archive/Micro400、Archive/Candidates）
 

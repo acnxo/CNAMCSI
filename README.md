@@ -87,14 +87,16 @@ python Tool/FetchHistory.py --status       # 看进度：已完成 / 待采 / �
 python Tool/FetchHistory.py --limit 20     # 先试 20 只
 python Tool/FetchHistory.py --workers 8    # 全量：2004-12-01 至今
 python Tool/FetchHistory.py --verify       # 校验覆盖（2004-12 天数、缺口月份）
-python Tool/FetchHistory.py --rebuild 2026 # 由 Archive 切出 Data/Latest
+python Tool/FetchHistory.py --split 2026   # 一次性迁移：Archive 里的当年行搬去 Data/.pending
+python Tool/FetchHistory.py --rebuild 2026 # .pending 落盘到 Data + 由 Data 重建 Latest
 ```
 
 | 项 | 说明 |
 | --- | --- |
 | 数据源 | 雪球 `chart/kline.json`（`type=normal` 不复权，一次返回全历史）；失败自动退避，`--source eastmoney` 换备源 |
 | 起点 | `2004-12-01`（2004 年 12 月有 **23 个交易日**，用于评估初始选样与建仓形态） |
-| 落盘 | `Archive/Security/<Code>.mvsv`，头部 16 行元数据与既有文件逐字一致（仅 `Count`/`Title` 变），数据行 13 列 |
+| 落盘 | 按三层**分流**：历史年（< 当年）→ `Archive/Security/<Code>.mvsv`；当年 → `Data/<yyyy>/<yyyyMM>.mvsv`（采集期间先落 `.pending/`）；`Latest` 由 Data 派生 |
+| 迁移 | 旧版若把当年数据写进了 Archive：`--split <年>` 一次性搬回 `Data/<年>/.pending/`，再 `--rebuild <年>` 落盘 |
 | 单位 | 成交量=**股**、成交额=**元**；股本沿用既有序列（最近邻填充，送转/增发日不跳变），市值 = 收盘 × 股本 |
 | 断点续采 | 状态写 `Archive/.FetchState.json`（不入库）：中断后**重跑同一条命令**即续采；`--force` 全量重采 |
 | 幂等 | 采集区间内以新数据为准、区间外既有行保留，按日期升序写回 |
