@@ -42,10 +42,11 @@ def readJsonl(path):
 
 
 def writeJsonl(path, rows):
+    """写 .jsonl：一行一个 JSON 对象，紧凑格式（无多余空格，separators=(",", ":")）。"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as file:
         for row in rows:
-            file.write(json.dumps(row, ensure_ascii=False) + "\n")
+            file.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
 def readCsv(path, columns=None):

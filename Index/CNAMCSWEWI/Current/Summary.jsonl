@@ -1,5 +1,5 @@
-{"date": "2026-11-09", "point": 91046.527325, "ret": -0.00591549, "cum_return": 90.04652732, "holdings_count": 400, "total_asset": 111288385.26, "cash": 35700643.26, "rebalance": false}
-{"date": "2026-11-10", "point": 93147.229283, "ret": 0.02307284, "cum_return": 92.14722928, "holdings_count": 400, "total_asset": 113092424.26, "cash": 35700643.26, "rebalance": false}
-{"date": "2026-11-11", "point": 95302.512722, "ret": 0.02313846, "cum_return": 94.30251272, "holdings_count": 400, "total_asset": 114876771.26, "cash": 35700643.26, "rebalance": false}
-{"date": "2026-11-12", "point": 94640.737792, "ret": -0.00694394, "cum_return": 93.64073779, "holdings_count": 400, "total_asset": 114219359.26, "cash": 35700643.26, "rebalance": false}
-{"date": "2026-11-13", "point": 93019.164337, "ret": -0.01713399, "cum_return": 92.01916434, "holdings_count": 400, "total_asset": 112913573.26, "cash": 35700643.26, "rebalance": true}
+{"date":"2026-11-09","point":91046.527325,"ret":-0.00591549,"cum_return":90.04652732,"holdings_count":400,"total_asset":111288385.26,"cash":35700643.26,"rebalance":false}
+{"date":"2026-11-10","point":93147.229283,"ret":0.02307284,"cum_return":92.14722928,"holdings_count":400,"total_asset":113092424.26,"cash":35700643.26,"rebalance":false}
+{"date":"2026-11-11","point":95302.512722,"ret":0.02313846,"cum_return":94.30251272,"holdings_count":400,"total_asset":114876771.26,"cash":35700643.26,"rebalance":false}
+{"date":"2026-11-12","point":94640.737792,"ret":-0.00694394,"cum_return":93.64073779,"holdings_count":400,"total_asset":114219359.26,"cash":35700643.26,"rebalance":false}
+{"date":"2026-11-13","point":93019.164337,"ret":-0.01713399,"cum_return":92.01916434,"holdings_count":400,"total_asset":112913573.26,"cash":35700643.26,"rebalance":true}

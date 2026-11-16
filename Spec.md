@@ -186,7 +186,7 @@ w_i,t = w_i,t-1 × (1 + r_i,t) / (1 + ret_t)
 | `Latest/Run.log` | 本次运行日志（每次覆盖） |
 | `Archive/<年>/*.mvsv` | L1 已归档（只读，跨年冻结） |
 | `Pending/<年>/*.mvsv` | L2 待归档（当年可修正，次年 3 月 1 日转 L1） |
-| `Current/*.jsonl` | L3 最近 5 个交易日（分类型 4 文件，每天覆盖） |
+| `Current/*.jsonl` | L3 最近 5 个交易日（分类型 4 文件，每天覆盖；单行紧凑 JSON，无多余空格） |
 | `Trades.mvsv` | 全量调仓流水（Plan + Execution 成交） |
 
 对比产物（`Compare.py` 生成，每日 15:35 由 `Compare.yml` 运行）：
@@ -216,6 +216,7 @@ w_i,t = w_i,t-1 × (1 + r_i,t) / (1 + ret_t)
 | L1 Archive | 已过次年 3 月 1 日 | 只读 | 需批量改数据时按年重写（每年 4 个文件） |
 
 - 全部明文存储（`.mvsv` / `.jsonl`，竖线分隔，不压缩），便于开发期直接调整；
+  `.jsonl` 为一行一个 JSON 对象、紧凑格式（`separators=(",", ":")`，无多余空格）；
 - 按年长表设计保证「加一列指标」只需改 23 个文件/指数，而按个股则要改 400+ 个文件。
 
 ## 7.2 行情数据层（Archive / Data / Current）
