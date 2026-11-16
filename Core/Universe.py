@@ -38,10 +38,10 @@ def listedTradingDays(list_date, calendar):
 
     上市日早于日历窗口 → 10**6（早已上市）；
     上市日缺失 / 日历为空 → 0（视为不可选，避免把缺失上市日的新股误当老股）。
+    日期缺失不再逐条打印：调用方（Sources.quotesFromTencent / fillMissingListDates）汇总一条 warn。
     """
     d = normalizeDate(list_date)
     if not d:
-        print(f"[warn] 上市日缺失，按不可选处理：{list_date!r}", flush=True)
         return 0
     if not calendar:
         return 0

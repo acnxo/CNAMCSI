@@ -71,10 +71,6 @@ class TestUpdateComponents(unittest.TestCase):
         self.assertEqual((ret, drifted, detail), (0.0, [], []))
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class TestListedDays(unittest.TestCase):
     """上市日缺失/异常时的处理：不可当作老股。"""
 
@@ -85,3 +81,29 @@ class TestListedDays(unittest.TestCase):
         self.assertEqual(listedTradingDays(None, calendar), 0)
         self.assertEqual(listedTradingDays("2025-01-02", calendar), 2)   # 上市次日至末日
         self.assertEqual(listedTradingDays("2000-01-04", calendar), 10 ** 6)  # 早于窗口
+
+
+class TestFillListDates(unittest.TestCase):
+    """巨潮深市清单不带上市日期 → 用部署包快照补齐，未知代码保持不可选。"""
+
+    def test_fill_from_seed(self):
+        import Sources
+        rows = {
+            "000001": {"code": "000001", "name": "平安银行", "list_date": ""},
+            "600000": {"code": "600000", "name": "浦发银行", "list_date": ""},
+            "999999": {"code": "999999", "name": "未知", "list_date": ""},
+        }
+        filled, left = Sources.fillMissingListDates(rows, quiet=True)
+        self.assertEqual((filled, left), (2, 1))
+        self.assertTrue(rows["000001"]["list_date"])
+        self.assertTrue(rows["600000"]["list_date"])
+        self.assertEqual(rows["999999"]["list_date"], "")
+
+    def test_no_missing_is_noop(self):
+        import Sources
+        rows = [{"code": "000001", "list_date": "1991-04-03"}]
+        self.assertEqual(Sources.fillMissingListDates(rows, quiet=True), (0, 0))
+
+
+if __name__ == "__main__":
+    unittest.main()

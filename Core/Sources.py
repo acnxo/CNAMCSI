@@ -420,6 +420,40 @@ def _seedStockList():
              "list_date": item.get("ListDate", "")} for item in stocks]
 
 
+def seedListDates():
+    """SeedStockList.yaml 中的 {code: list_date}（只取带日期的条目）。"""
+    return {str(r["code"]): r["list_date"] for r in _seedStockList()
+            if r.get("code") and r.get("list_date")}
+
+
+def fillMissingListDates(rows, quiet=False):
+    """用部署包快照补齐清单中缺失的上市日期。
+
+    巨潮的深市清单只有代码/简称，不带上市日期；不补的话深市股票 listed_days 全为 0，
+    会被整批判为「上市不满 60 个交易日」。快照滞后只会漏掉新股（新股本就该剔除），
+    属于安全方向的保守降级。
+
+    rows 可为 dict{code: row} 或 list[row]，就地修改；返回 (已补齐数, 仍缺失数)。
+    """
+    items = list(rows.values()) if isinstance(rows, dict) else list(rows)
+    missing = [r for r in items if isinstance(r, dict) and not normalizeDate(r.get("list_date"))]
+    if not missing:
+        return 0, 0
+    dates = seedListDates()
+    filled = 0
+    for r in missing:
+        ld = dates.get(str(r.get("code") or ""))
+        if ld:
+            r["list_date"] = ld
+            filled += 1
+    left = len(missing) - filled
+    if not quiet and filled:
+        print(f"[info] 上市日期补齐 {filled} 只（来源 SeedStockList.yaml）", flush=True)
+    if not quiet and left:
+        print(f"[warn] 上市日期仍缺失 {left} 只，按不可选处理（多为快照之后的新股）", flush=True)
+    return filled, left
+
+
 def exchangeStockList(only_main_board=True, append_new=True):
     """沪深主板代码清单（含上市日期）。
 
@@ -470,6 +504,8 @@ def exchangeStockList(only_main_board=True, append_new=True):
                     if not only_main_board or str(r["code"]).startswith(main)}
     if not rows:
         raise RuntimeError("代码清单获取失败：交易所接口与部署包快照都不可用")
+
+    fillMissingListDates(rows)
 
     return sorted(rows.values(), key=lambda x: x["code"])
 
@@ -533,7 +569,12 @@ def loadStockList(cfg, store):
     if cached and cached.get("rows"):
         age = time.time() - float(cached.get("updated_at") or 0)
         if age <= float(cfg.get("stock_list_ttl_days", 7)) * 86400:
-            return cached["rows"], "cache"
+            rows = cached["rows"]
+            filled, _ = fillMissingListDates(rows, quiet=True)
+            if filled:  # 老缓存可能缺上市日期 → 补齐后回写，避免一直带着缺口
+                print(f"[info] 缓存清单补齐上市日期 {filled} 只", flush=True)
+                store.writeJson("state/stock_list.json", {"updated_at": time.time(), "rows": rows})
+            return rows, "cache"
     rows = exchangeStockList(only_main_board=True)
     store.writeJson("state/stock_list.json", {"updated_at": time.time(), "rows": rows})
     return rows, "refreshed"
@@ -550,6 +591,9 @@ def quotesFromTencent(cfg, calendar, boards, store):
         quote["name"] = quote.get("name") or meta.get("name", "")
         quote["list_date"] = meta.get("list_date", "") or quote.get("list_date", "")
         quote["listed_days"] = listedTradingDays(quote["list_date"], calendar)
+    missing = sum(1 for q in quotes if not normalizeDate(q.get("list_date")))
+    if missing:
+        print(f"[warn] 快照中 {missing}/{len(quotes)} 只上市日缺失，按不可选处理", flush=True)
     return quotes, {"pages": 0, "stock_list": how, "codes": len(codes),
                     "scanned": len(quotes)}
 

@@ -219,3 +219,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 ReplayCache
+
+# 本地/CI 运行时缓存（代码清单、交易日历）
+Index/Cache/
