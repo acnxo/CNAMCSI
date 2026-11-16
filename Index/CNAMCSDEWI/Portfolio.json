@@ -1,0 +1,3076 @@
+{
+ "as_of": "2026-11-13",
+ "cash": 54271210.66,
+ "holdings": [
+  {
+   "code": "000014",
+   "name": "沙河股份",
+   "shares": 31500,
+   "cost": 13.82152,
+   "last_price": 13.82
+  },
+  {
+   "code": "000068",
+   "name": "华控赛格",
+   "shares": 152300,
+   "cost": 2.840312,
+   "last_price": 2.84
+  },
+  {
+   "code": "000153",
+   "name": "丰原药业",
+   "shares": 69400,
+   "cost": 6.09067,
+   "last_price": 6.09
+  },
+  {
+   "code": "000159",
+   "name": "国际实业",
+   "shares": 67500,
+   "cost": 6.210683,
+   "last_price": 6.21
+  },
+  {
+   "code": "000419",
+   "name": "通程控股",
+   "shares": 66200,
+   "cost": 6.530718,
+   "last_price": 6.53
+  },
+  {
+   "code": "000504",
+   "name": "南华生物",
+   "shares": 49000,
+   "cost": 8.82097,
+   "last_price": 8.82
+  },
+  {
+   "code": "000520",
+   "name": "凤凰航运",
+   "shares": 156900,
+   "cost": 2.810309,
+   "last_price": 2.81
+  },
+  {
+   "code": "000529",
+   "name": "广弘控股",
+   "shares": 86000,
+   "cost": 4.440488,
+   "last_price": 4.44
+  },
+  {
+   "code": "000545",
+   "name": "金浦钛业",
+   "shares": 130800,
+   "cost": 3.260359,
+   "last_price": 3.26
+  },
+  {
+   "code": "000548",
+   "name": "湖南投资",
+   "shares": 51100,
+   "cost": 6.040664,
+   "last_price": 6.04
+  },
+  {
+   "code": "000565",
+   "name": "渝三峡Ａ",
+   "shares": 62500,
+   "cost": 6.940763,
+   "last_price": 6.94
+  },
+  {
+   "code": "000573",
+   "name": "粤宏远Ａ",
+   "shares": 73200,
+   "cost": 4.670514,
+   "last_price": 4.67
+  },
+  {
+   "code": "000586",
+   "name": "汇源通信",
+   "shares": 26400,
+   "cost": 16.00176,
+   "last_price": 16.0
+  },
+  {
+   "code": "000590",
+   "name": "古汉医药",
+   "shares": 29200,
+   "cost": 12.171339,
+   "last_price": 12.17
+  },
+  {
+   "code": "000605",
+   "name": "渤海股份",
+   "shares": 41200,
+   "cost": 7.600836,
+   "last_price": 7.6
+  },
+  {
+   "code": "000619",
+   "name": "海螺新材",
+   "shares": 47600,
+   "cost": 6.560722,
+   "last_price": 6.56
+  },
+  {
+   "code": "000633",
+   "name": "合金投资",
+   "shares": 48400,
+   "cost": 8.760964,
+   "last_price": 8.76
+  },
+  {
+   "code": "000637",
+   "name": "茂化实华",
+   "shares": 62300,
+   "cost": 3.630399,
+   "last_price": 3.63
+  },
+  {
+   "code": "000663",
+   "name": "永安林业",
+   "shares": 28300,
+   "cost": 9.00099,
+   "last_price": 9.0
+  },
+  {
+   "code": "000668",
+   "name": "荣丰控股",
+   "shares": 23700,
+   "cost": 18.021982,
+   "last_price": 18.02
+  },
+  {
+   "code": "000679",
+   "name": "大连友谊",
+   "shares": 43700,
+   "cost": 9.421036,
+   "last_price": 9.42
+  },
+  {
+   "code": "000692",
+   "name": "惠天热电",
+   "shares": 63900,
+   "cost": 3.510386,
+   "last_price": 3.51
+  },
+  {
+   "code": "000695",
+   "name": "滨海能源",
+   "shares": 33700,
+   "cost": 13.101441,
+   "last_price": 13.1
+  },
+  {
+   "code": "000702",
+   "name": "正虹科技",
+   "shares": 39300,
+   "cost": 7.54083,
+   "last_price": 7.54
+  },
+  {
+   "code": "000705",
+   "name": "浙江震元",
+   "shares": 39200,
+   "cost": 10.0011,
+   "last_price": 10.0
+  },
+  {
+   "code": "000707",
+   "name": "双环科技",
+   "shares": 75600,
+   "cost": 6.050665,
+   "last_price": 6.05
+  },
+  {
+   "code": "000715",
+   "name": "中兴商业",
+   "shares": 81900,
+   "cost": 5.290582,
+   "last_price": 5.29
+  },
+  {
+   "code": "000757",
+   "name": "浩物股份",
+   "shares": 67800,
+   "cost": 5.840642,
+   "last_price": 5.84
+  },
+  {
+   "code": "000790",
+   "name": "华神科技",
+   "shares": 64500,
+   "cost": 4.430487,
+   "last_price": 4.43
+  },
+  {
+   "code": "000802",
+   "name": "北京文化",
+   "shares": 105000,
+   "cost": 4.080449,
+   "last_price": 4.08
+  },
+  {
+   "code": "000809",
+   "name": "和展能源",
+   "shares": 111500,
+   "cost": 3.650402,
+   "last_price": 3.65
+  },
+  {
+   "code": "000812",
+   "name": "陕西金叶",
+   "shares": 113100,
+   "cost": 3.780416,
+   "last_price": 3.78
+  },
+  {
+   "code": "000820",
+   "name": "神雾节能",
+   "shares": 124600,
+   "cost": 3.520387,
+   "last_price": 3.52
+  },
+  {
+   "code": "000856",
+   "name": "冀东装备",
+   "shares": 25100,
+   "cost": 12.431367,
+   "last_price": 12.43
+  },
+  {
+   "code": "000890",
+   "name": "法尔胜",
+   "shares": 61100,
+   "cost": 7.400814,
+   "last_price": 7.4
+  },
+  {
+   "code": "000910",
+   "name": "大亚圣象",
+   "shares": 80900,
+   "cost": 5.520607,
+   "last_price": 5.52
+  },
+  {
+   "code": "000926",
+   "name": "福星股份",
+   "shares": 239200,
+   "cost": 1.830201,
+   "last_price": 1.83
+  },
+  {
+   "code": "000929",
+   "name": "兰州黄河",
+   "shares": 42000,
+   "cost": 10.121113,
+   "last_price": 10.12
+  },
+  {
+   "code": "000931",
+   "name": "中 关 村",
+   "shares": 112700,
+   "cost": 3.850424,
+   "last_price": 3.85
+  },
+  {
+   "code": "000952",
+   "name": "广济药业",
+   "shares": 45300,
+   "cost": 8.720959,
+   "last_price": 8.72
+  },
+  {
+   "code": "000953",
+   "name": "中哲精化",
+   "shares": 47000,
+   "cost": 7.870866,
+   "last_price": 7.87
+  },
+  {
+   "code": "000955",
+   "name": "欣龙控股",
+   "shares": 67300,
+   "cost": 6.320695,
+   "last_price": 6.32
+  },
+  {
+   "code": "000978",
+   "name": "桂林旅游",
+   "shares": 69700,
+   "cost": 6.210683,
+   "last_price": 6.21
+  },
+  {
+   "code": "000985",
+   "name": "大庆华科",
+   "shares": 13800,
+   "cost": 19.922191,
+   "last_price": 19.92
+  },
+  {
+   "code": "001202",
+   "name": "炬申股份",
+   "shares": 8000,
+   "cost": 20.55226,
+   "last_price": 20.55
+  },
+  {
+   "code": "001205",
+   "name": "盛航股份",
+   "shares": 21800,
+   "cost": 16.00176,
+   "last_price": 16.0
+  },
+  {
+   "code": "001209",
+   "name": "洪兴股份",
+   "shares": 16900,
+   "cost": 23.712608,
+   "last_price": 23.71
+  },
+  {
+   "code": "001218",
+   "name": "丽臣实业",
+   "shares": 19200,
+   "cost": 23.402574,
+   "last_price": 23.4
+  },
+  {
+   "code": "001220",
+   "name": "世盟股份",
+   "shares": 12300,
+   "cost": 37.484123,
+   "last_price": 37.48
+  },
+  {
+   "code": "001222",
+   "name": "源飞宠物",
+   "shares": 27600,
+   "cost": 16.64183,
+   "last_price": 16.64
+  },
+  {
+   "code": "001231",
+   "name": "农心科技",
+   "shares": 8800,
+   "cost": 24.132655,
+   "last_price": 24.13
+  },
+  {
+   "code": "001234",
+   "name": "泰慕士",
+   "shares": 15900,
+   "cost": 28.353118,
+   "last_price": 28.35
+  },
+  {
+   "code": "001255",
+   "name": "博菲电气",
+   "shares": 11100,
+   "cost": 40.9145,
+   "last_price": 40.91
+  },
+  {
+   "code": "001256",
+   "name": "炜冈科技",
+   "shares": 20700,
+   "cost": 21.572372,
+   "last_price": 21.57
+  },
+  {
+   "code": "001259",
+   "name": "利仁科技",
+   "shares": 10600,
+   "cost": 43.084739,
+   "last_price": 43.08
+  },
+  {
+   "code": "001260",
+   "name": "坤泰股份",
+   "shares": 10400,
+   "cost": 23.802618,
+   "last_price": 23.8
+  },
+  {
+   "code": "001277",
+   "name": "速达股份",
+   "shares": 9800,
+   "cost": 43.00473,
+   "last_price": 43.0
+  },
+  {
+   "code": "001278",
+   "name": "一彬科技",
+   "shares": 10600,
+   "cost": 25.102761,
+   "last_price": 25.1
+  },
+  {
+   "code": "001296",
+   "name": "长江材料",
+   "shares": 22700,
+   "cost": 19.332126,
+   "last_price": 19.33
+  },
+  {
+   "code": "001300",
+   "name": "三柏硕",
+   "shares": 37300,
+   "cost": 12.171339,
+   "last_price": 12.17
+  },
+  {
+   "code": "001319",
+   "name": "铭科精技",
+   "shares": 21400,
+   "cost": 20.502255,
+   "last_price": 20.5
+  },
+  {
+   "code": "001324",
+   "name": "长青科技",
+   "shares": 14700,
+   "cost": 15.851744,
+   "last_price": 15.85
+  },
+  {
+   "code": "001325",
+   "name": "元创股份",
+   "shares": 11200,
+   "cost": 40.444448,
+   "last_price": 40.44
+  },
+  {
+   "code": "001333",
+   "name": "光华股份",
+   "shares": 17200,
+   "cost": 24.752723,
+   "last_price": 24.75
+  },
+  {
+   "code": "001335",
+   "name": "信凯科技",
+   "shares": 13400,
+   "cost": 31.46346,
+   "last_price": 31.46
+  },
+  {
+   "code": "001336",
+   "name": "楚环科技",
+   "shares": 6900,
+   "cost": 28.493133,
+   "last_price": 28.49
+  },
+  {
+   "code": "001366",
+   "name": "播恩集团",
+   "shares": 16000,
+   "cost": 14.471592,
+   "last_price": 14.47
+  },
+  {
+   "code": "001367",
+   "name": "海森药业",
+   "shares": 22900,
+   "cost": 18.812069,
+   "last_price": 18.81
+  },
+  {
+   "code": "001368",
+   "name": "通达创智",
+   "shares": 17000,
+   "cost": 25.982858,
+   "last_price": 25.98
+  },
+  {
+   "code": "001373",
+   "name": "翔腾新材",
+   "shares": 5800,
+   "cost": 44.834931,
+   "last_price": 44.83
+  },
+  {
+   "code": "001387",
+   "name": "雪祺电气",
+   "shares": 19500,
+   "cost": 14.511596,
+   "last_price": 14.51
+  },
+  {
+   "code": "001395",
+   "name": "亚联机械",
+   "shares": 17400,
+   "cost": 24.952744,
+   "last_price": 24.95
+  },
+  {
+   "code": "002012",
+   "name": "凯恩股份",
+   "shares": 69800,
+   "cost": 6.380702,
+   "last_price": 6.38
+  },
+  {
+   "code": "002022",
+   "name": "科华生物",
+   "shares": 80400,
+   "cost": 5.420596,
+   "last_price": 5.42
+  },
+  {
+   "code": "002069",
+   "name": "獐子岛",
+   "shares": 89600,
+   "cost": 4.460491,
+   "last_price": 4.46
+  },
+  {
+   "code": "002072",
+   "name": "凯瑞德",
+   "shares": 53000,
+   "cost": 8.610947,
+   "last_price": 8.61
+  },
+  {
+   "code": "002076",
+   "name": "星光股份",
+   "shares": 176800,
+   "cost": 2.370261,
+   "last_price": 2.37
+  },
+  {
+   "code": "002084",
+   "name": "海鸥住工",
+   "shares": 97400,
+   "cost": 4.500495,
+   "last_price": 4.5
+  },
+  {
+   "code": "002098",
+   "name": "浔兴股份",
+   "shares": 43700,
+   "cost": 10.441149,
+   "last_price": 10.44
+  },
+  {
+   "code": "002105",
+   "name": "信隆健康",
+   "shares": 42200,
+   "cost": 8.1809,
+   "last_price": 8.18
+  },
+  {
+   "code": "002114",
+   "name": "罗平锌电",
+   "shares": 40700,
+   "cost": 10.341137,
+   "last_price": 10.34
+  },
+  {
+   "code": "002133",
+   "name": "广宇集团",
+   "shares": 72700,
+   "cost": 3.110342,
+   "last_price": 3.11
+  },
+  {
+   "code": "002136",
+   "name": "安 纳 达",
+   "shares": 30700,
+   "cost": 12.811409,
+   "last_price": 12.81
+  },
+  {
+   "code": "002144",
+   "name": "宏达高科",
+   "shares": 3600,
+   "cost": 17.701947,
+   "last_price": 17.7
+  },
+  {
+   "code": "002159",
+   "name": "三特索道",
+   "shares": 22900,
+   "cost": 18.482033,
+   "last_price": 18.48
+  },
+  {
+   "code": "002186",
+   "name": "全 聚 德",
+   "shares": 46500,
+   "cost": 9.161008,
+   "last_price": 9.16
+  },
+  {
+   "code": "002188",
+   "name": "中天服务",
+   "shares": 26600,
+   "cost": 8.010881,
+   "last_price": 8.01
+  },
+  {
+   "code": "002199",
+   "name": "东晶电子",
+   "shares": 34600,
+   "cost": 12.401364,
+   "last_price": 12.4
+  },
+  {
+   "code": "002200",
+   "name": "交投生态",
+   "shares": 64400,
+   "cost": 7.060777,
+   "last_price": 7.06
+  },
+  {
+   "code": "002205",
+   "name": "国统股份",
+   "shares": 14000,
+   "cost": 12.201342,
+   "last_price": 12.2
+  },
+  {
+   "code": "002209",
+   "name": "达 意 隆",
+   "shares": 26700,
+   "cost": 16.611827,
+   "last_price": 16.61
+  },
+  {
+   "code": "002234",
+   "name": "民和股份",
+   "shares": 39800,
+   "cost": 8.500935,
+   "last_price": 8.5
+  },
+  {
+   "code": "002247",
+   "name": "聚力文化",
+   "shares": 89300,
+   "cost": 3.160348,
+   "last_price": 3.16
+  },
+  {
+   "code": "002248",
+   "name": "华东数控",
+   "shares": 45000,
+   "cost": 9.481043,
+   "last_price": 9.48
+  },
+  {
+   "code": "002253",
+   "name": "川大智胜",
+   "shares": 36600,
+   "cost": 10.871196,
+   "last_price": 10.87
+  },
+  {
+   "code": "002295",
+   "name": "精艺股份",
+   "shares": 31300,
+   "cost": 12.951425,
+   "last_price": 12.95
+  },
+  {
+   "code": "002316",
+   "name": "亚联发展",
+   "shares": 61400,
+   "cost": 6.170679,
+   "last_price": 6.17
+  },
+  {
+   "code": "002319",
+   "name": "乐通股份",
+   "shares": 19900,
+   "cost": 12.201342,
+   "last_price": 12.2
+  },
+  {
+   "code": "002330",
+   "name": "得利斯",
+   "shares": 78800,
+   "cost": 5.240576,
+   "last_price": 5.24
+  },
+  {
+   "code": "002337",
+   "name": "赛象科技",
+   "shares": 91300,
+   "cost": 4.570503,
+   "last_price": 4.57
+  },
+  {
+   "code": "002355",
+   "name": "兴民智通",
+   "shares": 100400,
+   "cost": 4.400484,
+   "last_price": 4.4
+  },
+  {
+   "code": "002363",
+   "name": "隆基机械",
+   "shares": 65500,
+   "cost": 6.100671,
+   "last_price": 6.1
+  },
+  {
+   "code": "002377",
+   "name": "国创高新",
+   "shares": 102100,
+   "cost": 2.920321,
+   "last_price": 2.92
+  },
+  {
+   "code": "002381",
+   "name": "双箭股份",
+   "shares": 47000,
+   "cost": 6.560722,
+   "last_price": 6.56
+  },
+  {
+   "code": "002397",
+   "name": "梦洁股份",
+   "shares": 105600,
+   "cost": 3.860425,
+   "last_price": 3.86
+  },
+  {
+   "code": "002398",
+   "name": "垒知集团",
+   "shares": 88600,
+   "cost": 4.970547,
+   "last_price": 4.97
+  },
+  {
+   "code": "002420",
+   "name": "毅昌科技",
+   "shares": 53600,
+   "cost": 8.210903,
+   "last_price": 8.21
+  },
+  {
+   "code": "002442",
+   "name": "龙星科技",
+   "shares": 66900,
+   "cost": 6.200682,
+   "last_price": 6.2
+  },
+  {
+   "code": "002476",
+   "name": "新叶股份",
+   "shares": 89200,
+   "cost": 4.91054,
+   "last_price": 4.91
+  },
+  {
+   "code": "002486",
+   "name": "嘉麟杰",
+   "shares": 62200,
+   "cost": 3.770415,
+   "last_price": 3.77
+  },
+  {
+   "code": "002492",
+   "name": "恒基达鑫",
+   "shares": 51200,
+   "cost": 8.950985,
+   "last_price": 8.95
+  },
+  {
+   "code": "002494",
+   "name": "华斯股份",
+   "shares": 73400,
+   "cost": 3.810419,
+   "last_price": 3.81
+  },
+  {
+   "code": "002495",
+   "name": "佳隆股份",
+   "shares": 109100,
+   "cost": 2.27025,
+   "last_price": 2.27
+  },
+  {
+   "code": "002496",
+   "name": "辉丰股份",
+   "shares": 228100,
+   "cost": 1.940213,
+   "last_price": 1.94
+  },
+  {
+   "code": "002513",
+   "name": "蓝丰生化",
+   "shares": 47400,
+   "cost": 8.710958,
+   "last_price": 8.71
+  },
+  {
+   "code": "002524",
+   "name": "光正眼科",
+   "shares": 47400,
+   "cost": 5.040554,
+   "last_price": 5.04
+  },
+  {
+   "code": "002529",
+   "name": "海源复材",
+   "shares": 53700,
+   "cost": 7.82086,
+   "last_price": 7.82
+  },
+  {
+   "code": "002535",
+   "name": "林州重机",
+   "shares": 95300,
+   "cost": 4.020442,
+   "last_price": 4.02
+  },
+  {
+   "code": "002548",
+   "name": "金新农",
+   "shares": 125200,
+   "cost": 3.510386,
+   "last_price": 3.51
+  },
+  {
+   "code": "002551",
+   "name": "尚荣医疗",
+   "shares": 100500,
+   "cost": 4.09045,
+   "last_price": 4.09
+  },
+  {
+   "code": "002566",
+   "name": "益盛药业",
+   "shares": 34500,
+   "cost": 6.500715,
+   "last_price": 6.5
+  },
+  {
+   "code": "002574",
+   "name": "明牌珠宝",
+   "shares": 68500,
+   "cost": 6.490714,
+   "last_price": 6.49
+  },
+  {
+   "code": "002576",
+   "name": "通达动力",
+   "shares": 20200,
+   "cost": 19.522147,
+   "last_price": 19.52
+  },
+  {
+   "code": "002591",
+   "name": "恒大高新",
+   "shares": 22500,
+   "cost": 8.460931,
+   "last_price": 8.46
+  },
+  {
+   "code": "002622",
+   "name": "皓宸医疗",
+   "shares": 99000,
+   "cost": 3.990439,
+   "last_price": 3.99
+  },
+  {
+   "code": "002629",
+   "name": "仁智股份",
+   "shares": 64800,
+   "cost": 6.45071,
+   "last_price": 6.45
+  },
+  {
+   "code": "002633",
+   "name": "申科股份",
+   "shares": 25200,
+   "cost": 15.461701,
+   "last_price": 15.46
+  },
+  {
+   "code": "002652",
+   "name": "扬子新材",
+   "shares": 20100,
+   "cost": 5.220574,
+   "last_price": 5.22
+  },
+  {
+   "code": "002656",
+   "name": "摩登大道",
+   "shares": 143600,
+   "cost": 2.630289,
+   "last_price": 2.63
+  },
+  {
+   "code": "002659",
+   "name": "凯文教育",
+   "shares": 90400,
+   "cost": 4.750522,
+   "last_price": 4.75
+  },
+  {
+   "code": "002660",
+   "name": "茂硕电源",
+   "shares": 43300,
+   "cost": 9.471042,
+   "last_price": 9.47
+  },
+  {
+   "code": "002661",
+   "name": "克明食品",
+   "shares": 37200,
+   "cost": 10.121113,
+   "last_price": 10.12
+  },
+  {
+   "code": "002663",
+   "name": "普邦股份",
+   "shares": 234100,
+   "cost": 1.800198,
+   "last_price": 1.8
+  },
+  {
+   "code": "002666",
+   "name": "德联集团",
+   "shares": 118600,
+   "cost": 3.720409,
+   "last_price": 3.72
+  },
+  {
+   "code": "002671",
+   "name": "龙泉股份",
+   "shares": 64200,
+   "cost": 4.540499,
+   "last_price": 4.54
+  },
+  {
+   "code": "002679",
+   "name": "福建金森",
+   "shares": 28400,
+   "cost": 14.881637,
+   "last_price": 14.88
+  },
+  {
+   "code": "002682",
+   "name": "龙洲股份",
+   "shares": 73700,
+   "cost": 5.960656,
+   "last_price": 5.96
+  },
+  {
+   "code": "002692",
+   "name": "远程股份",
+   "shares": 108100,
+   "cost": 4.070448,
+   "last_price": 4.07
+  },
+  {
+   "code": "002700",
+   "name": "万憬能源",
+   "shares": 61300,
+   "cost": 6.460711,
+   "last_price": 6.46
+  },
+  {
+   "code": "002715",
+   "name": "登云股份",
+   "shares": 16200,
+   "cost": 24.202662,
+   "last_price": 24.2
+  },
+  {
+   "code": "002722",
+   "name": "物产金轮",
+   "shares": 33200,
+   "cost": 13.27146,
+   "last_price": 13.27
+  },
+  {
+   "code": "002723",
+   "name": "小崧股份",
+   "shares": 45800,
+   "cost": 9.00099,
+   "last_price": 9.0
+  },
+  {
+   "code": "002725",
+   "name": "跃岭股份",
+   "shares": 36900,
+   "cost": 11.601276,
+   "last_price": 11.6
+  },
+  {
+   "code": "002729",
+   "name": "好利科技",
+   "shares": 25600,
+   "cost": 15.081659,
+   "last_price": 15.08
+  },
+  {
+   "code": "002732",
+   "name": "燕塘乳业",
+   "shares": 17700,
+   "cost": 17.491924,
+   "last_price": 17.49
+  },
+  {
+   "code": "002742",
+   "name": "冀衡医药",
+   "shares": 99000,
+   "cost": 4.410485,
+   "last_price": 4.41
+  },
+  {
+   "code": "002748",
+   "name": "世龙实业",
+   "shares": 35600,
+   "cost": 12.301353,
+   "last_price": 12.3
+  },
+  {
+   "code": "002753",
+   "name": "永东股份",
+   "shares": 51700,
+   "cost": 7.860865,
+   "last_price": 7.86
+  },
+  {
+   "code": "002760",
+   "name": "凤形股份",
+   "shares": 12100,
+   "cost": 24.272669,
+   "last_price": 24.27
+  },
+  {
+   "code": "002767",
+   "name": "先锋电子",
+   "shares": 23300,
+   "cost": 15.82174,
+   "last_price": 15.82
+  },
+  {
+   "code": "002769",
+   "name": "普路通",
+   "shares": 52800,
+   "cost": 7.740851,
+   "last_price": 7.74
+  },
+  {
+   "code": "002771",
+   "name": "真视通",
+   "shares": 29800,
+   "cost": 13.661503,
+   "last_price": 13.66
+  },
+  {
+   "code": "002772",
+   "name": "众兴菌业",
+   "shares": 56500,
+   "cost": 7.800858,
+   "last_price": 7.8
+  },
+  {
+   "code": "002775",
+   "name": "文科股份",
+   "shares": 81500,
+   "cost": 4.710518,
+   "last_price": 4.71
+  },
+  {
+   "code": "002778",
+   "name": "中晟高科",
+   "shares": 17500,
+   "cost": 20.842293,
+   "last_price": 20.84
+  },
+  {
+   "code": "002780",
+   "name": "三夫户外",
+   "shares": 12500,
+   "cost": 14.531598,
+   "last_price": 14.53
+  },
+  {
+   "code": "002790",
+   "name": "瑞尔特",
+   "shares": 62600,
+   "cost": 6.600726,
+   "last_price": 6.6
+  },
+  {
+   "code": "002799",
+   "name": "环球印务",
+   "shares": 40400,
+   "cost": 9.020992,
+   "last_price": 9.02
+  },
+  {
+   "code": "002800",
+   "name": "天顺股份",
+   "shares": 20800,
+   "cost": 21.212333,
+   "last_price": 21.21
+  },
+  {
+   "code": "002802",
+   "name": "洪汇新材",
+   "shares": 21000,
+   "cost": 14.851633,
+   "last_price": 14.85
+  },
+  {
+   "code": "002806",
+   "name": "华锋股份",
+   "shares": 31400,
+   "cost": 14.471592,
+   "last_price": 14.47
+  },
+  {
+   "code": "002809",
+   "name": "红墙股份",
+   "shares": 29100,
+   "cost": 12.881417,
+   "last_price": 12.88
+  },
+  {
+   "code": "002817",
+   "name": "黄山胶囊",
+   "shares": 23500,
+   "cost": 9.161008,
+   "last_price": 9.16
+  },
+  {
+   "code": "002820",
+   "name": "桂发祥",
+   "shares": 25000,
+   "cost": 11.611277,
+   "last_price": 11.61
+  },
+  {
+   "code": "002828",
+   "name": "贝肯能源",
+   "shares": 35100,
+   "cost": 11.661283,
+   "last_price": 11.66
+  },
+  {
+   "code": "002830",
+   "name": "名雕股份",
+   "shares": 26700,
+   "cost": 14.591605,
+   "last_price": 14.59
+  },
+  {
+   "code": "002836",
+   "name": "新宏泽",
+   "shares": 27800,
+   "cost": 16.101771,
+   "last_price": 16.1
+  },
+  {
+   "code": "002848",
+   "name": "高斯贝尔",
+   "shares": 27200,
+   "cost": 15.801738,
+   "last_price": 15.8
+  },
+  {
+   "code": "002852",
+   "name": "道道全",
+   "shares": 50600,
+   "cost": 8.950985,
+   "last_price": 8.95
+  },
+  {
+   "code": "002855",
+   "name": "捷荣技术",
+   "shares": 35600,
+   "cost": 12.691396,
+   "last_price": 12.69
+  },
+  {
+   "code": "002857",
+   "name": "三晖电气",
+   "shares": 15600,
+   "cost": 25.122763,
+   "last_price": 25.12
+  },
+  {
+   "code": "002858",
+   "name": "力盛体育",
+   "shares": 17700,
+   "cost": 13.401474,
+   "last_price": 13.4
+  },
+  {
+   "code": "002861",
+   "name": "瀛通通讯",
+   "shares": 26300,
+   "cost": 16.381802,
+   "last_price": 16.38
+  },
+  {
+   "code": "002862",
+   "name": "实丰文化",
+   "shares": 27400,
+   "cost": 13.711508,
+   "last_price": 13.71
+  },
+  {
+   "code": "002863",
+   "name": "今飞凯达",
+   "shares": 76100,
+   "cost": 5.940653,
+   "last_price": 5.94
+  },
+  {
+   "code": "002868",
+   "name": "绿康生化",
+   "shares": 23300,
+   "cost": 18.602046,
+   "last_price": 18.6
+  },
+  {
+   "code": "002869",
+   "name": "金溢科技",
+   "shares": 26600,
+   "cost": 16.501815,
+   "last_price": 16.5
+  },
+  {
+   "code": "002873",
+   "name": "新天药业",
+   "shares": 28700,
+   "cost": 14.051546,
+   "last_price": 14.05
+  },
+  {
+   "code": "002875",
+   "name": "安奈儿",
+   "shares": 31500,
+   "cost": 12.871416,
+   "last_price": 12.87
+  },
+  {
+   "code": "002877",
+   "name": "智能自控",
+   "shares": 53600,
+   "cost": 8.060887,
+   "last_price": 8.06
+  },
+  {
+   "code": "002879",
+   "name": "长缆科技",
+   "shares": 27800,
+   "cost": 16.3618,
+   "last_price": 16.36
+  },
+  {
+   "code": "002887",
+   "name": "绿茵生态",
+   "shares": 46700,
+   "cost": 9.211013,
+   "last_price": 9.21
+  },
+  {
+   "code": "002888",
+   "name": "惠威科技",
+   "shares": 21900,
+   "cost": 20.73228,
+   "last_price": 20.73
+  },
+  {
+   "code": "002890",
+   "name": "弘宇股份",
+   "shares": 6100,
+   "cost": 25.672823,
+   "last_price": 25.67
+  },
+  {
+   "code": "002893",
+   "name": "京能热力",
+   "shares": 36000,
+   "cost": 11.781296,
+   "last_price": 11.78
+  },
+  {
+   "code": "002899",
+   "name": "英派斯",
+   "shares": 22100,
+   "cost": 19.752172,
+   "last_price": 19.75
+  },
+  {
+   "code": "002908",
+   "name": "德生科技",
+   "shares": 65000,
+   "cost": 6.650732,
+   "last_price": 6.65
+  },
+  {
+   "code": "002909",
+   "name": "集泰股份",
+   "shares": 60600,
+   "cost": 6.710738,
+   "last_price": 6.71
+  },
+  {
+   "code": "002910",
+   "name": "庄园牧场",
+   "shares": 14800,
+   "cost": 14.421586,
+   "last_price": 14.42
+  },
+  {
+   "code": "002921",
+   "name": "联诚精密",
+   "shares": 21200,
+   "cost": 21.602376,
+   "last_price": 21.6
+  },
+  {
+   "code": "002942",
+   "name": "新农股份",
+   "shares": 22800,
+   "cost": 19.882187,
+   "last_price": 19.88
+  },
+  {
+   "code": "002949",
+   "name": "华阳国际",
+   "shares": 30800,
+   "cost": 13.071438,
+   "last_price": 13.07
+  },
+  {
+   "code": "002952",
+   "name": "亚世光电",
+   "shares": 24600,
+   "cost": 17.951974,
+   "last_price": 17.95
+  },
+  {
+   "code": "002963",
+   "name": "豪尔赛",
+   "shares": 22600,
+   "cost": 19.932192,
+   "last_price": 19.93
+  },
+  {
+   "code": "002968",
+   "name": "新大正",
+   "shares": 32600,
+   "cost": 12.041325,
+   "last_price": 12.04
+  },
+  {
+   "code": "002972",
+   "name": "科安达",
+   "shares": 38300,
+   "cost": 11.161228,
+   "last_price": 11.16
+  },
+  {
+   "code": "002982",
+   "name": "湘佳股份",
+   "shares": 30500,
+   "cost": 13.951534,
+   "last_price": 13.95
+  },
+  {
+   "code": "002998",
+   "name": "优彩资源",
+   "shares": 56500,
+   "cost": 7.800858,
+   "last_price": 7.8
+  },
+  {
+   "code": "002999",
+   "name": "天禾股份",
+   "shares": 34000,
+   "cost": 6.770745,
+   "last_price": 6.77
+  },
+  {
+   "code": "003001",
+   "name": "中岩大地",
+   "shares": 25600,
+   "cost": 16.901859,
+   "last_price": 16.9
+  },
+  {
+   "code": "003003",
+   "name": "天元股份",
+   "shares": 20100,
+   "cost": 13.82152,
+   "last_price": 13.82
+  },
+  {
+   "code": "003008",
+   "name": "开普检测",
+   "shares": 5000,
+   "cost": 34.00374,
+   "last_price": 34.0
+  },
+  {
+   "code": "003011",
+   "name": "海象新材",
+   "shares": 8200,
+   "cost": 27.533028,
+   "last_price": 27.53
+  },
+  {
+   "code": "003016",
+   "name": "欣贺股份",
+   "shares": 61800,
+   "cost": 7.260799,
+   "last_price": 7.26
+  },
+  {
+   "code": "003017",
+   "name": "大洋生物",
+   "shares": 3300,
+   "cost": 43.394773,
+   "last_price": 43.39
+  },
+  {
+   "code": "003023",
+   "name": "彩虹集团",
+   "shares": 7900,
+   "cost": 27.783056,
+   "last_price": 27.78
+  },
+  {
+   "code": "003027",
+   "name": "同兴科技",
+   "shares": 11800,
+   "cost": 21.252337,
+   "last_price": 21.25
+  },
+  {
+   "code": "003030",
+   "name": "祖名股份",
+   "shares": 18800,
+   "cost": 23.202552,
+   "last_price": 23.2
+  },
+  {
+   "code": "003038",
+   "name": "鑫铂股份",
+   "shares": 31400,
+   "cost": 14.651611,
+   "last_price": 14.65
+  },
+  {
+   "code": "003042",
+   "name": "中农联合",
+   "shares": 13300,
+   "cost": 16.211783,
+   "last_price": 16.21
+  },
+  {
+   "code": "600051",
+   "name": "宁波联合",
+   "shares": 24500,
+   "cost": 6.650731,
+   "last_price": 6.65
+  },
+  {
+   "code": "600076",
+   "name": "康欣新材",
+   "shares": 203300,
+   "cost": 2.200242,
+   "last_price": 2.2
+  },
+  {
+   "code": "600097",
+   "name": "开创国际",
+   "shares": 24200,
+   "cost": 9.421036,
+   "last_price": 9.42
+  },
+  {
+   "code": "600099",
+   "name": "林海股份",
+   "shares": 10500,
+   "cost": 15.861745,
+   "last_price": 15.86
+  },
+  {
+   "code": "600128",
+   "name": "苏豪弘业",
+   "shares": 28300,
+   "cost": 9.82108,
+   "last_price": 9.82
+  },
+  {
+   "code": "600137",
+   "name": "浪莎股份",
+   "shares": 3200,
+   "cost": 35.113863,
+   "last_price": 35.11
+  },
+  {
+   "code": "600148",
+   "name": "长春一东",
+   "shares": 16300,
+   "cost": 21.462361,
+   "last_price": 21.46
+  },
+  {
+   "code": "600149",
+   "name": "廊坊发展",
+   "shares": 29500,
+   "cost": 5.00055,
+   "last_price": 5.0
+  },
+  {
+   "code": "600156",
+   "name": "华升股份",
+   "shares": 61300,
+   "cost": 6.950764,
+   "last_price": 6.95
+  },
+  {
+   "code": "600159",
+   "name": "大龙地产",
+   "shares": 80100,
+   "cost": 3.00033,
+   "last_price": 3.0
+  },
+  {
+   "code": "600202",
+   "name": "哈空调",
+   "shares": 21900,
+   "cost": 6.370701,
+   "last_price": 6.37
+  },
+  {
+   "code": "600215",
+   "name": "派斯林",
+   "shares": 69700,
+   "cost": 6.310694,
+   "last_price": 6.31
+  },
+  {
+   "code": "600232",
+   "name": "金鹰股份",
+   "shares": 20400,
+   "cost": 4.970547,
+   "last_price": 4.97
+  },
+  {
+   "code": "600235",
+   "name": "民丰特纸",
+   "shares": 14200,
+   "cost": 7.55083,
+   "last_price": 7.55
+  },
+  {
+   "code": "600241",
+   "name": "时代万恒",
+   "shares": 43300,
+   "cost": 10.141115,
+   "last_price": 10.14
+  },
+  {
+   "code": "600249",
+   "name": "两面针",
+   "shares": 80800,
+   "cost": 4.760524,
+   "last_price": 4.76
+  },
+  {
+   "code": "600250",
+   "name": "南京商旅",
+   "shares": 45000,
+   "cost": 10.351138,
+   "last_price": 10.35
+  },
+  {
+   "code": "600257",
+   "name": "大湖股份",
+   "shares": 62700,
+   "cost": 7.00077,
+   "last_price": 7.0
+  },
+  {
+   "code": "600287",
+   "name": "苏豪时尚",
+   "shares": 61500,
+   "cost": 5.900649,
+   "last_price": 5.9
+  },
+  {
+   "code": "600303",
+   "name": "曙光股份",
+   "shares": 78100,
+   "cost": 4.300473,
+   "last_price": 4.3
+  },
+  {
+   "code": "600319",
+   "name": "亚星化学",
+   "shares": 47500,
+   "cost": 8.960986,
+   "last_price": 8.96
+  },
+  {
+   "code": "600322",
+   "name": "津投城开",
+   "shares": 159300,
+   "cost": 2.64029,
+   "last_price": 2.64
+  },
+  {
+   "code": "600359",
+   "name": "新农开发",
+   "shares": 55500,
+   "cost": 7.09078,
+   "last_price": 7.09
+  },
+  {
+   "code": "600386",
+   "name": "北巴传媒",
+   "shares": 108500,
+   "cost": 4.200462,
+   "last_price": 4.2
+  },
+  {
+   "code": "600405",
+   "name": "动力源",
+   "shares": 89600,
+   "cost": 5.010551,
+   "last_price": 5.01
+  },
+  {
+   "code": "600444",
+   "name": "国机通用",
+   "shares": 9800,
+   "cost": 17.431917,
+   "last_price": 17.43
+  },
+  {
+   "code": "600448",
+   "name": "华纺股份",
+   "shares": 73900,
+   "cost": 4.280471,
+   "last_price": 4.28
+  },
+  {
+   "code": "600455",
+   "name": "博通股份",
+   "shares": 10200,
+   "cost": 21.992419,
+   "last_price": 21.99
+  },
+  {
+   "code": "600463",
+   "name": "空港股份",
+   "shares": 38000,
+   "cost": 12.101331,
+   "last_price": 12.1
+  },
+  {
+   "code": "600470",
+   "name": "六国化工",
+   "shares": 76500,
+   "cost": 5.680625,
+   "last_price": 5.68
+  },
+  {
+   "code": "600493",
+   "name": "凤竹纺织",
+   "shares": 7600,
+   "cost": 18.192001,
+   "last_price": 18.19
+  },
+  {
+   "code": "600533",
+   "name": "栖霞建设",
+   "shares": 110200,
+   "cost": 2.750303,
+   "last_price": 2.75
+  },
+  {
+   "code": "600538",
+   "name": "国发股份",
+   "shares": 76700,
+   "cost": 5.260579,
+   "last_price": 5.26
+  },
+  {
+   "code": "600539",
+   "name": "狮头股份",
+   "shares": 34700,
+   "cost": 12.701397,
+   "last_price": 12.7
+  },
+  {
+   "code": "600540",
+   "name": "新赛股份",
+   "shares": 90200,
+   "cost": 4.800528,
+   "last_price": 4.8
+  },
+  {
+   "code": "600560",
+   "name": "金自天正",
+   "shares": 28500,
+   "cost": 15.941753,
+   "last_price": 15.94
+  },
+  {
+   "code": "600561",
+   "name": "江西长运",
+   "shares": 7200,
+   "cost": 15.621718,
+   "last_price": 15.62
+  },
+  {
+   "code": "600594",
+   "name": "益佰制药",
+   "shares": 114200,
+   "cost": 3.950435,
+   "last_price": 3.95
+  },
+  {
+   "code": "600615",
+   "name": "鑫源智造",
+   "shares": 20800,
+   "cost": 13.811519,
+   "last_price": 13.81
+  },
+  {
+   "code": "600616",
+   "name": "金枫酒业",
+   "shares": 97900,
+   "cost": 4.560502,
+   "last_price": 4.56
+  },
+  {
+   "code": "600620",
+   "name": "天宸股份",
+   "shares": 98200,
+   "cost": 4.250468,
+   "last_price": 4.25
+  },
+  {
+   "code": "600661",
+   "name": "昂立教育",
+   "shares": 33700,
+   "cost": 11.36125,
+   "last_price": 11.36
+  },
+  {
+   "code": "600665",
+   "name": "天地源",
+   "shares": 124100,
+   "cost": 3.460381,
+   "last_price": 3.46
+  },
+  {
+   "code": "600668",
+   "name": "尖峰集团",
+   "shares": 64800,
+   "cost": 6.430707,
+   "last_price": 6.43
+  },
+  {
+   "code": "600671",
+   "name": "天目药业",
+   "shares": 25500,
+   "cost": 13.201452,
+   "last_price": 13.2
+  },
+  {
+   "code": "600689",
+   "name": "上海三毛",
+   "shares": 19000,
+   "cost": 11.311244,
+   "last_price": 11.31
+  },
+  {
+   "code": "600692",
+   "name": "亚通股份",
+   "shares": 41100,
+   "cost": 6.960766,
+   "last_price": 6.96
+  },
+  {
+   "code": "600697",
+   "name": "欧亚集团",
+   "shares": 7400,
+   "cost": 19.252118,
+   "last_price": 19.25
+  },
+  {
+   "code": "600706",
+   "name": "曲江文旅",
+   "shares": 28500,
+   "cost": 10.82119,
+   "last_price": 10.82
+  },
+  {
+   "code": "600712",
+   "name": "南宁百货",
+   "shares": 82000,
+   "cost": 5.310584,
+   "last_price": 5.31
+  },
+  {
+   "code": "600719",
+   "name": "大连热电",
+   "shares": 59700,
+   "cost": 7.500825,
+   "last_price": 7.5
+  },
+  {
+   "code": "600749",
+   "name": "西藏旅游",
+   "shares": 33000,
+   "cost": 13.431477,
+   "last_price": 13.43
+  },
+  {
+   "code": "600768",
+   "name": "富邦新材",
+   "shares": 9800,
+   "cost": 8.950985,
+   "last_price": 8.95
+  },
+  {
+   "code": "600774",
+   "name": "汉商集团",
+   "shares": 34700,
+   "cost": 10.921201,
+   "last_price": 10.92
+  },
+  {
+   "code": "600778",
+   "name": "友好集团",
+   "shares": 35700,
+   "cost": 7.880867,
+   "last_price": 7.88
+  },
+  {
+   "code": "600791",
+   "name": "京能置业",
+   "shares": 65600,
+   "cost": 6.830751,
+   "last_price": 6.83
+  },
+  {
+   "code": "600793",
+   "name": "宜宾纸业",
+   "shares": 26600,
+   "cost": 14.931642,
+   "last_price": 14.93
+  },
+  {
+   "code": "600807",
+   "name": "济高发展",
+   "shares": 98200,
+   "cost": 3.080339,
+   "last_price": 3.08
+  },
+  {
+   "code": "600831",
+   "name": "广电网络",
+   "shares": 90800,
+   "cost": 4.720519,
+   "last_price": 4.72
+  },
+  {
+   "code": "600833",
+   "name": "第一医药",
+   "shares": 26500,
+   "cost": 14.471592,
+   "last_price": 14.47
+  },
+  {
+   "code": "600844",
+   "name": "金煤科技",
+   "shares": 152500,
+   "cost": 2.810309,
+   "last_price": 2.81
+  },
+  {
+   "code": "600847",
+   "name": "万里股份",
+   "shares": 28900,
+   "cost": 8.380922,
+   "last_price": 8.38
+  },
+  {
+   "code": "600854",
+   "name": "春兰股份",
+   "shares": 50500,
+   "cost": 4.27047,
+   "last_price": 4.27
+  },
+  {
+   "code": "600858",
+   "name": "银座股份",
+   "shares": 62800,
+   "cost": 7.130784,
+   "last_price": 7.13
+  },
+  {
+   "code": "600883",
+   "name": "博闻科技",
+   "shares": 12700,
+   "cost": 11.511266,
+   "last_price": 11.51
+  },
+  {
+   "code": "600992",
+   "name": "贵绳股份",
+   "shares": 38700,
+   "cost": 9.691066,
+   "last_price": 9.69
+  },
+  {
+   "code": "601007",
+   "name": "金陵饭店",
+   "shares": 45700,
+   "cost": 7.620838,
+   "last_price": 7.62
+  },
+  {
+   "code": "601616",
+   "name": "广电电气",
+   "shares": 128000,
+   "cost": 3.400374,
+   "last_price": 3.4
+  },
+  {
+   "code": "601798",
+   "name": "蓝科高新",
+   "shares": 45400,
+   "cost": 10.131114,
+   "last_price": 10.13
+  },
+  {
+   "code": "601996",
+   "name": "丰林集团",
+   "shares": 164300,
+   "cost": 2.720299,
+   "last_price": 2.72
+  },
+  {
+   "code": "603006",
+   "name": "联明股份",
+   "shares": 39300,
+   "cost": 10.331136,
+   "last_price": 10.33
+  },
+  {
+   "code": "603017",
+   "name": "中衡设计",
+   "shares": 37200,
+   "cost": 11.331246,
+   "last_price": 11.33
+  },
+  {
+   "code": "603022",
+   "name": "新通联",
+   "shares": 11000,
+   "cost": 12.891418,
+   "last_price": 12.89
+  },
+  {
+   "code": "603023",
+   "name": "威帝股份",
+   "shares": 85400,
+   "cost": 4.100451,
+   "last_price": 4.1
+  },
+  {
+   "code": "603028",
+   "name": "赛福天",
+   "shares": 45700,
+   "cost": 8.420926,
+   "last_price": 8.42
+  },
+  {
+   "code": "603029",
+   "name": "天鹅股份",
+   "shares": 9800,
+   "cost": 22.612487,
+   "last_price": 22.61
+  },
+  {
+   "code": "603030",
+   "name": "全筑股份",
+   "shares": 182500,
+   "cost": 2.250248,
+   "last_price": 2.25
+  },
+  {
+   "code": "603036",
+   "name": "如通股份",
+   "shares": 30900,
+   "cost": 14.521597,
+   "last_price": 14.52
+  },
+  {
+   "code": "603041",
+   "name": "美思德",
+   "shares": 10200,
+   "cost": 12.841413,
+   "last_price": 12.84
+  },
+  {
+   "code": "603042",
+   "name": "华脉科技",
+   "shares": 33900,
+   "cost": 12.921421,
+   "last_price": 12.92
+  },
+  {
+   "code": "603059",
+   "name": "倍加洁",
+   "shares": 13200,
+   "cost": 34.73382,
+   "last_price": 34.73
+  },
+  {
+   "code": "603066",
+   "name": "音飞储存",
+   "shares": 43000,
+   "cost": 9.431037,
+   "last_price": 9.43
+  },
+  {
+   "code": "603073",
+   "name": "彩蝶实业",
+   "shares": 11600,
+   "cost": 19.922191,
+   "last_price": 19.92
+  },
+  {
+   "code": "603076",
+   "name": "乐惠国际",
+   "shares": 16600,
+   "cost": 27.603036,
+   "last_price": 27.6
+  },
+  {
+   "code": "603079",
+   "name": "圣达生物",
+   "shares": 23500,
+   "cost": 19.592155,
+   "last_price": 19.59
+  },
+  {
+   "code": "603080",
+   "name": "新疆火炬",
+   "shares": 19500,
+   "cost": 22.222444,
+   "last_price": 22.22
+  },
+  {
+   "code": "603086",
+   "name": "先达股份",
+   "shares": 56800,
+   "cost": 7.800858,
+   "last_price": 7.8
+  },
+  {
+   "code": "603089",
+   "name": "正裕工业",
+   "shares": 41000,
+   "cost": 9.981098,
+   "last_price": 9.98
+  },
+  {
+   "code": "603096",
+   "name": "新经典",
+   "shares": 23400,
+   "cost": 17.951974,
+   "last_price": 17.95
+  },
+  {
+   "code": "603102",
+   "name": "百合股份",
+   "shares": 7400,
+   "cost": 45.304982,
+   "last_price": 45.3
+  },
+  {
+   "code": "603117",
+   "name": "万林物流",
+   "shares": 69700,
+   "cost": 5.610617,
+   "last_price": 5.61
+  },
+  {
+   "code": "603136",
+   "name": "天目湖",
+   "shares": 33300,
+   "cost": 12.581384,
+   "last_price": 12.58
+  },
+  {
+   "code": "603159",
+   "name": "上海亚虹",
+   "shares": 20800,
+   "cost": 20.792287,
+   "last_price": 20.79
+  },
+  {
+   "code": "603168",
+   "name": "莎普爱思",
+   "shares": 38000,
+   "cost": 8.200902,
+   "last_price": 8.2
+  },
+  {
+   "code": "603172",
+   "name": "万丰股份",
+   "shares": 17800,
+   "cost": 23.202552,
+   "last_price": 23.2
+  },
+  {
+   "code": "603176",
+   "name": "汇通集团",
+   "shares": 54100,
+   "cost": 7.200792,
+   "last_price": 7.2
+  },
+  {
+   "code": "603177",
+   "name": "德创环保",
+   "shares": 16000,
+   "cost": 14.031543,
+   "last_price": 14.03
+  },
+  {
+   "code": "603180",
+   "name": "金牌家居",
+   "shares": 19700,
+   "cost": 21.872406,
+   "last_price": 21.87
+  },
+  {
+   "code": "603182",
+   "name": "嘉华股份",
+   "shares": 25200,
+   "cost": 16.861855,
+   "last_price": 16.86
+  },
+  {
+   "code": "603183",
+   "name": "建研院",
+   "shares": 90700,
+   "cost": 5.060557,
+   "last_price": 5.06
+  },
+  {
+   "code": "603188",
+   "name": "亚邦股份",
+   "shares": 84100,
+   "cost": 5.220574,
+   "last_price": 5.22
+  },
+  {
+   "code": "603190",
+   "name": "亚通精工",
+   "shares": 25300,
+   "cost": 15.631719,
+   "last_price": 15.63
+  },
+  {
+   "code": "603201",
+   "name": "常润股份",
+   "shares": 26800,
+   "cost": 15.991759,
+   "last_price": 15.99
+  },
+  {
+   "code": "603208",
+   "name": "江山欧派",
+   "shares": 19200,
+   "cost": 16.061767,
+   "last_price": 16.06
+  },
+  {
+   "code": "603214",
+   "name": "爱婴室",
+   "shares": 16400,
+   "cost": 20.012201,
+   "last_price": 20.01
+  },
+  {
+   "code": "603237",
+   "name": "五芳斋",
+   "shares": 29800,
+   "cost": 14.121553,
+   "last_price": 14.12
+  },
+  {
+   "code": "603238",
+   "name": "诺邦股份",
+   "shares": 21000,
+   "cost": 18.882077,
+   "last_price": 18.88
+  },
+  {
+   "code": "603280",
+   "name": "南方路机",
+   "shares": 17100,
+   "cost": 23.462581,
+   "last_price": 23.46
+  },
+  {
+   "code": "603282",
+   "name": "亚光股份",
+   "shares": 14100,
+   "cost": 15.531709,
+   "last_price": 15.53
+  },
+  {
+   "code": "603284",
+   "name": "林平发展",
+   "shares": 10700,
+   "cost": 41.994619,
+   "last_price": 41.99
+  },
+  {
+   "code": "603307",
+   "name": "扬州金泉",
+   "shares": 7300,
+   "cost": 28.803168,
+   "last_price": 28.8
+  },
+  {
+   "code": "603320",
+   "name": "迪贝电气",
+   "shares": 20300,
+   "cost": 20.482253,
+   "last_price": 20.48
+  },
+  {
+   "code": "603321",
+   "name": "梅轮电梯",
+   "shares": 42200,
+   "cost": 7.880867,
+   "last_price": 7.88
+  },
+  {
+   "code": "603326",
+   "name": "我乐家居",
+   "shares": 37200,
+   "cost": 8.27091,
+   "last_price": 8.27
+  },
+  {
+   "code": "603329",
+   "name": "上海雅仕",
+   "shares": 22300,
+   "cost": 14.741622,
+   "last_price": 14.74
+  },
+  {
+   "code": "603331",
+   "name": "百达精工",
+   "shares": 25300,
+   "cost": 17.301903,
+   "last_price": 17.3
+  },
+  {
+   "code": "603332",
+   "name": "苏州龙杰",
+   "shares": 25600,
+   "cost": 15.101661,
+   "last_price": 15.1
+  },
+  {
+   "code": "603335",
+   "name": "迪生力",
+   "shares": 63400,
+   "cost": 6.380702,
+   "last_price": 6.38
+  },
+  {
+   "code": "603356",
+   "name": "华菱精工",
+   "shares": 18800,
+   "cost": 17.771955,
+   "last_price": 17.77
+  },
+  {
+   "code": "603385",
+   "name": "惠达卫浴",
+   "shares": 38100,
+   "cost": 5.900649,
+   "last_price": 5.9
+  },
+  {
+   "code": "603488",
+   "name": "展鹏科技",
+   "shares": 42800,
+   "cost": 9.451039,
+   "last_price": 9.45
+  },
+  {
+   "code": "603506",
+   "name": "南都物业",
+   "shares": 12900,
+   "cost": 14.09155,
+   "last_price": 14.09
+  },
+  {
+   "code": "603518",
+   "name": "锦泓集团",
+   "shares": 42400,
+   "cost": 9.951095,
+   "last_price": 9.95
+  },
+  {
+   "code": "603527",
+   "name": "众源新材",
+   "shares": 45600,
+   "cost": 10.061107,
+   "last_price": 10.06
+  },
+  {
+   "code": "603535",
+   "name": "嘉诚国际",
+   "shares": 76800,
+   "cost": 5.600616,
+   "last_price": 5.6
+  },
+  {
+   "code": "603577",
+   "name": "汇金通",
+   "shares": 51200,
+   "cost": 8.430927,
+   "last_price": 8.43
+  },
+  {
+   "code": "603578",
+   "name": "三星新材",
+   "shares": 37500,
+   "cost": 10.221124,
+   "last_price": 10.22
+  },
+  {
+   "code": "603579",
+   "name": "荣泰健康",
+   "shares": 30300,
+   "cost": 14.501595,
+   "last_price": 14.5
+  },
+  {
+   "code": "603585",
+   "name": "苏利股份",
+   "shares": 24600,
+   "cost": 18.842072,
+   "last_price": 18.84
+  },
+  {
+   "code": "603602",
+   "name": "纵横通信",
+   "shares": 27900,
+   "cost": 16.161778,
+   "last_price": 16.16
+  },
+  {
+   "code": "603616",
+   "name": "韩建河山",
+   "shares": 65600,
+   "cost": 7.540829,
+   "last_price": 7.54
+  },
+  {
+   "code": "603617",
+   "name": "君禾股份",
+   "shares": 45400,
+   "cost": 8.690956,
+   "last_price": 8.69
+  },
+  {
+   "code": "603628",
+   "name": "清源股份",
+   "shares": 41000,
+   "cost": 10.501155,
+   "last_price": 10.5
+  },
+  {
+   "code": "603633",
+   "name": "徕木股份",
+   "shares": 60700,
+   "cost": 6.740741,
+   "last_price": 6.74
+  },
+  {
+   "code": "603655",
+   "name": "朗博科技",
+   "shares": 15500,
+   "cost": 29.503245,
+   "last_price": 29.5
+  },
+  {
+   "code": "603677",
+   "name": "奇精机械",
+   "shares": 28700,
+   "cost": 14.061547,
+   "last_price": 14.06
+  },
+  {
+   "code": "603700",
+   "name": "宁水集团",
+   "shares": 21600,
+   "cost": 12.711398,
+   "last_price": 12.71
+  },
+  {
+   "code": "603709",
+   "name": "中源家居",
+   "shares": 4000,
+   "cost": 28.803168,
+   "last_price": 28.8
+  },
+  {
+   "code": "603717",
+   "name": "天域生物",
+   "shares": 32600,
+   "cost": 8.630949,
+   "last_price": 8.63
+  },
+  {
+   "code": "603721",
+   "name": "中广天择",
+   "shares": 20300,
+   "cost": 21.632379,
+   "last_price": 21.63
+  },
+  {
+   "code": "603722",
+   "name": "阿科力",
+   "shares": 13700,
+   "cost": 31.933512,
+   "last_price": 31.93
+  },
+  {
+   "code": "603755",
+   "name": "日辰股份",
+   "shares": 15300,
+   "cost": 28.423126,
+   "last_price": 28.42
+  },
+  {
+   "code": "603768",
+   "name": "常青股份",
+   "shares": 27400,
+   "cost": 12.851414,
+   "last_price": 12.85
+  },
+  {
+   "code": "603779",
+   "name": "威龙股份",
+   "shares": 50800,
+   "cost": 7.380812,
+   "last_price": 7.38
+  },
+  {
+   "code": "603787",
+   "name": "新日股份",
+   "shares": 33100,
+   "cost": 12.901419,
+   "last_price": 12.9
+  },
+  {
+   "code": "603788",
+   "name": "宁波高发",
+   "shares": 33800,
+   "cost": 12.831411,
+   "last_price": 12.83
+  },
+  {
+   "code": "603797",
+   "name": "联泰环保",
+   "shares": 58100,
+   "cost": 4.140455,
+   "last_price": 4.14
+  },
+  {
+   "code": "603801",
+   "name": "志邦家居",
+   "shares": 62400,
+   "cost": 6.590725,
+   "last_price": 6.59
+  },
+  {
+   "code": "603808",
+   "name": "歌力思",
+   "shares": 53500,
+   "cost": 8.36092,
+   "last_price": 8.36
+  },
+  {
+   "code": "603810",
+   "name": "丰山集团",
+   "shares": 15400,
+   "cost": 14.851634,
+   "last_price": 14.85
+  },
+  {
+   "code": "603813",
+   "name": "原尚股份",
+   "shares": 15100,
+   "cost": 25.852844,
+   "last_price": 25.85
+  },
+  {
+   "code": "603815",
+   "name": "交建股份",
+   "shares": 90000,
+   "cost": 5.080559,
+   "last_price": 5.08
+  },
+  {
+   "code": "603818",
+   "name": "曲美家居",
+   "shares": 104700,
+   "cost": 4.070448,
+   "last_price": 4.07
+  },
+  {
+   "code": "603819",
+   "name": "神力股份",
+   "shares": 32900,
+   "cost": 12.941423,
+   "last_price": 12.94
+  },
+  {
+   "code": "603829",
+   "name": "洛凯股份",
+   "shares": 26500,
+   "cost": 14.931642,
+   "last_price": 14.93
+  },
+  {
+   "code": "603836",
+   "name": "海程邦达",
+   "shares": 22400,
+   "cost": 14.751622,
+   "last_price": 14.75
+  },
+  {
+   "code": "603839",
+   "name": "安正时尚",
+   "shares": 46400,
+   "cost": 9.191011,
+   "last_price": 9.19
+  },
+  {
+   "code": "603856",
+   "name": "东宏股份",
+   "shares": 42300,
+   "cost": 10.471152,
+   "last_price": 10.47
+  },
+  {
+   "code": "603860",
+   "name": "中公高科",
+   "shares": 6400,
+   "cost": 31.663483,
+   "last_price": 31.66
+  },
+  {
+   "code": "603863",
+   "name": "松炀资源",
+   "shares": 27700,
+   "cost": 15.081659,
+   "last_price": 15.08
+  },
+  {
+   "code": "603878",
+   "name": "武进不锈",
+   "shares": 78300,
+   "cost": 5.190571,
+   "last_price": 5.19
+  },
+  {
+   "code": "603879",
+   "name": "永悦科技",
+   "shares": 60600,
+   "cost": 5.340587,
+   "last_price": 5.34
+  },
+  {
+   "code": "603880",
+   "name": "南卫股份",
+   "shares": 59900,
+   "cost": 3.620398,
+   "last_price": 3.62
+  },
+  {
+   "code": "603895",
+   "name": "天永智能",
+   "shares": 16900,
+   "cost": 22.482473,
+   "last_price": 22.48
+  },
+  {
+   "code": "603896",
+   "name": "寿仙谷",
+   "shares": 28500,
+   "cost": 14.671614,
+   "last_price": 14.67
+  },
+  {
+   "code": "603900",
+   "name": "莱绅通灵",
+   "shares": 41100,
+   "cost": 9.301023,
+   "last_price": 9.3
+  },
+  {
+   "code": "603908",
+   "name": "牧高笛",
+   "shares": 5000,
+   "cost": 46.595124,
+   "last_price": 46.59
+  },
+  {
+   "code": "603909",
+   "name": "建发合诚",
+   "shares": 33800,
+   "cost": 13.231455,
+   "last_price": 13.23
+  },
+  {
+   "code": "603917",
+   "name": "合力科技",
+   "shares": 23600,
+   "cost": 13.921531,
+   "last_price": 13.92
+  },
+  {
+   "code": "603937",
+   "name": "丽岛新材",
+   "shares": 32300,
+   "cost": 11.111222,
+   "last_price": 11.11
+  },
+  {
+   "code": "603949",
+   "name": "雪龙集团",
+   "shares": 31300,
+   "cost": 14.021542,
+   "last_price": 14.02
+  },
+  {
+   "code": "603968",
+   "name": "醋化股份",
+   "shares": 31200,
+   "cost": 13.801518,
+   "last_price": 13.8
+  },
+  {
+   "code": "603970",
+   "name": "中农立华",
+   "shares": 39600,
+   "cost": 11.421256,
+   "last_price": 11.42
+  },
+  {
+   "code": "603982",
+   "name": "泉峰汽车",
+   "shares": 43000,
+   "cost": 9.18101,
+   "last_price": 9.18
+  },
+  {
+   "code": "605001",
+   "name": "威奥股份",
+   "shares": 42300,
+   "cost": 7.480823,
+   "last_price": 7.48
+  },
+  {
+   "code": "605003",
+   "name": "众望布艺",
+   "shares": 14300,
+   "cost": 31.743492,
+   "last_price": 31.74
+  },
+  {
+   "code": "605033",
+   "name": "美邦股份",
+   "shares": 17300,
+   "cost": 24.952745,
+   "last_price": 24.95
+  },
+  {
+   "code": "605069",
+   "name": "正和生态",
+   "shares": 31000,
+   "cost": 12.64139,
+   "last_price": 12.64
+  },
+  {
+   "code": "605089",
+   "name": "味知香",
+   "shares": 21000,
+   "cost": 20.502255,
+   "last_price": 20.5
+  },
+  {
+   "code": "605122",
+   "name": "四方新材",
+   "shares": 21300,
+   "cost": 15.701727,
+   "last_price": 15.7
+  },
+  {
+   "code": "605151",
+   "name": "西上海",
+   "shares": 16900,
+   "cost": 19.282121,
+   "last_price": 19.28
+  },
+  {
+   "code": "605155",
+   "name": "西大门",
+   "shares": 23600,
+   "cost": 19.332126,
+   "last_price": 19.33
+  },
+  {
+   "code": "605166",
+   "name": "聚合顺",
+   "shares": 43800,
+   "cost": 9.321025,
+   "last_price": 9.32
+  },
+  {
+   "code": "605177",
+   "name": "东亚药业",
+   "shares": 17800,
+   "cost": 24.882737,
+   "last_price": 24.88
+  },
+  {
+   "code": "605180",
+   "name": "华生科技",
+   "shares": 16300,
+   "cost": 15.011651,
+   "last_price": 15.01
+  },
+  {
+   "code": "605186",
+   "name": "健麾信息",
+   "shares": 21100,
+   "cost": 20.302233,
+   "last_price": 20.3
+  },
+  {
+   "code": "605266",
+   "name": "健之佳",
+   "shares": 17900,
+   "cost": 21.882407,
+   "last_price": 21.88
+  },
+  {
+   "code": "605500",
+   "name": "森林包装",
+   "shares": 61000,
+   "cost": 7.250798,
+   "last_price": 7.25
+  },
+  {
+   "code": "605567",
+   "name": "春雪食品",
+   "shares": 16200,
+   "cost": 13.401474,
+   "last_price": 13.4
+  },
+  {
+   "code": "605588",
+   "name": "冠石科技",
+   "shares": 10700,
+   "cost": 42.524678,
+   "last_price": 42.52
+  }
+ ],
+ "pending": {
+  "signal_date": "2026-11-13",
+  "exec_date": "2026-11-16",
+  "orders": [
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "000802",
+    "name": "北京文化",
+    "shares": 105000,
+    "ref_price": 4.21,
+    "est_amount": 442050.0,
+    "est_fee": 269.65,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "002355",
+    "name": "兴民智通",
+    "shares": 100400,
+    "ref_price": 4.3,
+    "est_amount": 431720.0,
+    "est_fee": 263.35,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "002548",
+    "name": "金新农",
+    "shares": 125200,
+    "ref_price": 3.83,
+    "est_amount": 479516.0,
+    "est_fee": 292.5,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "002666",
+    "name": "德联集团",
+    "shares": 118600,
+    "ref_price": 3.65,
+    "est_amount": 432890.0,
+    "est_fee": 264.06,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "002748",
+    "name": "世龙实业",
+    "shares": 35600,
+    "ref_price": 12.39,
+    "est_amount": 441084.0,
+    "est_fee": 269.06,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "002772",
+    "name": "众兴菌业",
+    "shares": 56500,
+    "ref_price": 7.7,
+    "est_amount": 435050.0,
+    "est_fee": 265.38,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "002952",
+    "name": "亚世光电",
+    "shares": 24600,
+    "ref_price": 17.64,
+    "est_amount": 433944.0,
+    "est_fee": 264.71,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "600539",
+    "name": "狮头股份",
+    "shares": 34700,
+    "ref_price": 12.67,
+    "est_amount": 439649.0,
+    "est_fee": 268.19,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "600844",
+    "name": "金煤科技",
+    "shares": 152500,
+    "ref_price": 2.84,
+    "est_amount": 433100.0,
+    "est_fee": 264.19,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "603080",
+    "name": "新疆火炬",
+    "shares": 19500,
+    "ref_price": 20.41,
+    "est_amount": 397995.0,
+    "est_fee": 242.78,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "603577",
+    "name": "汇金通",
+    "shares": 51200,
+    "ref_price": 8.48,
+    "est_amount": 434176.0,
+    "est_fee": 264.85,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "SELL",
+    "code": "603856",
+    "name": "东宏股份",
+    "shares": 42300,
+    "ref_price": 10.21,
+    "est_amount": 431883.0,
+    "est_fee": 263.45,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "600281",
+    "name": "华阳新材",
+    "shares": 80200,
+    "ref_price": 5.41,
+    "est_amount": 433882.0,
+    "est_fee": 47.73,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "002278",
+    "name": "神开股份",
+    "shares": 60600,
+    "ref_price": 7.16,
+    "est_amount": 433896.0,
+    "est_fee": 47.73,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "603536",
+    "name": "惠发食品",
+    "shares": 36900,
+    "ref_price": 11.74,
+    "est_amount": 433206.0,
+    "est_fee": 47.65,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "603289",
+    "name": "泰瑞机器",
+    "shares": 45000,
+    "ref_price": 9.63,
+    "est_amount": 433350.0,
+    "est_fee": 47.67,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "001230",
+    "name": "劲旅环境",
+    "shares": 28600,
+    "ref_price": 15.14,
+    "est_amount": 433004.0,
+    "est_fee": 47.63,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "002826",
+    "name": "易明医药",
+    "shares": 29000,
+    "ref_price": 14.93,
+    "est_amount": 432970.0,
+    "est_fee": 47.63,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "603137",
+    "name": "恒尚节能",
+    "shares": 27700,
+    "ref_price": 15.63,
+    "est_amount": 432951.0,
+    "est_fee": 47.62,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "002451",
+    "name": "摩恩电气",
+    "shares": 66600,
+    "ref_price": 6.51,
+    "est_amount": 433566.0,
+    "est_fee": 47.69,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "002561",
+    "name": "徐家汇",
+    "shares": 63000,
+    "ref_price": 6.89,
+    "est_amount": 434070.0,
+    "est_fee": 47.75,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "002259",
+    "name": "升达林业",
+    "shares": 113900,
+    "ref_price": 3.81,
+    "est_amount": 433959.0,
+    "est_fee": 47.74,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "001239",
+    "name": "永达股份",
+    "shares": 36300,
+    "ref_price": 11.95,
+    "est_amount": 433785.0,
+    "est_fee": 47.72,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-13",
+    "side": "BUY",
+    "code": "002521",
+    "name": "齐峰新材",
+    "shares": 84700,
+    "ref_price": 5.12,
+    "est_amount": 433664.0,
+    "est_fee": 47.7,
+    "reason": "enter"
+   }
+  ]
+ }
+}

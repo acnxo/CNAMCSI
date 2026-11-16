@@ -1,0 +1,78 @@
+# CNAMCSMEWI：中证微盘股月频等权指数（调仓频率：monthly）。
+# 每个交易日北京时间 15:05 自动触发（非调仓日只更新点位与估值，不调仓）；
+# 首次运行自动初始化基期 2025-01-02、基点 1000。GitHub cron 只支持 UTC 且可能延迟，
+# 脚本会轮询上证指数时间戳等待收盘数据就绪（最多 40 分钟）。
+name: CNAMCSMEWI
+
+on:
+  schedule:
+    - cron: '5 7 * * 1-5'      # 07:05 UTC = 15:05 Asia/Shanghai（周一到周五）
+  workflow_dispatch:            # 可选：手动补跑，留空即按默认配置运行
+    inputs:
+      mode:
+        description: '调仓模式（留空=changes）'
+        required: false
+        default: ''
+      no_wait:
+        description: '跳过收盘等待（补跑/调试用）'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cnamci-CNAMCSMEWI
+  cancel-in-progress: false
+
+jobs:
+  compute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 运行 CNAMCSMEWI 计算（默认零参数）
+        env:
+          TZ: Asia/Shanghai
+          INPUT_MODE: ${{{{ inputs.mode }}}}
+          INPUT_NO_WAIT: ${{{{ inputs.no_wait }}}}
+        run: |
+          set -euo pipefail
+          ARGS="--index CNAMCSMEWI"
+          [ -n "${{INPUT_MODE}}" ] && ARGS="$ARGS --mode ${{INPUT_MODE}}"
+          [ "${{INPUT_NO_WAIT}}" = "true" ] && ARGS="$ARGS --no-wait"
+          echo "执行：python Index.py $ARGS"
+          python Index.py $ARGS
+
+      - name: 上传结果（artifact 兜底）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CNAMCSMEWI-Data
+          path: Index/CNAMCSMEWI
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: 提交结果到仓库
+        run: |
+          set -euo pipefail
+          git config user.name "cnamci-bot"
+          git config user.email "cnamci-bot@users.noreply.github.com"
+          git add Index/CNAMCSMEWI
+          if git diff --cached --quiet; then
+            echo "没有变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "data(CNAMCSMEWI): $(date -u +%F) 每日快照"
+          git pull --rebase --autostash origin "${{GITHUB_REF_NAME}}" || true
+          git push origin "HEAD:${{GITHUB_REF_NAME}}"

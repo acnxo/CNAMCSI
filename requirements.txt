@@ -1,0 +1,4 @@
+# 云端（每日增量）：零第三方依赖，无需安装任何包。
+# 本地历史回放（--replay-start）与 Tools/ExportPanel.py 需要 pandas：
+#   pip install pandas
+# GitHub Actions 的 Replay.yml 会自动安装 pandas。

@@ -1,0 +1,42 @@
+{
+ "code": "CNAMCSMEWI",
+ "name": "中证微盘股月频等权指数",
+ "trade_date": "2026-11-13",
+ "point": 52988.879357,
+ "prev_point": 53880.537598,
+ "ret": -0.0165488,
+ "cum_return": 51.98887936,
+ "base_date": "2004-12-31",
+ "data_start": "2004-12-31",
+ "base_point": 1000.0,
+ "components": 400,
+ "eligible_count": null,
+ "weight_mode": "equal",
+ "rebalance": "monthly",
+ "border_mcap": null,
+ "next_mcap": null,
+ "skipped": null,
+ "mode": "changes",
+ "portfolio": {
+  "cash": 21999292.99,
+  "market_value": 47058310.0,
+  "total_asset": 69057602.99,
+  "holdings_count": 400,
+  "plan_orders": 0,
+  "plan_meta": {},
+  "executed_orders": 0
+ },
+ "scan": {
+  "replay": true,
+  "days": 5310,
+  "rebalance": false
+ },
+ "http": {
+  "requests": 0,
+  "attempts": 0,
+  "bytes": 0,
+  "bytes_mb": 0.0,
+  "hosts": {}
+ },
+ "generated_at": "2026-11-13T15:00:00+0800"
+}

@@ -1,0 +1,67 @@
+# CNAMCI Compare：三只自建指数 vs 业绩比较基准（国证2000 / 中证2000 / 中证全指）。
+# 每日 15:35（三个指数工作流之后）运行，生成 Statistic/Comparison.svg 并提交。
+name: CNAMCI Compare
+
+on:
+  schedule:
+    - cron: '35 7 * * 1-5'      # 07:35 UTC = 15:35 Asia/Shanghai（周一到周五）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cnamci-compare
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 生成对比图与统计
+        env:
+          TZ: Asia/Shanghai
+        run: python Compare.py
+
+      - name: 上传图表（artifact 兜底）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CNAMCI-Comparison
+          path: |
+            Statistic/Comparison.svg
+            Statistic/Comparison-All.svg
+            Statistic/Comparison-10Y.svg
+            Statistic/Comparison-5Y.svg
+            Statistic/Comparison-3Y.svg
+            Statistic/Comparison-1Y.svg
+            Statistic/Comparison-CSI2000.svg
+            Statistic/Comparison.md
+            Statistic/Comparison.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: 提交结果到仓库
+        run: |
+          set -euo pipefail
+          git config user.name "cnamci-bot"
+          git config user.email "cnamci-bot@users.noreply.github.com"
+          git add Statistic/Comparison*.svg Statistic/Comparison.md Statistic/Comparison.json Benchmarks
+          if git diff --cached --quiet; then
+            echo "没有变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "data(Compare): $(date -u +%F) 基准对比快照"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"

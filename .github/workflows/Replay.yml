@@ -1,0 +1,84 @@
+# CNAMCI 历史回放（GitHub Actions，手动触发）。
+# 用仓库内自包含的 Input/Panel-YYYY.csv.gz 回放三只指数，并重新生成四张对比图。
+# 首次使用前：本地运行 `python Tools/ExportPanel.py` 生成 Input/ 并提交（183 MB，按年分片）。
+name: CNAMCI Replay
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: '回放起始日（默认基日 2004-12-31）'
+        required: false
+        default: '2004-12-31'
+      index:
+        description: '指数（all / CNAMCSDEWI / CNAMCSWEWI / CNAMCSMEWI）'
+        required: false
+        default: 'all'
+      daily_since:
+        description: 'Daily 全量归档起点（留空=最近1年+年末；填 2009-06-01=全量）'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cnamci-replay
+  cancel-in-progress: false
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Python 与 pandas
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pandas
+
+      - name: 检查回放数据
+        run: |
+          if ! ls Input/Panel-*.mvsv.gz >/dev/null 2>&1; then
+            echo "::error::缺少 Input/Panel-*.mvsv.gz；请先本地运行 python Tools/ExportPanel.py 并提交"
+            exit 1
+          fi
+          ls -lh Input | head -5
+
+      - name: 回放
+        env:
+          TZ: Asia/Shanghai
+          INPUT_START: ${{ inputs.start }}
+          INPUT_INDEX: ${{ inputs.index }}
+          INPUT_DAILY_SINCE: ${{ inputs.daily_since }}
+        run: |
+          set -euo pipefail
+          ARGS="--replay-start ${INPUT_START:-2004-12-31}"
+          [ -n "${INPUT_DAILY_SINCE}" ] && ARGS="$ARGS --daily-since ${INPUT_DAILY_SINCE}"
+          for code in CNAMCSDEWI CNAMCSWEWI CNAMCSMEWI; do
+            if [ "${INPUT_INDEX:-all}" != "all" ] && [ "${INPUT_INDEX}" != "$code" ]; then continue; fi
+            echo "回放 $code $ARGS"
+            python Index.py --index "$code" $ARGS
+          done
+
+      - name: 重新生成对比图
+        run: python Compare.py
+
+      - name: 提交结果
+        run: |
+          set -euo pipefail
+          git config user.name "cnamci-bot"
+          git config user.email "cnamci-bot@users.noreply.github.com"
+          git add Data
+          if git diff --cached --quiet; then
+            echo "没有变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "data(CNAMCI): 历史回放 $(date -u +%F)"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"

@@ -1,0 +1,20 @@
+# CNAMCI 基线指数配置（字段：大驼峰）
+N: 400                      # 成分数量
+Capital: 4000000            # 组合初始资金（元）
+Mode: changes               # index / changes / full
+WeightMode: equal           # 指数等权
+MinListedDays: 60           # 上市满 60 个交易日
+FeeModel: rate              # 真实费率
+Lot: 100                    # 最小交易单位
+BasePoint: 1000             # 基点
+BaseDate: "2004-12-31"      # 基日（中证全指基日）
+Source: tencent             # 行情源：tencent / eastmoney
+Boards: ["600", "601", "603", "605", "000", "001", "002", "003"]
+MaxWaitMin: 40              # 收盘后等待数据就绪的分钟数
+RetrySeconds: 60            # 重试间隔（秒）
+# 以下三条为"现行政策"规则，历史早期（指数未发布/样本不足）不适用，暂不启用；
+# 决策与数据依据见 SPEC.md §4.1。
+ExcludeTop: 0               # 剔除市值前 N 名（宽基覆盖区，0=不启用）
+MinAmount20: 0              # 20 日日均成交额下限（元，0=不启用）
+Amount20Pct: 0              # 剔除成交额最低分位（0=不启用，如 0.10）
+LiquidityFirst: true        # 若启用流动性规则：先过滤再取市值 400

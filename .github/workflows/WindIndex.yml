@@ -1,0 +1,61 @@
+# WindIndex：抓取万得官网两个微盘股指数的日线，增量更新 Benchmarks/*.mvsv。
+# 每个交易日北京时间 15:45（07:45 UTC）运行；接口只返回最近 60 个交易日，
+# 脚本按 Date 合并去重，历史数据始终保留。
+name: WindIndex
+
+on:
+  schedule:
+    - cron: '45 7 * * 1-5'      # 07:45 UTC = 15:45 Asia/Shanghai
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cnamci-wind-index
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 抓取万得指数（零参数）
+        env:
+          TZ: Asia/Shanghai
+        run: python Tool/FetchWindIndex.py
+
+      - name: 上传结果（artifact 兜底）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WindIndex-Benchmarks
+          path: |
+            Benchmarks/868008.WI.mvsv
+            Benchmarks/8841431.WI.mvsv
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: 提交结果到仓库
+        run: |
+          set -euo pipefail
+          git config user.name "cnamci-bot"
+          git config user.email "cnamci-bot@users.noreply.github.com"
+          git add "Benchmarks/868008.WI.mvsv" "Benchmarks/8841431.WI.mvsv"
+          if git diff --cached --quiet; then
+            echo "没有变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "data(WindIndex): $(date -u +%F) 万得微盘股指数日线"
+          git pull --rebase --autostash origin "${{ github.ref_name }}" || true
+          git push origin "HEAD:${{ github.ref_name }}"

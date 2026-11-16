@@ -1,0 +1,50 @@
+{
+ "code": "CNAMCSDEWI",
+ "name": "中证微盘股日频等权指数",
+ "trade_date": "2026-11-13",
+ "point": 91915.927658,
+ "prev_point": 93466.541317,
+ "ret": -0.01659004,
+ "cum_return": 90.91592766,
+ "base_date": "2004-12-31",
+ "data_start": "2004-12-31",
+ "base_point": 1000.0,
+ "components": 400,
+ "eligible_count": 3043,
+ "weight_mode": "equal",
+ "rebalance": "daily",
+ "border_mcap": 2868000000.0,
+ "next_mcap": 2870000000.0,
+ "skipped": {
+  "st": 141,
+  "new_listing": 5
+ },
+ "mode": "changes",
+ "portfolio": {
+  "cash": 54271210.66,
+  "market_value": 119358298.0,
+  "total_asset": 173629508.66,
+  "holdings_count": 400,
+  "plan_orders": 24,
+  "plan_meta": {
+   "mode": "changes",
+   "entries": 12,
+   "exits": 12,
+   "cash_after_est": 54298200.23
+  },
+  "executed_orders": 26
+ },
+ "scan": {
+  "replay": true,
+  "days": 5310,
+  "rebalance": true
+ },
+ "http": {
+  "requests": 0,
+  "attempts": 0,
+  "bytes": 0,
+  "bytes_mb": 0.0,
+  "hosts": {}
+ },
+ "generated_at": "2026-11-13T15:00:00+0800"
+}
