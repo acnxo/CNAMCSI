@@ -18,6 +18,7 @@
 import argparse
 import os
 import sys
+import time
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
@@ -38,6 +39,15 @@ def showStatus(root):
     print(f"证券总数 {total} · 已记录 {len(entries)} · 累计新采 {rows:,} 行")
     print(f"状态分布 {counts} · 区间 {state.get('start', '-')}~{state.get('end', '-')}"
           f" · 源 {state.get('source', '-')} · 更新 {state.get('updated', '-')}")
+    stamp = state.get("updated") or ""
+    try:
+        idle = (time.time() - time.mktime(time.strptime(stamp, "%Y-%m-%d %H:%M:%S")))
+    except ValueError:
+        idle = None
+    if idle is not None and idle < 300:
+        print(f"后台采集中：状态 {idle:.0f} 秒前更新（勿重复启动，查看进度用 --status）")
+    elif idle is not None:
+        print(f"当前无采集在跑（状态 {idle / 60:.0f} 分钟前更新），重跑本命令即续采")
     failed = [(code, entry.get("error", "")) for code, entry in entries.items()
               if entry.get("status") == "failed"]
     for code, error in failed[:10]:

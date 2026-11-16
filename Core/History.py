@@ -268,6 +268,20 @@ def securityCodes(root, includeData=True):
     return sorted(code for code in codes if code.startswith(Market.BOARDS))
 
 
+def dataShares(root):
+    """当年 ``Data/`` 里每只股票的**最新**股本（新股在 Archive 无历史时的兜底）。"""
+    index = {}
+    for path in sorted(glob.glob(os.path.join(root, "Data", "*", "*.mvsv"))):
+        for row in Market.readRows(path):
+            field = row.split("|")
+            if len(field) < 13 or field[9] in ("", "0"):
+                continue
+            known = index.get(field[0])
+            if known is None or field[2] > known[0]:
+                index[field[0]] = (field[2], field[9], field[10])
+    return {code: (item[1], item[2]) for code, item in index.items()}
+
+
 def nameOf(root, code):
     """名称：优先既有 Archive 头部 / 数据行，其次当年 Data。"""
     path = archivePath(root, code)
@@ -362,13 +376,18 @@ def isDone(entry, start, end):
 # --------------------------------------------------------------------------- #
 # 主流程
 # --------------------------------------------------------------------------- #
-def oneSecurity(root, code, start, end, source, delay):
-    """采一只：读既有股本 → 抓取 → 合并 → 落盘。返回状态条目。"""
+def oneSecurity(root, code, start, end, source, delay, extraShares=None):
+    """采一只：读既有股本 → 抓取 → 合并 → 落盘。返回状态条目。
+
+    ``extraShares`` 是 ``dataShares()`` 的结果：Archive 里没有股本的新股用它兜底。
+    """
     old = Market.readRows(archivePath(root, code))
     name = nameOf(root, code)
     index = sharesIndex(old)
     dates = sorted(index)
-    fallback = index.get(dates[-1]) if dates else None
+    fallback = index.get(dates[-1]) if dates else (extraShares or {}).get(code)
+    if not index and fallback:
+        index, dates = {start: fallback}, [start]
 
     if source == "eastmoney":
         klines = fetchEastmoney(code, start, end)
@@ -392,8 +411,8 @@ def oneSecurity(root, code, start, end, source, delay):
 
 
 def run(root, start=DEFAULT_START, end=None, source="xueqiu", workers=4, delay=0.15,
-        force=False, only=None, limit=None, saveEvery=20, log=print):
-    """全量/增量采集入口，返回汇总统计。"""
+        force=False, only=None, limit=None, saveEvery=20, retries=2, log=print):
+    """全量/增量采集入口（失败的在同一轮运行末尾自动重试），返回汇总统计。"""
     start, end = normDate(start), normDate(end)
     state = stateLoad(root)
     codes = securityCodes(root)
@@ -411,37 +430,57 @@ def run(root, start=DEFAULT_START, end=None, source="xueqiu", workers=4, delay=0
     started = time.time()
     lock = threading.Lock()
 
+    extra = dataShares(root)
+
     def work(code):
         try:
-            return code, oneSecurity(root, code, start, end, source, delay), None
+            return code, oneSecurity(root, code, start, end, source, delay, extra), None
         except Exception as e:  # noqa: BLE001
-            return code, {"status": "failed", "error": str(e)[:200],
+            return code, {"status": "failed", "error": str(e)[:200], "from": start,
                           "source": source,
                           "ts": time.strftime("%Y-%m-%d %H:%M:%S")}, e
 
-    with concurrent.futures.ThreadPoolExecutor(workers) as pool:
-        futures = [pool.submit(work, code) for code in todo]
-        for done, future in enumerate(concurrent.futures.as_completed(futures), 1):
-            code, entry, error = future.result()
-            with lock:
-                stats["rows"] += entry.get("rows", 0)
-                stats[entry.get("status", "failed")] = stats.get(entry.get("status", "failed"), 0) + 1
-                state["securities"][code] = entry
-                if error:
-                    log(f"[{done}/{len(todo)}] {code} 失败：{entry['error']}")
-                elif done % 20 == 0 or entry.get("status") != "ok":
-                    log(f"[{done}/{len(todo)}] {code} {entry.get('status')} "
-                        f"{entry.get('rows', 0)} 行 · 累计 {stats['rows']} 行 · "
-                        f"失败 {stats['failed']}")
-                if done % saveEvery == 0:
-                    state.update({"start": start, "end": end, "source": source,
-                                  "stats": stats})
-                    stateSave(root, state)
+    def once(batch, label):
+        """跑一批；返回本批失败（failed/empty）的代码，供下一轮重试。"""
+        if not batch:
+            return []
+        bad = []
+        with concurrent.futures.ThreadPoolExecutor(workers) as pool:
+            futures = [pool.submit(work, code) for code in batch]
+            for done, future in enumerate(concurrent.futures.as_completed(futures), 1):
+                code, entry, error = future.result()
+                with lock:
+                    stats["rows"] += entry.get("rows", 0)
+                    status = entry.get("status", "failed")
+                    stats[status] = stats.get(status, 0) + 1
+                    state["securities"][code] = entry
+                    if status in ("failed", "empty"):
+                        bad.append(code)
+                    if error:
+                        log(f"{label}[{done}/{len(batch)}] {code} 失败：{entry['error']}")
+                    elif done % 20 == 0 or status != "ok":
+                        log(f"{label}[{done}/{len(batch)}] {code} {status} "
+                            f"{entry.get('rows', 0)} 行 · 累计 {stats['rows']} 行 · "
+                            f"失败 {stats['failed']}")
+                    if done % saveEvery == 0:
+                        state.update({"start": start, "end": end, "source": source,
+                                      "stats": stats})
+                        stateSave(root, state)
+        return bad
+
+    bad = once(todo, "")
+    round_no = 0
+    while bad and round_no < retries:
+        round_no += 1
+        time.sleep(min(10.0 * round_no, 60))
+        log(f"第 {round_no} 轮重试 {len(bad)} 只未完成的证券…")
+        bad = once(bad, f"R{round_no}")
 
     state.update({"start": start, "end": end, "source": source, "stats": stats})
     stateSave(root, state)
     stats["seconds"] = round(time.time() - started, 1)
     stats["todo"] = len(todo)
+    stats["pending"] = bad
     log(f"完成：{stats}")
     return stats
 
