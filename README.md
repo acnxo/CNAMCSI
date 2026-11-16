@@ -101,10 +101,10 @@ CNAMCI/                        本仓库
     LocalData.py               历史回放数据源（pandas，仅回放）
   tests/                       TestCnamci / TestIndexFlow / TestRebalance
   .github/workflows/
-    CNAMCSDEWI.yml              日频：15:05 自动运行
-    CNAMCSWEWI.yml              周频：15:05 自动运行（仅周五调仓）
-    CNAMCSMEWI.yml              月频：15:05 自动运行（仅月末调仓）
-    Compare.yml                15:35 生成 6 指数对比图与统计
+    CNAMCSDEWI.yml              日频：15:35 自动运行
+    CNAMCSWEWI.yml              周频：15:35 自动运行（仅周五调仓）
+    CNAMCSMEWI.yml              月频：15:35 自动运行（仅月末调仓）
+    Compare.yml                15:55 生成 6 指数对比图与统计
     Replay.yml                 手动触发：用 Input/ 回放三只指数并重建对比图
   Data/
     CNAMCSDEWI/  CNAMCSWEWI/  CNAMCSMEWI/   各自的 Index/Nav/State/Portfolio/Latest/Daily
@@ -121,7 +121,7 @@ CNAMCI/                        本仓库
 Settings → Actions → General → Workflow permissions 选 **Read and write**，
 fork 仓库在 Actions 页面点一次 **Enable workflow**。
 
-每个交易日 15:05 触发，三个工作流并行的流程一致：
+每个交易日 15:35 触发，三个工作流并行的流程一致：
 
 ```
 1. 数据就绪检查   上证指数快照时间戳 = 今日且 ≥ 15:00:00（最多等 40 分钟）
@@ -186,7 +186,7 @@ python3 Compare.py --no-fetch # 只用本地缓存（Benchmarks/）
    - `daily_since`：留空=最近 1 年+年末；填 `2004-12-31`=逐日全量归档（体积约 1.1 GB）
    - 回放后自动 `python Compare.py` 重建六张对比图并提交 `Statistic/`
 
-5. **每日增量**：`CNAMCSDEWI` / `CNAMCSWEWI` / `CNAMCSMEWI` 三个工作流每交易日 15:05 自动运行。
+5. **每日增量**：`CNAMCSDEWI` / `CNAMCSWEWI` / `CNAMCSMEWI` 三个工作流每交易日 15:35 自动运行。
 
 > 若不想把 207 MB 放进 git，可改用 GitHub Release 存 `Input/*.csv.gz`，在 `Replay.yml` 的「检查回放数据」步骤前加一步 `gh release download`。
 

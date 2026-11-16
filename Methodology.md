@@ -269,7 +269,7 @@ cum_return = point_t / 1000 − 1
 ### 10.1 运行时点
 
 - 指数计算：每个交易日北京时间 **15:35**（GitHub Actions `CNAMCSDEWI/CNAMCWEWI/CNAMCSMEWI.yml`）；
-- 基准对比：同日 **15:45**（`Compare.yml`）；
+- 基准对比：同日 **15:55**（`Compare.yml`）；
 - 万得指数抓取：同日 **15:45**（`WindIndex.yml`）。
 
 ### 10.2 输出文件
