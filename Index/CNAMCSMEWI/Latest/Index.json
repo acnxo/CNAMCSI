@@ -1,11 +1,11 @@
 {
  "code": "CNAMCSMEWI",
  "name": "中证微盘股月频等权指数",
- "trade_date": "2026-11-13",
- "point": 52988.879357,
- "prev_point": 53880.537598,
- "ret": -0.0165488,
- "cum_return": 51.98887936,
+ "trade_date": "2026-11-16",
+ "point": 52118.319759,
+ "prev_point": 52988.879357,
+ "ret": -0.0164291,
+ "cum_return": 51.11831976,
  "base_date": "2004-12-31",
  "data_start": "2004-12-31",
  "base_point": 1000.0,
@@ -19,24 +19,46 @@
  "mode": "changes",
  "portfolio": {
   "cash": 21999292.99,
-  "market_value": 47058310.0,
-  "total_asset": 69057602.99,
+  "market_value": 46273085.0,
+  "total_asset": 68272377.99,
   "holdings_count": 400,
   "plan_orders": 0,
   "plan_meta": {},
   "executed_orders": 0
  },
  "scan": {
-  "replay": true,
-  "days": 5310,
-  "rebalance": false
+  "pages": 0,
+  "stock_list": "refreshed",
+  "codes": 3499,
+  "scanned": 3493
  },
  "http": {
-  "requests": 0,
-  "attempts": 0,
-  "bytes": 0,
-  "bytes_mb": 0.0,
-  "hosts": {}
+  "requests": 9,
+  "attempts": 9,
+  "bytes": 3284342,
+  "bytes_mb": 3.132,
+  "hosts": {
+   "qt.gtimg.cn": {
+    "requests": 5,
+    "bytes": 1696081
+   },
+   "push2his.eastmoney.com": {
+    "requests": 1,
+    "bytes": 27330
+   },
+   "query.sse.com.cn": {
+    "requests": 1,
+    "bytes": 951469
+   },
+   "www.cninfo.com.cn": {
+    "requests": 1,
+    "bytes": 593064
+   },
+   "82.push2.eastmoney.com": {
+    "requests": 1,
+    "bytes": 16398
+   }
+  }
  },
- "generated_at": "2026-11-13T15:00:00+0800"
+ "generated_at": "2026-11-16T21:40:27+0800"
 }
