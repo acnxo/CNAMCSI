@@ -1,6 +1,6 @@
 {
- "as_of": "2026-11-13",
- "cash": 54271210.66,
+ "as_of": "2026-11-16",
+ "cash": 54412986.47,
  "holdings": [
   {
    "code": "000014",
@@ -206,13 +206,6 @@
    "last_price": 4.43
   },
   {
-   "code": "000802",
-   "name": "北京文化",
-   "shares": 105000,
-   "cost": 4.080449,
-   "last_price": 4.08
-  },
-  {
    "code": "000809",
    "name": "和展能源",
    "shares": 111500,
@@ -353,6 +346,13 @@
    "last_price": 16.64
   },
   {
+   "code": "001230",
+   "name": "劲旅环境",
+   "shares": 28600,
+   "cost": 15.061657,
+   "last_price": 15.06
+  },
+  {
    "code": "001231",
    "name": "农心科技",
    "shares": 8800,
@@ -365,6 +365,13 @@
    "shares": 15900,
    "cost": 28.353118,
    "last_price": 28.35
+  },
+  {
+   "code": "001239",
+   "name": "永达股份",
+   "shares": 36300,
+   "cost": 11.961316,
+   "last_price": 11.96
   },
   {
    "code": "001255",
@@ -668,6 +675,20 @@
    "last_price": 10.87
   },
   {
+   "code": "002259",
+   "name": "升达林业",
+   "shares": 113900,
+   "cost": 3.770415,
+   "last_price": 3.77
+  },
+  {
+   "code": "002278",
+   "name": "神开股份",
+   "shares": 60600,
+   "cost": 7.050776,
+   "last_price": 7.05
+  },
+  {
    "code": "002295",
    "name": "精艺股份",
    "shares": 31300,
@@ -701,13 +722,6 @@
    "shares": 91300,
    "cost": 4.570503,
    "last_price": 4.57
-  },
-  {
-   "code": "002355",
-   "name": "兴民智通",
-   "shares": 100400,
-   "cost": 4.400484,
-   "last_price": 4.4
   },
   {
    "code": "002363",
@@ -759,6 +773,13 @@
    "last_price": 6.2
   },
   {
+   "code": "002451",
+   "name": "摩恩电气",
+   "shares": 66600,
+   "cost": 6.510716,
+   "last_price": 6.51
+  },
+  {
    "code": "002476",
    "name": "新叶股份",
    "shares": 89200,
@@ -808,6 +829,13 @@
    "last_price": 8.71
   },
   {
+   "code": "002521",
+   "name": "齐峰新材",
+   "shares": 84700,
+   "cost": 5.120563,
+   "last_price": 5.12
+  },
+  {
    "code": "002524",
    "name": "光正眼科",
    "shares": 47400,
@@ -829,18 +857,18 @@
    "last_price": 4.02
   },
   {
-   "code": "002548",
-   "name": "金新农",
-   "shares": 125200,
-   "cost": 3.510386,
-   "last_price": 3.51
-  },
-  {
    "code": "002551",
    "name": "尚荣医疗",
    "shares": 100500,
    "cost": 4.09045,
    "last_price": 4.09
+  },
+  {
+   "code": "002561",
+   "name": "徐家汇",
+   "shares": 63000,
+   "cost": 6.880757,
+   "last_price": 6.88
   },
   {
    "code": "002566",
@@ -934,13 +962,6 @@
    "last_price": 1.8
   },
   {
-   "code": "002666",
-   "name": "德联集团",
-   "shares": 118600,
-   "cost": 3.720409,
-   "last_price": 3.72
-  },
-  {
    "code": "002671",
    "name": "龙泉股份",
    "shares": 64200,
@@ -1025,13 +1046,6 @@
    "last_price": 4.41
   },
   {
-   "code": "002748",
-   "name": "世龙实业",
-   "shares": 35600,
-   "cost": 12.301353,
-   "last_price": 12.3
-  },
-  {
    "code": "002753",
    "name": "永东股份",
    "shares": 51700,
@@ -1065,13 +1079,6 @@
    "shares": 29800,
    "cost": 13.661503,
    "last_price": 13.66
-  },
-  {
-   "code": "002772",
-   "name": "众兴菌业",
-   "shares": 56500,
-   "cost": 7.800858,
-   "last_price": 7.8
   },
   {
    "code": "002775",
@@ -1149,6 +1156,13 @@
    "shares": 25000,
    "cost": 11.611277,
    "last_price": 11.61
+  },
+  {
+   "code": "002826",
+   "name": "易明医药",
+   "shares": 29000,
+   "cost": 14.881637,
+   "last_price": 14.88
   },
   {
    "code": "002828",
@@ -1345,13 +1359,6 @@
    "shares": 30800,
    "cost": 13.071438,
    "last_price": 13.07
-  },
-  {
-   "code": "002952",
-   "name": "亚世光电",
-   "shares": 24600,
-   "cost": 17.951974,
-   "last_price": 17.95
   },
   {
    "code": "002963",
@@ -1599,6 +1606,13 @@
    "last_price": 7.0
   },
   {
+   "code": "600281",
+   "name": "华阳新材",
+   "shares": 80200,
+   "cost": 5.430597,
+   "last_price": 5.43
+  },
+  {
    "code": "600287",
    "name": "苏豪时尚",
    "shares": 61500,
@@ -1702,13 +1716,6 @@
    "shares": 76700,
    "cost": 5.260579,
    "last_price": 5.26
-  },
-  {
-   "code": "600539",
-   "name": "狮头股份",
-   "shares": 34700,
-   "cost": 12.701397,
-   "last_price": 12.7
   },
   {
    "code": "600540",
@@ -1893,13 +1900,6 @@
    "last_price": 14.47
   },
   {
-   "code": "600844",
-   "name": "金煤科技",
-   "shares": 152500,
-   "cost": 2.810309,
-   "last_price": 2.81
-  },
-  {
    "code": "600847",
    "name": "万里股份",
    "shares": 28900,
@@ -2068,13 +2068,6 @@
    "last_price": 19.59
   },
   {
-   "code": "603080",
-   "name": "新疆火炬",
-   "shares": 19500,
-   "cost": 22.222444,
-   "last_price": 22.22
-  },
-  {
    "code": "603086",
    "name": "先达股份",
    "shares": 56800,
@@ -2115,6 +2108,13 @@
    "shares": 33300,
    "cost": 12.581384,
    "last_price": 12.58
+  },
+  {
+   "code": "603137",
+   "name": "恒尚节能",
+   "shares": 27700,
+   "cost": 15.561712,
+   "last_price": 15.56
   },
   {
    "code": "603159",
@@ -2243,6 +2243,13 @@
    "last_price": 41.99
   },
   {
+   "code": "603289",
+   "name": "泰瑞机器",
+   "shares": 45000,
+   "cost": 9.601056,
+   "last_price": 9.6
+  },
+  {
    "code": "603307",
    "name": "扬州金泉",
    "shares": 7300,
@@ -2348,11 +2355,11 @@
    "last_price": 5.6
   },
   {
-   "code": "603577",
-   "name": "汇金通",
-   "shares": 51200,
-   "cost": 8.430927,
-   "last_price": 8.43
+   "code": "603536",
+   "name": "惠发食品",
+   "shares": 36900,
+   "cost": 10.571163,
+   "last_price": 10.57
   },
   {
    "code": "603578",
@@ -2570,13 +2577,6 @@
    "shares": 46400,
    "cost": 9.191011,
    "last_price": 9.19
-  },
-  {
-   "code": "603856",
-   "name": "东宏股份",
-   "shares": 42300,
-   "cost": 10.471152,
-   "last_price": 10.47
   },
   {
    "code": "603860",
@@ -2804,271 +2804,315 @@
   }
  ],
  "pending": {
-  "signal_date": "2026-11-13",
-  "exec_date": "2026-11-16",
+  "signal_date": "2026-11-16",
+  "exec_date": "2026-11-17",
   "orders": [
    {
-    "signal_date": "2026-11-13",
+    "signal_date": "2026-11-16",
     "side": "SELL",
-    "code": "000802",
-    "name": "北京文化",
-    "shares": 105000,
-    "ref_price": 4.21,
-    "est_amount": 442050.0,
-    "est_fee": 269.65,
+    "code": "000068",
+    "name": "华控赛格",
+    "shares": 152300,
+    "ref_price": 2.81,
+    "est_amount": 427963.0,
+    "est_fee": 261.06,
     "reason": "exit"
    },
    {
-    "signal_date": "2026-11-13",
+    "signal_date": "2026-11-16",
     "side": "SELL",
-    "code": "002355",
-    "name": "兴民智通",
-    "shares": 100400,
-    "ref_price": 4.3,
-    "est_amount": 431720.0,
-    "est_fee": 263.35,
+    "code": "000715",
+    "name": "中兴商业",
+    "shares": 81900,
+    "ref_price": 5.34,
+    "est_amount": 437346.0,
+    "est_fee": 266.78,
     "reason": "exit"
    },
    {
-    "signal_date": "2026-11-13",
+    "signal_date": "2026-11-16",
     "side": "SELL",
-    "code": "002548",
-    "name": "金新农",
-    "shares": 125200,
-    "ref_price": 3.83,
-    "est_amount": 479516.0,
-    "est_fee": 292.5,
+    "code": "000931",
+    "name": "中 关 村",
+    "shares": 112700,
+    "ref_price": 3.75,
+    "est_amount": 422625.0,
+    "est_fee": 257.8,
     "reason": "exit"
    },
    {
-    "signal_date": "2026-11-13",
+    "signal_date": "2026-11-16",
     "side": "SELL",
-    "code": "002666",
-    "name": "德联集团",
-    "shares": 118600,
-    "ref_price": 3.65,
-    "est_amount": 432890.0,
-    "est_fee": 264.06,
+    "code": "000978",
+    "name": "桂林旅游",
+    "shares": 69700,
+    "ref_price": 6.02,
+    "est_amount": 419594.0,
+    "est_fee": 255.95,
     "reason": "exit"
    },
    {
-    "signal_date": "2026-11-13",
+    "signal_date": "2026-11-16",
     "side": "SELL",
-    "code": "002748",
-    "name": "世龙实业",
-    "shares": 35600,
-    "ref_price": 12.39,
-    "est_amount": 441084.0,
-    "est_fee": 269.06,
+    "code": "002012",
+    "name": "凯恩股份",
+    "shares": 69800,
+    "ref_price": 6.14,
+    "est_amount": 428572.0,
+    "est_fee": 261.43,
     "reason": "exit"
    },
    {
-    "signal_date": "2026-11-13",
+    "signal_date": "2026-11-16",
     "side": "SELL",
-    "code": "002772",
-    "name": "众兴菌业",
-    "shares": 56500,
-    "ref_price": 7.7,
-    "est_amount": 435050.0,
-    "est_fee": 265.38,
-    "reason": "exit"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "SELL",
-    "code": "002952",
-    "name": "亚世光电",
-    "shares": 24600,
-    "ref_price": 17.64,
-    "est_amount": 433944.0,
-    "est_fee": 264.71,
-    "reason": "exit"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "SELL",
-    "code": "600539",
-    "name": "狮头股份",
-    "shares": 34700,
-    "ref_price": 12.67,
-    "est_amount": 439649.0,
-    "est_fee": 268.19,
-    "reason": "exit"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "SELL",
-    "code": "600844",
-    "name": "金煤科技",
-    "shares": 152500,
-    "ref_price": 2.84,
-    "est_amount": 433100.0,
-    "est_fee": 264.19,
-    "reason": "exit"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "SELL",
-    "code": "603080",
-    "name": "新疆火炬",
-    "shares": 19500,
-    "ref_price": 20.41,
-    "est_amount": 397995.0,
-    "est_fee": 242.78,
-    "reason": "exit"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "SELL",
-    "code": "603577",
-    "name": "汇金通",
-    "shares": 51200,
-    "ref_price": 8.48,
-    "est_amount": 434176.0,
-    "est_fee": 264.85,
-    "reason": "exit"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "SELL",
-    "code": "603856",
-    "name": "东宏股份",
-    "shares": 42300,
-    "ref_price": 10.21,
-    "est_amount": 431883.0,
-    "est_fee": 263.45,
-    "reason": "exit"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "600281",
-    "name": "华阳新材",
-    "shares": 80200,
-    "ref_price": 5.41,
-    "est_amount": 433882.0,
-    "est_fee": 47.73,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "002278",
-    "name": "神开股份",
-    "shares": 60600,
-    "ref_price": 7.16,
-    "est_amount": 433896.0,
-    "est_fee": 47.73,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "603536",
-    "name": "惠发食品",
-    "shares": 36900,
-    "ref_price": 11.74,
-    "est_amount": 433206.0,
-    "est_fee": 47.65,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "603289",
-    "name": "泰瑞机器",
-    "shares": 45000,
-    "ref_price": 9.63,
-    "est_amount": 433350.0,
-    "est_fee": 47.67,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "001230",
-    "name": "劲旅环境",
-    "shares": 28600,
-    "ref_price": 15.14,
-    "est_amount": 433004.0,
-    "est_fee": 47.63,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "002826",
-    "name": "易明医药",
-    "shares": 29000,
-    "ref_price": 14.93,
-    "est_amount": 432970.0,
-    "est_fee": 47.63,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "603137",
-    "name": "恒尚节能",
-    "shares": 27700,
-    "ref_price": 15.63,
-    "est_amount": 432951.0,
-    "est_fee": 47.62,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
     "code": "002451",
     "name": "摩恩电气",
     "shares": 66600,
-    "ref_price": 6.51,
-    "est_amount": 433566.0,
-    "est_fee": 47.69,
-    "reason": "enter"
+    "ref_price": 6.48,
+    "est_amount": 431568.0,
+    "est_fee": 263.26,
+    "reason": "exit"
    },
    {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "002561",
-    "name": "徐家汇",
-    "shares": 63000,
-    "ref_price": 6.89,
-    "est_amount": 434070.0,
-    "est_fee": 47.75,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "002259",
-    "name": "升达林业",
-    "shares": 113900,
-    "ref_price": 3.81,
-    "est_amount": 433959.0,
-    "est_fee": 47.74,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
-    "code": "001239",
-    "name": "永达股份",
-    "shares": 36300,
-    "ref_price": 11.95,
-    "est_amount": 433785.0,
-    "est_fee": 47.72,
-    "reason": "enter"
-   },
-   {
-    "signal_date": "2026-11-13",
-    "side": "BUY",
+    "signal_date": "2026-11-16",
+    "side": "SELL",
     "code": "002521",
     "name": "齐峰新材",
     "shares": 84700,
-    "ref_price": 5.12,
-    "est_amount": 433664.0,
-    "est_fee": 47.7,
+    "ref_price": 5.09,
+    "est_amount": 431123.0,
+    "est_fee": 262.99,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "SELL",
+    "code": "002561",
+    "name": "徐家汇",
+    "shares": 63000,
+    "ref_price": 6.91,
+    "est_amount": 435330.0,
+    "est_fee": 265.55,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "SELL",
+    "code": "002877",
+    "name": "智能自控",
+    "shares": 53600,
+    "ref_price": 7.95,
+    "est_amount": 426120.0,
+    "est_fee": 259.93,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "SELL",
+    "code": "002982",
+    "name": "湘佳股份",
+    "shares": 30500,
+    "ref_price": 13.92,
+    "est_amount": 424560.0,
+    "est_fee": 258.98,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "SELL",
+    "code": "600076",
+    "name": "康欣新材",
+    "shares": 203300,
+    "ref_price": 2.11,
+    "est_amount": 428963.0,
+    "est_fee": 261.67,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "SELL",
+    "code": "600156",
+    "name": "华升股份",
+    "shares": 61300,
+    "ref_price": 7.15,
+    "est_amount": 438295.0,
+    "est_fee": 267.36,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "SELL",
+    "code": "600386",
+    "name": "北巴传媒",
+    "shares": 108500,
+    "ref_price": 3.81,
+    "est_amount": 413385.0,
+    "est_fee": 252.16,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "SELL",
+    "code": "601616",
+    "name": "广电电气",
+    "shares": 128000,
+    "ref_price": 3.36,
+    "est_amount": 430080.0,
+    "est_fee": 262.35,
+    "reason": "exit"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "001211",
+    "name": "双枪科技",
+    "shares": 16000,
+    "ref_price": 26.7,
+    "est_amount": 427200.0,
+    "est_fee": 46.99,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "603080",
+    "name": "新疆火炬",
+    "shares": 22600,
+    "ref_price": 18.95,
+    "est_amount": 428270.0,
+    "est_fee": 47.11,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "603637",
+    "name": "镇海股份",
+    "shares": 37600,
+    "ref_price": 11.38,
+    "est_amount": 427888.0,
+    "est_fee": 47.07,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "600539",
+    "name": "狮头股份",
+    "shares": 36200,
+    "ref_price": 11.85,
+    "est_amount": 428970.0,
+    "est_fee": 47.19,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "603090",
+    "name": "宏盛股份",
+    "shares": 15600,
+    "ref_price": 27.45,
+    "est_amount": 428220.0,
+    "est_fee": 47.1,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "605068",
+    "name": "明新旭腾",
+    "shares": 25200,
+    "ref_price": 17.0,
+    "est_amount": 428400.0,
+    "est_fee": 47.12,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "600130",
+    "name": "波导股份",
+    "shares": 116200,
+    "ref_price": 3.69,
+    "est_amount": 428778.0,
+    "est_fee": 47.17,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "002933",
+    "name": "新兴装备",
+    "shares": 18100,
+    "ref_price": 23.68,
+    "est_amount": 428608.0,
+    "est_fee": 47.15,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "002762",
+    "name": "金发拉比",
+    "shares": 54500,
+    "ref_price": 7.86,
+    "est_amount": 428370.0,
+    "est_fee": 47.12,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "001299",
+    "name": "美能能源",
+    "shares": 48300,
+    "ref_price": 8.87,
+    "est_amount": 428421.0,
+    "est_fee": 47.13,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "603577",
+    "name": "汇金通",
+    "shares": 52100,
+    "ref_price": 8.23,
+    "est_amount": 428783.0,
+    "est_fee": 47.17,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "000554",
+    "name": "泰山石油",
+    "shares": 73200,
+    "ref_price": 5.86,
+    "est_amount": 428952.0,
+    "est_fee": 47.18,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "001225",
+    "name": "和泰机电",
+    "shares": 14000,
+    "ref_price": 30.55,
+    "est_amount": 427700.0,
+    "est_fee": 47.05,
+    "reason": "enter"
+   },
+   {
+    "signal_date": "2026-11-16",
+    "side": "BUY",
+    "code": "603559",
+    "name": "中通国脉",
+    "shares": 61300,
+    "ref_price": 6.99,
+    "est_amount": 428487.0,
+    "est_fee": 47.13,
     "reason": "enter"
    }
   ]
