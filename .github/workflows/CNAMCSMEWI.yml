@@ -51,8 +51,8 @@ jobs:
           ARGS="--index CNAMCSMEWI --no-market"   # 行情三层只由日频工作流维护
           if [ -n "${INPUT_MODE}" ]; then ARGS="$ARGS --mode ${INPUT_MODE}"; fi
           if [ "${INPUT_NO_WAIT}" = "true" ]; then ARGS="$ARGS --no-wait"; fi
-          echo "执行：python Index.py $ARGS"
-          python Index.py $ARGS
+          echo "执行：python3 Index.py $ARGS"
+          python3 Index.py $ARGS
 
       - name: 上传结果（artifact 兜底）
         if: always()

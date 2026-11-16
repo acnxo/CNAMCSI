@@ -9,11 +9,11 @@
 
 查看某一天的 400 只成分股::
 
-    python Tool/Micro400.py --date 2026-11-16              # 打印全部 400 只
-    python Tool/Micro400.py --date 2026-11-16 --top 20     # 只看市值最小的 20 只
-    python Tool/Micro400.py --date 2026-11-16 --candidates # 只看收盘价 <10 元的候选
-    python Tool/Micro400.py --code 600000                  # 查某只股票是否在名单内
-    python Tool/Micro400.py --date 2004-12-31 --bottom 10  # 市值最大的 10 只（边界观察）
+    python3 Tool/Micro400.py --date 2026-11-16              # 打印全部 400 只
+    python3 Tool/Micro400.py --date 2026-11-16 --top 20     # 只看市值最小的 20 只
+    python3 Tool/Micro400.py --date 2026-11-16 --candidates # 只看收盘价 <10 元的候选
+    python3 Tool/Micro400.py --code 600000                  # 查某只股票是否在名单内
+    python3 Tool/Micro400.py --date 2004-12-31 --bottom 10  # 市值最大的 10 只（边界观察）
 
 选样规则（与 AGENTS.md §3 一致）：沪深主板、非 ST、当日有成交、上市满 60 个交易日，
 按总市值升序取前 400 只；候选池 = 这 400 只里收盘价 < 10 元的。

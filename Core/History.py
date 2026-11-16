@@ -56,6 +56,15 @@ STATE_VERSION = 1
 # --------------------------------------------------------------------------- #
 # 基础：日期 / 代码
 # --------------------------------------------------------------------------- #
+def currentYear():
+    """三层分界用的「当年」= 当前自然年。
+
+    以它为界而不是采集终点年份：``--end 2025-12-31`` 重采历史时，2025 年的数据
+    应进 ``Archive``（历史年），而不是被当成「当年」写进 ``Data/2025/``。
+    """
+    return time.strftime("%Y")
+
+
 def normDate(value):
     """``2004-12-01`` / ``20041201`` / ``None`` → ``20041201``（None → 今天）。"""
     if value is None:
@@ -457,10 +466,11 @@ def oneSecurity(root, code, start, end, source, delay, extraShares=None):
     if not rows:
         return {"status": "no_shares", "rows": 0, "from": start, "source": source,
                 "ts": time.strftime("%Y-%m-%d %H:%M:%S")}
-    dataYear = end[:4]
+    dataYear = currentYear()
     histOld, curOld = splitRows(old, dataYear)     # 旧文件里残留的当年行，一并搬去 pending
     histNew, curNew = splitRows(rows, dataYear)    # 本次采集：历史年 / 当年
-    saveSecurity(root, code, name, mergeRows(histOld, histNew, start, end))
+    merged = mergeRows(histOld, histNew, start, end)
+    saveSecurity(root, code, name, merged)
     if curOld or curNew:
         savePending(root, dataYear, code, curOld + curNew)
     if delay:
@@ -539,8 +549,9 @@ def run(root, start=DEFAULT_START, end=None, source="xueqiu", workers=4, delay=0
     state.update({"start": start, "end": end, "source": source, "stats": stats})
     stateSave(root, state)
     if not only:
-        applyPending(root, end[:4], log=log)
-        rebuildLatest(root, end[:4], log=log)
+        year = currentYear()
+        applyPending(root, year, log=log)
+        rebuildLatest(root, year, log=log)
     stats["seconds"] = round(time.time() - started, 1)
     stats["todo"] = len(todo)
     stats["pending"] = bad

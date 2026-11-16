@@ -30,7 +30,7 @@ GET https://index_api.wind.com.cn/indexofficialwebsite/Kline?indexId=<ID>&lan=cn
   8841431.WI  万得微盘股日频等权指数  indexId = 2O5u8vTCa4KiLTLQ7DT/9w==
 ```
 
-- 抓取：`python Tool/FetchWindIndex.py`（零依赖，按 Date 合并去重，历史保留）
+- 抓取：`python3 Tool/FetchWindIndex.py`（零依赖，按 Date 合并去重，历史保留）
 - 定时：`.github/workflows/WindIndex.yml` 每个交易日 15:45（北京时间）自动运行并提交
 
 | 指数 | 起点 | 末值 | 区间收益 | 年化 | 最大回撤 |
@@ -74,7 +74,7 @@ Date|Code|Name|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 三层由日频工作流（`CNAMCSDEWI`）每天自动更新：拉完快照后由 `Core/Market.py` 落盘——
 L3 保留最近 5 个交易日、L2 追加当月横截面、跨年后自动把往年 `Data/` 合并进 `Archive/Security/`（幂等）。
 周频/月频工作流用 `--no-market` 跳过，避免三个工作流同时改写同一批文件。
-单独补采：`python Tool/UpdateMarket.py [--date YYYY-MM-DD]`。
+单独补采：`python3 Tool/UpdateMarket.py [--date YYYY-MM-DD]`。
 
 历史 `Amount` 已用雪球日线重采为**真实成交额**（2026-11 全量重采，详见下节）；每日增量的 `Amount` 仍取自腾讯快照（万元精度近似），`SharesTotal`/`SharesFloat` 由市值 ÷ 收盘反推。
 
@@ -83,12 +83,12 @@ L3 保留最近 5 个交易日、L2 追加当月横截面、跨年后自动把�
 早期历史数据部分来自转换/缺省值占位。需要时用 `Tool/FetchHistory.py` 重采**真实**日线（不复权）：
 
 ```bash
-python Tool/FetchHistory.py --status       # 看进度：已完成 / 待采 / 失败
-python Tool/FetchHistory.py --limit 20     # 先试 20 只
-python Tool/FetchHistory.py --workers 8    # 全量：2004-12-01 至今
-python Tool/FetchHistory.py --verify       # 校验覆盖（2004-12 天数、缺口月份）
-python Tool/FetchHistory.py --split 2026   # 一次性迁移：Archive 里的当年行搬去 Data/.pending
-python Tool/FetchHistory.py --rebuild 2026 # .pending 落盘到 Data + 由 Data 重建 Latest
+python3 Tool/FetchHistory.py --status       # 看进度：已完成 / 待采 / 失败
+python3 Tool/FetchHistory.py --limit 20     # 先试 20 只
+python3 Tool/FetchHistory.py --workers 8    # 全量：2004-12-01 至今
+python3 Tool/FetchHistory.py --verify       # 校验覆盖（2004-12 天数、缺口月份）
+python3 Tool/FetchHistory.py --split 2026   # 一次性迁移：Archive 里的当年行搬去 Data/.pending
+python3 Tool/FetchHistory.py --rebuild 2026 # .pending 落盘到 Data + 由 Data 重建 Latest
 ```
 
 | 项 | 说明 |
@@ -108,13 +108,13 @@ python Tool/FetchHistory.py --rebuild 2026 # .pending 落盘到 Data + 由 Data 
 按总市值升序取前 400；候选池 = 其中收盘价 < 10 元）。
 
 ```bash
-python Tool/Micro400.py --date 2026-11-16                # 打印当日 400 只
-python Tool/Micro400.py --date 2026-11-16 --top 20       # 只看市值最小的 20 只
-python Tool/Micro400.py --date 2026-11-16 --bottom 10    # 市值最大的 10 只（边界观察）
-python Tool/Micro400.py --date 2026-11-16 --candidates   # 只看收盘价 <10 元的候选池
-python Tool/Micro400.py --code 600768                    # 查某只股票当日排名
-python Tool/Micro400.py --date 2026-11-16 --csv 400.csv  # 导出 CSV（Excel 直接打开）
-python Tool/Micro400.py --date 2004-12-31                # 历史任意交易日
+python3 Tool/Micro400.py --date 2026-11-16                # 打印当日 400 只
+python3 Tool/Micro400.py --date 2026-11-16 --top 20       # 只看市值最小的 20 只
+python3 Tool/Micro400.py --date 2026-11-16 --bottom 10    # 市值最大的 10 只（边界观察）
+python3 Tool/Micro400.py --date 2026-11-16 --candidates   # 只看收盘价 <10 元的候选池
+python3 Tool/Micro400.py --code 600768                    # 查某只股票当日排名
+python3 Tool/Micro400.py --date 2026-11-16 --csv 400.csv  # 导出 CSV（Excel 直接打开）
+python3 Tool/Micro400.py --date 2004-12-31                # 历史任意交易日
 ```
 
 输出示例：
@@ -170,7 +170,7 @@ CNAMCI/                        本仓库
 
 ### Actions（默认）
 
-每个工作流各自 `python Index.py --index <代码>`，无需其他参数。启用方式：
+每个工作流各自 `python3 Index.py --index <代码>`，无需其他参数。启用方式：
 Settings → Actions → General → Workflow permissions 选 **Read and write**，
 fork 仓库在 Actions 页面点一次 **Enable workflow**。
 
@@ -225,7 +225,7 @@ python3 Compare.py --no-fetch # 只用本地缓存（Benchmarks/）
 
    ```bash
    pip install pandas
-   python Tool/ExportPanel.py         # 生成 Input/Panel-2004.csv.gz … Panel-2026.csv.gz（共约 207 MB）
+   python3 Tool/ExportPanel.py         # 生成 Input/Panel-2004.csv.gz … Panel-2026.csv.gz（共约 207 MB）
    ```
 
 2. 提交并推送：`git add Input Tools && git commit -m "data: 回放面板" && git push`
@@ -237,7 +237,7 @@ python3 Compare.py --no-fetch # 只用本地缓存（Benchmarks/）
    - `start`：默认 `2004-12-31`
    - `index`：`all` 或单个代码
    - `daily_since`：留空=最近 1 年+年末；填 `2004-12-31`=逐日全量归档（体积约 1.1 GB）
-   - 回放后自动 `python Compare.py` 重建六张对比图并提交 `Statistic/`
+   - 回放后自动 `python3 Compare.py` 重建六张对比图并提交 `Statistic/`
 
 5. **每日增量**：`CNAMCSDEWI` / `CNAMCSWEWI` / `CNAMCSMEWI` 三个工作流每交易日 15:35 自动运行。
 

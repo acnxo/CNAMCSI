@@ -6,10 +6,10 @@
 
 用法::
 
-    python Tool/UpdateMarket.py                     # 抓当日快照并更新三层
-    python Tool/UpdateMarket.py --date 2026-11-16   # 指定日期（仍用当前快照数据）
-    python Tool/UpdateMarket.py --source eastmoney  # 备用数据源
-    python Tool/UpdateMarket.py --dry-run           # 只打印摘要，不写盘
+    python3 Tool/UpdateMarket.py                     # 抓当日快照并更新三层
+    python3 Tool/UpdateMarket.py --date 2026-11-16   # 指定日期（仍用当前快照数据）
+    python3 Tool/UpdateMarket.py --source eastmoney  # 备用数据源
+    python3 Tool/UpdateMarket.py --dry-run           # 只打印摘要，不写盘
 """
 
 import argparse

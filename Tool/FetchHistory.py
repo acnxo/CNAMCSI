@@ -3,13 +3,13 @@
 
 典型用法::
 
-    python Tool/FetchHistory.py --status                 # 看进度（已完成/待采/失败）
-    python Tool/FetchHistory.py --limit 5                # 先跑 5 只验证
-    python Tool/FetchHistory.py                          # 全量：2004-12-01 至今
-    python Tool/FetchHistory.py --workers 6              # 提高并发（雪球限流时调低）
-    python Tool/FetchHistory.py --verify                 # 校验覆盖（2004-12 天数等）
-    python Tool/FetchHistory.py --rebuild 2026           # 从 Archive 切出 Data/Latest
-    python Tool/FetchHistory.py --source eastmoney       # 换备源重采失败的
+    python3 Tool/FetchHistory.py --status                 # 看进度（已完成/待采/失败）
+    python3 Tool/FetchHistory.py --limit 5                # 先跑 5 只验证
+    python3 Tool/FetchHistory.py                          # 全量：2004-12-01 至今
+    python3 Tool/FetchHistory.py --workers 6              # 提高并发（雪球限流时调低）
+    python3 Tool/FetchHistory.py --verify                 # 校验覆盖（2004-12 天数等）
+    python3 Tool/FetchHistory.py --rebuild 2026           # 从 Archive 切出 Data/Latest
+    python3 Tool/FetchHistory.py --source eastmoney       # 换备源重采失败的
 
 采集状态写在 ``Archive/.FetchState.json``：中途失败后**直接重跑同一条命令**即可，
 已完成的证券会被跳过；``--force`` 忽略状态强制重采。

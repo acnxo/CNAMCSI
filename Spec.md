@@ -152,7 +152,7 @@ w_i,t = w_i,t-1 × (1 + r_i,t) / (1 + ret_t)
 | 就绪校验 | 用 1 次请求查上证指数快照 `qt.gtimg.cn/q=sh000001`，要求 `f30` 时间戳 **日期 = 今日** 且 **时间 ≥ 15:00:00** |
 | 等待策略 | 未就绪则每 60 s 重试，最多 `--max-wait-min`（默认 40 分钟，到 16:15） |
 | 超时处理 | 视为非交易日/数据源异常：不写盘，输出 `skipped` 并退出码 0（避免 Actions 红叉） |
-| 运行参数 | **无需任何命令行参数**：Actions 直接执行 `python Index.py`，参数全部来自 `Config.yaml` 与内置默认值 |
+| 运行参数 | **无需任何命令行参数**：Actions 直接执行 `python3 Index.py`，参数全部来自 `Config.yaml` 与内置默认值 |
 | 交易日历 | 东财上证指数日线；最后交易日 ≠ 今日 时同样视为非交易日 |
 
 运行日判定以**接口返回的数据日期**为准，不以 runner 的本地日期为准（runner 为 UTC）。
@@ -265,8 +265,8 @@ Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
 - 规模：`Archive/Security` 3,194 个文件 / 约 1.3 GB / 1,138 万行；`Data/2026` 11 个月度文件 / 75 MB（664,414 行）；`Latest/Latest.mvsv` 约 1.8 MB
 - 补采单只证券：只改 `Archive/Security/<Code>.mvsv` 1 个文件
 - 年末分发：`Data/<yyyy>/` 的月份文件追加进各 `Archive/Security/<Code>.mvsv`（一年一次）
-- 重采工具（本仓库）：`python Tool/FetchHistory.py`（断点续采，见 7.2.1）
-- 生成工具（父仓库 `WindMicroCapIdx/tools/BuildCnamcsi.py`）：`python tools/BuildCnamcsi.py --force`
+- 重采工具（本仓库）：`python3 Tool/FetchHistory.py`（断点续采，见 7.2.1）
+- 生成工具（父仓库 `WindMicroCapIdx/tools/BuildCnamcsi.py`）：`python3 tools/BuildCnamcsi.py --force`
 
 #### 7.2.1 历史全量采集（`Tool/FetchHistory.py`，断点续采）
 
@@ -299,7 +299,7 @@ Code|Name|Date|Open|Close|High|Low|Volume|Amount|SharesTotal|SharesFloat|MvTotal
   `Code+Date` 去重（同日以 `Latest` 为准）
 - **不默认入库**：名单由 `Tool/Micro400.py` 从行情现场计算（`--date`/`--code`/`--csv`），
   避免与 `Archive/Security` 重复存储；仅在 `Index/Cache/Panel/` 建查询缓存（不入库）
-- 确需落盘时由父仓库 `python tools/BuildMicro.py` 按需生成
+- 确需落盘时由父仓库 `python3 tools/BuildMicro.py` 按需生成
 
 ## 8. 复现步骤
 

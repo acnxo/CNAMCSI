@@ -11,8 +11,8 @@
 
 数据源：腾讯日线（国证2000 sz399303、中证全指 sh000985）、中证指数官网（中证2000 932000）。
 用法：
-    python Compare.py                 # 拉取基准并生成图表（失败时用缓存）
-    python Compare.py --no-fetch      # 只用本地缓存
+    python3 Compare.py                 # 拉取基准并生成图表（失败时用缓存）
+    python3 Compare.py --no-fetch      # 只用本地缓存
 """
 
 import argparse

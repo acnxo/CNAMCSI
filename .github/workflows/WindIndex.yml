@@ -33,7 +33,7 @@ jobs:
       - name: 抓取万得指数（零参数）
         env:
           TZ: Asia/Shanghai
-        run: python Tool/FetchWindIndex.py
+        run: python3 Tool/FetchWindIndex.py
 
       - name: 上传结果（artifact 兜底）
         if: always()

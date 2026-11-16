@@ -2,8 +2,8 @@
 """把回放所需的全市场面板导出为按年分片的 gzip（仓库自包含，供 GitHub Actions 回放）。
 
 用法（在有 data/panel.csv 的机器上运行一次）：
-    python Tools/ExportPanel.py              # 输出 Input/Panel-YYYY.csv.gz
-    python Tools/ExportPanel.py --src ../data/panel.csv --out Input
+    python3 Tools/ExportPanel.py              # 输出 Input/Panel-YYYY.csv.gz
+    python3 Tools/ExportPanel.py --src ../data/panel.csv --out Input
 
 产物列：date,code,name,list_date,open,close,volume,mcap（回放所需最小集合）。
 按年分片避免单文件过大；配合 Core/LocalData.py 直接读取。

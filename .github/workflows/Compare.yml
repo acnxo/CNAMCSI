@@ -32,7 +32,7 @@ jobs:
       - name: 生成对比图与统计
         env:
           TZ: Asia/Shanghai
-        run: python Compare.py
+        run: python3 Compare.py
 
       - name: 上传图表（artifact 兜底）
         if: always()
