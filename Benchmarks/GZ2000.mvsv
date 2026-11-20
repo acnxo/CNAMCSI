@@ -5,7 +5,7 @@
 # FieldName : "Date|Close"
 # FieldType : "Int|Decimal"
 # TypeKLine : Day
-# Count : 3074
+# Count : 3075
 # Symbol : sz399303
 # SecuCode : sz399303
 # USC : sz399303
@@ -3089,3 +3089,4 @@
 20261117|8084.799
 20261118|8023.454
 20261119|7834.495
+20261120|7431.198
