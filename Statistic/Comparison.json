@@ -1,12 +1,12 @@
 {
  "base_date": "2004-12-31",
  "base_point": 1000.0,
- "as_of": "2026-11-23",
+ "as_of": "2026-11-24",
  "windows": {
   "All": {
    "title": "全时段",
    "begin": "2004-12-31",
-   "end": "2026-11-23",
+   "end": "2026-11-24",
    "rows": [
     {
      "label": "CNAMCSDEWI 日频",
@@ -38,88 +38,88 @@
     {
      "label": "国证2000",
      "begin": "2014-03-31",
-     "last": 1911.7321,
-     "return": 0.91173209,
-     "annualized": 0.05452235,
+     "last": 1911.9778,
+     "return": 0.91197779,
+     "annualized": 0.05451526,
      "max_drawdown": -0.66750998,
-     "drawdown_percentile": 0.598049
+     "drawdown_percentile": 0.597854
     },
     {
      "label": "中证2000",
      "begin": "2023-08-11",
-     "last": 1036.051,
-     "return": 0.03605101,
-     "annualized": 0.01130387,
+     "last": 1038.4632,
+     "return": 0.03846317,
+     "annualized": 0.01203532,
      "max_drawdown": -0.37336175,
-     "drawdown_percentile": 0.996217
+     "drawdown_percentile": 0.994962
     },
     {
      "label": "中证全指",
      "begin": "2004-12-31",
-     "last": 4813.17,
-     "return": 3.81317,
-     "annualized": 0.07731803,
+     "last": 4812.85,
+     "return": 3.81285,
+     "annualized": 0.07729955,
      "max_drawdown": -0.71480471,
-     "drawdown_percentile": 0.54778
+     "drawdown_percentile": 0.547865
     }
    ]
   },
   "10Y": {
    "title": "最近十年",
-   "begin": "2016-11-23",
-   "end": "2026-11-23",
+   "begin": "2016-11-24",
+   "end": "2026-11-24",
    "rows": [
     {
      "label": "CNAMCSDEWI 日频",
-     "begin": "2016-11-23",
-     "last": 2845.4344,
-     "return": 1.84543436,
-     "annualized": 0.11489239,
-     "max_drawdown": -0.54806653,
-     "drawdown_percentile": 0.490504
+     "begin": "2016-11-24",
+     "last": 2864.513,
+     "return": 1.86451302,
+     "annualized": 0.11571795,
+     "max_drawdown": -0.54503632,
+     "drawdown_percentile": 0.494837
     },
     {
      "label": "CNAMCSWEWI 周频",
-     "begin": "2016-11-23",
-     "last": 3329.4932,
-     "return": 2.3294932,
-     "annualized": 0.13325867,
-     "max_drawdown": -0.52606464,
-     "drawdown_percentile": 0.521057
+     "begin": "2016-11-24",
+     "last": 3352.2356,
+     "return": 2.35223561,
+     "annualized": 0.1341202,
+     "max_drawdown": -0.52282738,
+     "drawdown_percentile": 0.530359
     },
     {
      "label": "CNAMCSMEWI 月频",
-     "begin": "2016-11-23",
-     "last": 2523.1753,
-     "return": 1.5231753,
-     "annualized": 0.10104193,
-     "max_drawdown": -0.54226107,
-     "drawdown_percentile": 0.457886
+     "begin": "2016-11-24",
+     "last": 2539.2555,
+     "return": 1.53925547,
+     "annualized": 0.10181373,
+     "max_drawdown": -0.53934391,
+     "drawdown_percentile": 0.46014
     },
     {
      "label": "国证2000",
-     "begin": "2016-11-23",
-     "last": 796.3482,
-     "return": -0.20365183,
-     "annualized": -0.02335762,
-     "max_drawdown": -0.51912338,
-     "drawdown_percentile": 0.814586
+     "begin": "2016-11-24",
+     "last": 801.5275,
+     "return": -0.19847251,
+     "annualized": -0.02270027,
+     "max_drawdown": -0.51637852,
+     "drawdown_percentile": 0.818706
     },
     {
      "label": "中证2000",
      "begin": "2023-08-11",
-     "last": 1036.051,
-     "return": 0.03605101,
-     "annualized": 0.01130387,
+     "last": 1038.4632,
+     "return": 0.03846317,
+     "annualized": 0.01203532,
      "max_drawdown": -0.37336175,
-     "drawdown_percentile": 0.996217
+     "drawdown_percentile": 0.994962
     },
     {
      "label": "中证全指",
-     "begin": "2016-11-23",
-     "last": 948.5331,
-     "return": -0.05146689,
-     "annualized": -0.00546682,
+     "begin": "2016-11-24",
+     "last": 949.3119,
+     "return": -0.05068809,
+     "annualized": -0.00538213,
      "max_drawdown": -0.39331456,
      "drawdown_percentile": 0.901977
     }
@@ -127,60 +127,60 @@
   },
   "5Y": {
    "title": "最近五年",
-   "begin": "2021-11-23",
-   "end": "2026-11-23",
+   "begin": "2021-11-24",
+   "end": "2026-11-24",
    "rows": [
     {
      "label": "CNAMCSDEWI 日频",
-     "begin": "2021-11-23",
-     "last": 2994.6805,
-     "return": 1.99468053,
-     "annualized": 0.25734211,
+     "begin": "2021-11-24",
+     "last": 2978.9658,
+     "return": 1.97896583,
+     "annualized": 0.25619907,
      "max_drawdown": -0.41078147,
-     "drawdown_percentile": 0.827529
+     "drawdown_percentile": 0.827386
     },
     {
      "label": "CNAMCSWEWI 周频",
-     "begin": "2021-11-23",
-     "last": 3250.8319,
-     "return": 2.25083192,
-     "annualized": 0.27907288,
+     "begin": "2021-11-24",
+     "last": 3234.8086,
+     "return": 2.23480858,
+     "annualized": 0.27801375,
      "max_drawdown": -0.40738766,
-     "drawdown_percentile": 0.817579
+     "drawdown_percentile": 0.817427
     },
     {
      "label": "CNAMCSMEWI 月频",
-     "begin": "2021-11-23",
-     "last": 2751.8274,
-     "return": 1.75182736,
-     "annualized": 0.23533582,
+     "begin": "2021-11-24",
+     "last": 2736.2552,
+     "return": 1.73625522,
+     "annualized": 0.23408808,
      "max_drawdown": -0.4034693,
-     "drawdown_percentile": 0.810945
+     "drawdown_percentile": 0.810788
     },
     {
      "label": "国证2000",
-     "begin": "2021-11-23",
-     "last": 852.916,
-     "return": -0.147084,
-     "annualized": -0.03253787,
+     "begin": "2021-11-24",
+     "last": 853.534,
+     "return": -0.14646598,
+     "annualized": -0.03239215,
      "max_drawdown": -0.42680426,
-     "drawdown_percentile": 0.942197
+     "drawdown_percentile": 0.941371
     },
     {
      "label": "中证2000",
      "begin": "2023-08-11",
-     "last": 1036.051,
-     "return": 0.03605101,
-     "annualized": 0.01130387,
+     "last": 1038.4632,
+     "return": 0.03846317,
+     "annualized": 0.01203532,
      "max_drawdown": -0.37336175,
-     "drawdown_percentile": 0.996217
+     "drawdown_percentile": 0.994962
     },
     {
      "label": "中证全指",
-     "begin": "2021-11-23",
-     "last": 813.925,
-     "return": -0.18607498,
-     "annualized": -0.04190486,
+     "begin": "2021-11-24",
+     "last": 814.0843,
+     "return": -0.18591572,
+     "annualized": -0.04186588,
      "max_drawdown": -0.39331456,
      "drawdown_percentile": 0.868704
     }
@@ -188,60 +188,60 @@
   },
   "3Y": {
    "title": "最近三年",
-   "begin": "2023-11-23",
-   "end": "2026-11-23",
+   "begin": "2023-11-24",
+   "end": "2026-11-24",
    "rows": [
     {
      "label": "CNAMCSDEWI 日频",
-     "begin": "2023-11-23",
-     "last": 1707.2328,
-     "return": 0.70723283,
-     "annualized": 0.20556242,
+     "begin": "2023-11-24",
+     "last": 1718.7996,
+     "return": 0.71879963,
+     "annualized": 0.20872871,
      "max_drawdown": -0.41078147,
-     "drawdown_percentile": 0.720833
+     "drawdown_percentile": 0.720445
     },
     {
      "label": "CNAMCSWEWI 周频",
-     "begin": "2023-11-23",
-     "last": 1820.5848,
-     "return": 0.82058481,
-     "annualized": 0.23295579,
+     "begin": "2023-11-24",
+     "last": 1831.6602,
+     "return": 0.8316602,
+     "annualized": 0.23593525,
      "max_drawdown": -0.40738766,
-     "drawdown_percentile": 0.705556
+     "drawdown_percentile": 0.705146
     },
     {
      "label": "CNAMCSMEWI 月频",
-     "begin": "2023-11-23",
-     "last": 1615.09,
-     "return": 0.61509002,
-     "annualized": 0.18240917,
+     "begin": "2023-11-24",
+     "last": 1628.7295,
+     "return": 0.62872947,
+     "annualized": 0.18617054,
      "max_drawdown": -0.4034693,
-     "drawdown_percentile": 0.693056
+     "drawdown_percentile": 0.692629
     },
     {
      "label": "国证2000",
-     "begin": "2023-11-23",
-     "last": 964.6228,
-     "return": -0.03537721,
-     "annualized": -0.01242434,
+     "begin": "2023-11-24",
+     "last": 976.9637,
+     "return": -0.02303635,
+     "annualized": -0.00805699,
      "max_drawdown": -0.37045913,
-     "drawdown_percentile": 0.998621
+     "drawdown_percentile": 0.997241
     },
     {
      "label": "中证2000",
-     "begin": "2023-11-23",
-     "last": 980.0141,
-     "return": -0.01998589,
-     "annualized": -0.00698302,
+     "begin": "2023-11-24",
+     "last": 994.8463,
+     "return": -0.00515372,
+     "annualized": -0.00179191,
      "max_drawdown": -0.37336175,
-     "drawdown_percentile": 0.995862
+     "drawdown_percentile": 0.994483
     },
     {
      "label": "中证全指",
-     "begin": "2023-11-23",
-     "last": 1046.2276,
-     "return": 0.04622758,
-     "annualized": 0.01580978,
+     "begin": "2023-11-24",
+     "last": 1055.871,
+     "return": 0.05587098,
+     "annualized": 0.01905002,
      "max_drawdown": -0.29035408,
      "drawdown_percentile": 0.998621
     }
@@ -250,7 +250,7 @@
   "1Y": {
    "title": "最近一年",
    "begin": "2025-11-24",
-   "end": "2026-11-23",
+   "end": "2026-11-24",
    "rows": [
     {
      "label": "CNAMCSDEWI 日频",
@@ -282,36 +282,36 @@
     {
      "label": "国证2000",
      "begin": "2025-11-24",
-     "last": 823.9732,
-     "return": -0.17602681,
-     "annualized": -0.18259288,
+     "last": 824.0791,
+     "return": -0.1759209,
+     "annualized": -0.18180535,
      "max_drawdown": -0.37045913,
-     "drawdown_percentile": 0.995851
+     "drawdown_percentile": 0.991736
     },
     {
      "label": "中证2000",
      "begin": "2025-11-24",
-     "last": 814.841,
-     "return": -0.18515901,
-     "annualized": -0.19202449,
+     "last": 816.7381,
+     "return": -0.18326187,
+     "annualized": -0.18936259,
      "max_drawdown": -0.37336175,
-     "drawdown_percentile": 0.995851
+     "drawdown_percentile": 0.991736
     },
     {
      "label": "中证全指",
      "begin": "2025-11-24",
-     "last": 858.163,
-     "return": -0.14183704,
-     "annualized": -0.14724414,
+     "last": 858.1059,
+     "return": -0.1418941,
+     "annualized": -0.14674382,
      "max_drawdown": -0.29035408,
-     "drawdown_percentile": 0.995851
+     "drawdown_percentile": 0.995868
     }
    ]
   },
   "CSI2000": {
    "title": "中证2000 发布以来",
    "begin": "2023-08-11",
-   "end": "2026-11-23",
+   "end": "2026-11-24",
    "rows": [
     {
      "label": "CNAMCSDEWI 日频",
@@ -343,29 +343,29 @@
     {
      "label": "国证2000",
      "begin": "2023-08-11",
-     "last": 984.0593,
-     "return": -0.01594073,
-     "annualized": -0.00508705,
+     "last": 984.1857,
+     "return": -0.01581426,
+     "annualized": -0.00504014,
      "max_drawdown": -0.37045913,
-     "drawdown_percentile": 0.998739
+     "drawdown_percentile": 0.997481
     },
     {
      "label": "中证2000",
      "begin": "2023-08-11",
-     "last": 1036.051,
-     "return": 0.03605101,
-     "annualized": 0.01130387,
+     "last": 1038.4632,
+     "return": 0.03846317,
+     "annualized": 0.01203532,
      "max_drawdown": -0.37336175,
-     "drawdown_percentile": 0.996217
+     "drawdown_percentile": 0.994962
     },
     {
      "label": "中证全指",
      "begin": "2023-08-11",
-     "last": 1003.0405,
-     "return": 0.00304048,
-     "annualized": 0.00096399,
+     "last": 1002.9738,
+     "return": 0.0029738,
+     "annualized": 0.00094168,
      "max_drawdown": -0.29035408,
-     "drawdown_percentile": 0.998739
+     "drawdown_percentile": 0.998741
     }
    ]
   }
