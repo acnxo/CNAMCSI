@@ -5,7 +5,7 @@
 # FieldName : "Date|Close"
 # FieldType : "Int|Decimal"
 # TypeKLine : Day
-# Count : 3136
+# Count : 3137
 # Symbol : 932000
 # SecuCode : 932000
 # USC : 932000
@@ -3151,3 +3151,4 @@
 20261120|2351.93
 20261123|2443.92
 20261124|2449.61
+20261125|2345.15
