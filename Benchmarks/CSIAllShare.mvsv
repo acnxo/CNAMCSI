@@ -5,7 +5,7 @@
 # FieldName : "Date|Close"
 # FieldType : "Int|Decimal"
 # TypeKLine : Day
-# Count : 5320
+# Count : 5321
 # Symbol : 000985
 # SecuCode : 000985
 # USC : 000985
@@ -5335,3 +5335,4 @@
 20261124|4812.85
 20261125|4676.89
 20261126|4672.96
+20261127|4951.92
